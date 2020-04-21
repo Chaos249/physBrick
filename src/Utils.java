@@ -1,11 +1,5 @@
 import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
-import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.BodyDef;
-import org.jbox2d.dynamics.FixtureDef;
 import org.jbox2d.dynamics.World;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,53 +16,13 @@ public class Utils {
     //Ball radius in pixel
     public static final int BALL_SIZE = 8;
 
+    // brick size
+    public static final int SML_BRICK_SIZE = 5;
+    public static final int MED_BRICK_SIZE = 10;
+    public static final int LRG_BRICK_SIZE = 15;
+
     //Total number of balls
-    public final static int NO_OF_BALLS = 1;
-
-    //Ball gradient
-    private final static LinearGradient BALL_GRADIENT = new LinearGradient(0.0, 0.0, 1.0, 0.0, true, CycleMethod.NO_CYCLE, new Stop[] { new Stop(0, Color.WHITE), new Stop(1, Color.RED)});
-
-    //This method adds a ground to the screen.
-    public static void addGround(float width, float height){
-        PolygonShape ps = new PolygonShape();
-        ps.setAsBox(width,height);
-
-        FixtureDef fd = new FixtureDef();
-        fd.shape = ps;
-
-        BodyDef bd = new BodyDef();
-        bd.position= new Vec2(0.0f,-10f);
-
-        world.createBody(bd).createFixture(fd);
-    }
-    public static void addCeiling(float width, float height){
-        PolygonShape ps = new PolygonShape();
-        ps.setAsBox(width,height);
-
-        FixtureDef fd = new FixtureDef();
-        fd.shape = ps;
-
-        BodyDef bd = new BodyDef();
-        bd.position= new Vec2(0.0f,110f);
-
-        world.createBody(bd).createFixture(fd);
-    }
-
-    //This method creates a walls.
-    public static void addWall(float posX, float posY, float width, float height){
-        PolygonShape ps = new PolygonShape();
-        ps.setAsBox(width,height);
-
-        FixtureDef fd = new FixtureDef();
-        fd.shape = ps;
-        fd.density = 1.0f;
-        fd.friction = 0.3f;
-
-        BodyDef bd = new BodyDef();
-        bd.position.set(posX, posY);
-
-        Utils.world.createBody(bd).createFixture(fd);
-    }
+    //public final static int NO_OF_BALLS = 1;
 
     //Convert a JBox2D x coordinate to a JavaFX pixel x coordinate
     public static float toPixelPosX(float posX) {
@@ -90,7 +44,7 @@ public class Utils {
 
     //Convert a JavaFX pixel y coordinate to a JBox2D y coordinate
     public static float toPosY(float posY) {
-        float y = 100.0f - ((posY * 100*1.0f) /HEIGHT) ;
+        float y = 100.0f - ((posY * 100 * 1.0f) /HEIGHT) ;
         return y;
     }
 
@@ -105,10 +59,17 @@ public class Utils {
     }
 
     // MY SHIT NOW
-    public static Color randomColor(){
+    public static Color RandomColor() {
         ArrayList<Color> colors = new ArrayList<Color>(Arrays.asList(Color.RED, Color.YELLOW, Color.LIMEGREEN, Color.AQUA, Color.BLUEVIOLET, Color.CORAL));
         Random random = new Random();
         int randomInteger = random.nextInt(6);
+        return colors.get(randomInteger);
+    }
+
+    public static Color LightningColor() {
+        ArrayList<Color> colors = new ArrayList<>(Arrays.asList(Color.AQUA, Color.DEEPPINK));
+        Random random = new Random();
+        int randomInteger = random.nextInt(2);
         return colors.get(randomInteger);
     }
 

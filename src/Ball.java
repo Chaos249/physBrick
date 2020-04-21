@@ -1,3 +1,4 @@
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -23,23 +24,18 @@ public class Ball{
 
 	private BodyType bodyType;
 
-	public Ball(float posX, float posY){
-		this(posX, posY, Utils.BALL_SIZE, BodyType.KINEMATIC,Color.RED);
-		this.posX = posX;
-		this.posY = posY;
-	}
-
-	public Ball(float posX, float posY, int radius, BodyType bodyType, Color color){
+	public Ball(Group root, float posX, float posY, int radius, Color color){
 		this.posX = posX;
 		this.posY = posY;
 		this.radius = radius;
-		this.bodyType = bodyType;
+		this.bodyType = BodyType.DYNAMIC;
 		this.color = color;
 		node = create();
+		root.getChildren().add(node);
 	}
 
 	private Node create(){
-		//Create an UI for ball - JavaFX code
+		// javafx code
 		Circle ball = new Circle();
 		ball.setRadius(radius);
 		ball.setStroke(this.color); //set look and feel
@@ -48,24 +44,28 @@ public class Ball{
 		ball.setLayoutY(Utils.toPixelPosY(posY));
 		ball.setCache(true); //Cache this object for better performance
 
-		//Create an JBox2D body defination for ball.
+		// jbox2d code
+		// body def
 		BodyDef bd = new BodyDef();
 		bd.type = bodyType;
 		bd.position.set(posX, posY);
 
+		// shape
 		CircleShape cs = new CircleShape();
-		cs.m_radius = radius * 0.1f;  //We need to convert radius to JBox2D equivalent
+		cs.m_radius = radius * 0.1f;
 
-		// Create a fixture for ball
+		// fixture
 		FixtureDef fd = new FixtureDef();
 		fd.shape = cs;
 		fd.density = 10f; //10 yields best results
 		fd.restitution = 0.2f;
 
+		// body
 		Body body = Utils.world.createBody(bd);
 		body.createFixture(fd);
 		body.m_gravityScale = 8f;
-		ball.setUserData(body);
+
+		ball.setUserData(body); // important, sets the jbox2d object as the javafx nodes userdata
 
 		return ball;
 	}
