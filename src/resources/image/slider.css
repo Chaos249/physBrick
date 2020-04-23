@@ -1,0 +1,22 @@
+
+#custom-slider .thumb {
+    -fx-background-image :url("slider.png");
+    -fx-background-color: transparent;
+
+    -fx-padding: 48px 40px;
+
+    height: 96px;
+    width: 80px;
+
+}
+
+#custom-slider .track {
+    -fx-background-image :url("slider_bar.png");
+        -fx-background-color: transparent;
+
+        -fx-padding: 48px 1000px;
+
+        width: 700px;
+        height: 80px;
+
+}

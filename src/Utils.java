@@ -60,7 +60,7 @@ public class Utils {
 
     // MY SHIT NOW
     public static Color RandomColor() {
-        ArrayList<Color> colors = new ArrayList<Color>(Arrays.asList(Color.RED, Color.YELLOW, Color.LIMEGREEN, Color.AQUA, Color.BLUEVIOLET, Color.CORAL));
+        ArrayList<Color> colors = new ArrayList<>(Arrays.asList(Color.RED, Color.YELLOW, Color.LIMEGREEN, Color.AQUA, Color.BLUEVIOLET, Color.CORAL));
         Random random = new Random();
         int randomInteger = random.nextInt(6);
         return colors.get(randomInteger);

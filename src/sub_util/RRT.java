@@ -8,8 +8,8 @@ import java.util.*;
 public class RRT {
 
     public static final int SCREEN_SIZE = 1280;
-    public ArrayList<Node> rrtNodes = new ArrayList<Node>();
-    public ArrayList<Line> rrtLines = new ArrayList<Line>();
+    public ArrayList<Node> rrtNodes = new ArrayList<>();
+    public ArrayList<Line> rrtLines = new ArrayList<>();
 
     public RRT() {
         this.rrtNodes = rrtNodes;

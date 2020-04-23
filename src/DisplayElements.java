@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import sub_util.Node;
 import sub_util.RRT;
@@ -21,59 +22,7 @@ import java.util.Random;
 
 public class DisplayElements {
 
-    public static AudioClip thunder = new AudioClip("file:src/resources/thunder.wav"); //thunder.wav
-
-    //creates title image
-    public static ImageView MakeTitle(Group root) throws FileNotFoundException {
-        FileInputStream title_input = new FileInputStream("src/resources/title.jpg");
-        Image image = new Image(title_input);
-        ImageView imageView = new ImageView(image);
-        imageView.setLayoutX((Utils.WIDTH / 2) - 380);
-        imageView.setLayoutY(Utils.HEIGHT - 1200);
-        imageView.setOpacity(0.8);
-        root.getChildren().add(imageView);
-        return imageView;
-    }
-
-    // creates plat button
-    public static Button MakePlayButton(Group root) throws FileNotFoundException {
-        final Button btn = new Button();
-        FileInputStream play_input = new FileInputStream("src/resources/play.jpg");
-        Image play_img = new Image(play_input);
-        ImageView btngraphic = new ImageView(play_img);
-        double btnScale = 0.5;
-
-        btn.setLayoutX((Utils.WIDTH / 4.85));
-        btn.setLayoutY((Utils.HEIGHT - 550));
-        btn.setGraphic(btngraphic);
-        btn.setScaleX(btnScale);
-        btn.setScaleY(btnScale);
-        btn.setOpacity(0.8);
-        btn.setPadding(Insets.EMPTY);
-
-        root.getChildren().add(btn);
-        return btn;
-    }
-
-    // creates credit button
-    public static Button MakeCreditButton(Group root) throws FileNotFoundException {
-        final Button btn = new Button();
-        FileInputStream play_input = new FileInputStream("src/resources/credit.jpg");
-        Image play_img = new Image(play_input);
-        ImageView btngraphic = new ImageView(play_img);
-        double btnScale = 0.3;
-
-        btn.setLayoutX((Utils.WIDTH / 7));
-        btn.setLayoutY((Utils.HEIGHT - 250));
-        btn.setGraphic(btngraphic);
-        btn.setScaleX(btnScale);
-        btn.setScaleY(btnScale);
-        btn.setOpacity(0.7);
-        btn.setPadding(Insets.EMPTY);
-
-        root.getChildren().add(btn);
-        return btn;
-    }
+    public static AudioClip thunder = new AudioClip("file:src/resources/sound/thunder.wav"); //thunder.wav
 
     // generates rrt configuration
     public static ArrayList<Line> MakeLightning(int iterations) {
@@ -83,7 +32,7 @@ public class DisplayElements {
         Color color = Utils.LightningColor();
 
         Random rand = new Random();
-        Vertex ver = new Vertex(rand.nextInt(Utils.WIDTH), 0); //y = Utils.HEIGHT or 0
+        Vertex ver = new Vertex(rand.nextInt(Utils.WIDTH), 0); //y = View.Utils.HEIGHT or 0
         Node startNode = new Node(ver);
         rrt.executeRRT(iterations, startNode);
 
@@ -221,6 +170,43 @@ public class DisplayElements {
         for (Line line : ylines) {
             line.setStroke(color);
         }
+    }
+
+    public static void EightiesAnim(boolean debug_preload, Stage primaryStage, Group root, Color color) {
+        ArrayList<Line> xlines = DisplayElements.MakeXLines(root);
+        ArrayList<Line> ylines = DisplayElements.MakeYLines(root);
+        ChangeLinesColor(color, xlines, ylines);
+
+        AnimationTimer at = new AnimationTimer() {
+            int startTime = 380; // 380 is best
+            boolean game_on = false;
+            int count = 0;
+            int xline_idx = 0;
+
+            @Override
+            public void handle(long l) {
+                // disables annoyances
+                if (debug_preload) {
+                    startTime = 1;
+                }
+                // sends the horizontal lines for title graphic
+                if (count % 80 == 0 && xline_idx < xlines.size()) {
+                    PathTransition pt = (PathTransition) xlines.get(xline_idx).getUserData();
+                    pt.play();
+                    xline_idx += 1;
+                    if ((xline_idx + 1) == xlines.size()) {
+                        xline_idx = 0;
+                    }
+                }
+                count += 1;
+                //starts the program
+                if (count % startTime == 0 && game_on == false) {
+                    primaryStage.show();
+                    game_on = true;
+                }
+            }
+        };
+        at.start();
     }
 
 

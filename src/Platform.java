@@ -46,7 +46,7 @@ public class Platform{
         rec.setLayoutX(Utils.toPixelPosXPlat(posX));
         rec.setLayoutY(Utils.toPixelPosYPlat(posY));
         rec.setCache(true); //Cache this object for better performance
-        rec.setVisible(false);
+        rec.setOpacity(0.9);
 
         // jbox2d code
         // body def
@@ -60,8 +60,7 @@ public class Platform{
         // shape
         PolygonShape platform_rectangle = new PolygonShape();
         platform_rectangle.setAsBox(Utils.toPosY(this.height) * 0.0393f, Utils.toPosX(this.width) * 0.13f); // x and y are backwards
-        //Utils.toPosY(this.height) * 0.1f)/2.54f, Utils.toPosX(this.width) * 0.1f) * 1.3)
-
+        //View.Utils.toPosY(this.height) * 0.1f)/2.54f, View.Utils.toPosX(this.width) * 0.1f) * 1.3)
 
         // fixture
         FixtureDef fd = new FixtureDef();
@@ -74,6 +73,7 @@ public class Platform{
         Body body = Utils.world.createBody(bd);
         body.createFixture(fd);
         body.m_gravityScale = 1f;
+        body.setAngularVelocity(0);
 
         rec.setUserData(body); // important, sets the jbox2d object as the javafx nodes userdata
 

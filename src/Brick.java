@@ -27,7 +27,7 @@ public class Brick {
     // size of box in pixels
     private int size;
 
-    public int durability;
+    public float durability;
     public Text durabilityText;
 
     private Color color;
@@ -58,19 +58,17 @@ public class Brick {
         brick.setStrokeWidth(2.5);
         brick.setLayoutX(posX);
         brick.setLayoutY(posY);
-        brick.setVisible(false); // made invisible by default to be turned on later --!!should probably be fixed!!--
+        //brick.setVisible(false); // made invisible by default to be turned on later --!!should probably be fixed!!--
         brick.setCache(true); // Cache this object for better performance
 
-        //this.initDurabilityText(root);
-
-        //Create an JBox2D body definition for brick
+        // Create an JBox2D body definition for brick
         BodyDef bd = new BodyDef();
         bd.type = bodyType;
         bd.bullet = true;
         bd.position.set(Utils.toPosX(posX) + (((this.size / 2) - 5.4f) * 0.1f), Utils.toPosY(posY) - (((this.size / 2) - 5.2f) * 0.1f));
 
         PolygonShape ss = new PolygonShape();
-        ss.setAsBox((this.size)  * 0.04f, (this.size) * 0.038f); //x : * 0.0393f, y : * 0.13f
+        ss.setAsBox((this.size)  * 0.04f, (this.size) * 0.038f); // x : * 0.0393f, y : * 0.13f
 
         // Create a fixture for brick
         FixtureDef fd = new FixtureDef();
@@ -98,19 +96,19 @@ public class Brick {
     }
 
     public void initDurabilityText(Group root) {
-        Text durText = new Text(Integer.toString(durability));
+        Text durText = new Text(Integer.toString((int) durability));
         this.durabilityText = durText;
         formatText(durText);
         durText.setLayoutY((posY + this.size * 0.5) + 2);
         durText.setFill(Color.WHITE);
         durText.setFont(Font.font("Source Code Pro"));
-        durText.setVisible(false);
+        //durText.setVisible(false);
         root.getChildren().add(durText);
     }
 
-    public void damageDurabilityText(int damageAmount) {
+    public void damageDurabilityText(float damageAmount) { // usually 1
         this.durability -= damageAmount;
-        this.durabilityText.setText(Integer.toString(this.durability));
+        this.durabilityText.setText(Integer.toString((int) this.durability));
         formatText(durabilityText);
     }
 
@@ -131,7 +129,7 @@ public class Brick {
     }
 
     public void breakCheck(Group root) {
-        if (this.durability == 1) { // stays one step after 1 for some reason
+        if ((int) this.durability == 1) { // stays one step after 1 for some reason
             this.durabilityText.setVisible(false);
             this.playBreakEffect();
             Utils.world.destroyBody((Body) this.node.getUserData());

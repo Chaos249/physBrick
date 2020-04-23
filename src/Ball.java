@@ -43,12 +43,14 @@ public class Ball{
 		ball.setLayoutX(Utils.toPixelPosX(posX));
 		ball.setLayoutY(Utils.toPixelPosY(posY));
 		ball.setCache(true); //Cache this object for better performance
+		ball.setOpacity(0.9);
 
 		// jbox2d code
 		// body def
 		BodyDef bd = new BodyDef();
 		bd.type = bodyType;
 		bd.position.set(posX, posY);
+		//bd.bullet = true; // questionable
 
 		// shape
 		CircleShape cs = new CircleShape();
@@ -64,6 +66,7 @@ public class Ball{
 		Body body = Utils.world.createBody(bd);
 		body.createFixture(fd);
 		body.m_gravityScale = 8f;
+		body.setAngularDamping(15f);
 
 		ball.setUserData(body); // important, sets the jbox2d object as the javafx nodes userdata
 

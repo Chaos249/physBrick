@@ -28,8 +28,8 @@ public class UserInput {
         jointDef.bodyA = ground;
         jointDef.bodyB = (Body) plat.node.getUserData();
         jointDef.collideConnected = false;
-        jointDef.frequencyHz = 5000f; //500f works well
-        jointDef.maxForce = 100000000f; //100000f works well
+        jointDef.frequencyHz = 5000f; //5000f works well
+        jointDef.maxForce = 100000f; //100000f works well
         //jointDef.dampingRatio = 10f;
 
         return jointDef;

@@ -2,6 +2,7 @@ import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -15,31 +16,6 @@ import org.jbox2d.dynamics.FixtureDef;
 import java.util.ArrayList;
 
 public class GameElements {
-
-    public static ArrayList<Brick> MakeBrickLayout1(Group root){
-        ArrayList<Brick> brickList = new ArrayList<>();
-        Brick brick1 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 100, 50, 100, Color.WHITE, root);
-        brick1.initDurabilityText(root);
-        Brick brick2 = new Brick(Utils.WIDTH / 2 - 50, Utils.HEIGHT / 2 - 100, 50, 10, Color.WHITE, root);
-        brick2.initDurabilityText(root);
-        Brick brick3 = new Brick(Utils.WIDTH / 2 + 50, Utils.HEIGHT / 2 - 100, 50, 10, Color.WHITE, root);
-        brick3.initDurabilityText(root);
-        Brick brick4 = new Brick(Utils.WIDTH / 2 + 50, Utils.HEIGHT / 2 - 150, 50, 10, Color.WHITE, root);
-        brick4.initDurabilityText(root);
-        Brick brick5 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 150, 50, 10, Color.WHITE, root);
-        brick5.initDurabilityText(root);
-        Brick brick6 = new Brick(Utils.WIDTH / 2 - 50, Utils.HEIGHT / 2 - 150, 50, 10, Color.WHITE, root);
-        brick6.initDurabilityText(root);
-
-
-        brickList.add(brick1);
-        brickList.add(brick2);
-        brickList.add(brick3);
-        brickList.add(brick4);
-        brickList.add(brick5);
-        brickList.add(brick6);
-        return brickList;
-    }
 
     public static void addGround(float width, float height) {
         PolygonShape ps = new PolygonShape();
@@ -91,7 +67,7 @@ public class GameElements {
         addCeiling(100, 11);
     }
 
-    public static void MakeAddBallMouseEvent(Scene scene, Group root, ArrayList<Ball> balls) {
+    public static void MakeAddBallMouseEvent(Scene scene, Group root, ArrayList<Ball> balls, Button homeButton) {
         EventHandler<MouseEvent> addBall = new EventHandler<MouseEvent>() {
             public void handle(MouseEvent me) {
 
@@ -101,6 +77,7 @@ public class GameElements {
                 //Draw ball on this location. Set balls body type to static.
                 Ball ball = new Ball(root, Utils.toPosX(dragX), Utils.toPosY(dragY), 12, Utils.RandomColor());
                 balls.add(ball);
+                homeButton.toFront();
             }
         };
         scene.setOnMouseDragged(addBall);
@@ -113,7 +90,7 @@ public class GameElements {
                 if (keyEvent.getCode() == KeyCode.L) {
                     ArrayList<Line> RRT = DisplayElements.MakeLightning(800); //800
                     root.getChildren().addAll(RRT);
-                    AnimationTimer at = DisplayElements.DrawLightning(root, RRT, 30, 0.8); //35, 0.8
+                    AnimationTimer at = DisplayElements.DrawLightning(root, RRT, 35, 0.8); //35, 0.8
                     at.start();
                 }
             }
