@@ -1,8 +1,7 @@
-package sub_util;
+package SubUtil;
 
 import javafx.scene.shape.Line;
 
-import java.awt.geom.Point2D;
 import java.util.*;
 
 public class RRT {

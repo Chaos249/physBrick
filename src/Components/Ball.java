@@ -1,14 +1,19 @@
+package Components;
+
+import ElementsUtil.Utils;
+import View.GameView;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import org.jbox2d.collision.shapes.CircleShape;
+import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
 
-public class Ball{
+public class Ball {
 
 	//JavaFX UI for ball
 	public Node node;
@@ -17,12 +22,14 @@ public class Ball{
 	private float posX;
 	private float posY;
 
-	//Ball radius in pixels
+	//Entities.Ball radius in pixels
 	private int radius;
 
 	private Color color;
 
 	private BodyType bodyType;
+
+	public double velocity;
 
 	public Ball(Group root, float posX, float posY, int radius, Color color){
 		this.posX = posX;
@@ -32,6 +39,8 @@ public class Ball{
 		this.color = color;
 		node = create();
 		root.getChildren().add(node);
+
+		this.velocity = 0;
 	}
 
 	private Node create(){
@@ -63,7 +72,7 @@ public class Ball{
 		fd.restitution = 0.2f;
 
 		// body
-		Body body = Utils.world.createBody(bd);
+		Body body = GameView.world.createBody(bd);
 		body.createFixture(fd);
 		body.m_gravityScale = 8f;
 		body.setAngularDamping(15f);
@@ -71,5 +80,12 @@ public class Ball{
 		ball.setUserData(body); // important, sets the jbox2d object as the javafx nodes userdata
 
 		return ball;
+	}
+
+	public double setVelocityInfo() {
+		Body body = (Body) this.node.getUserData();
+		Vec2 velocityVector = body.getLinearVelocity();
+		double delta = Math.pow(velocityVector.x, 2) + Math.pow(velocityVector.y, 2);
+		return Math.sqrt(delta);
 	}
 }

@@ -1,3 +1,7 @@
+package Components;
+
+import ElementsUtil.Utils;
+import View.GameView;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
@@ -60,7 +64,7 @@ public class Platform{
         // shape
         PolygonShape platform_rectangle = new PolygonShape();
         platform_rectangle.setAsBox(Utils.toPosY(this.height) * 0.0393f, Utils.toPosX(this.width) * 0.13f); // x and y are backwards
-        //View.Utils.toPosY(this.height) * 0.1f)/2.54f, View.Utils.toPosX(this.width) * 0.1f) * 1.3)
+        //View.UtilElements.Utils.toPosY(this.height) * 0.1f)/2.54f, View.UtilElements.Utils.toPosX(this.width) * 0.1f) * 1.3)
 
         // fixture
         FixtureDef fd = new FixtureDef();
@@ -70,7 +74,7 @@ public class Platform{
         fd.friction = 8f; //8f
 
         // body
-        Body body = Utils.world.createBody(bd);
+        Body body = GameView.world.createBody(bd);
         body.createFixture(fd);
         body.m_gravityScale = 1f;
         body.setAngularVelocity(0);

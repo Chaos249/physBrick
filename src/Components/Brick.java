@@ -1,3 +1,8 @@
+package Components;
+
+import ElementsUtil.DisplayElements;
+import ElementsUtil.Utils;
+import View.GameView;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.scene.Group;
@@ -13,12 +18,16 @@ import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.dynamics.*;
 import org.jbox2d.dynamics.contacts.ContactEdge;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Brick {
 
     // javafx node
     public Node node;
+
+    public ArrayList<Ball> ballContacts;
 
     //X and Y position of the ball in JBox2D world
     private float posX;
@@ -58,7 +67,6 @@ public class Brick {
         brick.setStrokeWidth(2.5);
         brick.setLayoutX(posX);
         brick.setLayoutY(posY);
-        //brick.setVisible(false); // made invisible by default to be turned on later --!!should probably be fixed!!--
         brick.setCache(true); // Cache this object for better performance
 
         // Create an JBox2D body definition for brick
@@ -76,7 +84,7 @@ public class Brick {
         fd.density = 10f; //10 yields best results
         fd.restitution = 0.2f;
 
-        Body body = Utils.world.createBody(bd);
+        Body body = GameView.world.createBody(bd);
         body.createFixture(fd);
         body.m_gravityScale = 8f;
         brick.setUserData(body);
@@ -88,6 +96,7 @@ public class Brick {
         Body body = (Body) this.node.getUserData();
         ContactEdge contactEdge = body.getContactList();
         if (contactEdge != null) {
+            //System.out.println(contactEdge.next.toString());
             if (contactEdge.contact.getFixtureB().getShape() instanceof CircleShape) {
                 return true;
             }
@@ -95,14 +104,14 @@ public class Brick {
         return false;
     }
 
-    public void initDurabilityText(Group root) {
+    public void initDurabilityText(Group root) throws FileNotFoundException {
         Text durText = new Text(Integer.toString((int) durability));
         this.durabilityText = durText;
         formatText(durText);
-        durText.setLayoutY((posY + this.size * 0.5) + 2);
+        durText.setLayoutY((posY + this.size * 0.5) + 4.2);
         durText.setFill(Color.WHITE);
-        durText.setFont(Font.font("Source Code Pro"));
-        //durText.setVisible(false);
+        durText.setFont(Font.loadFont(new FileInputStream("src/resources/start.ttf"), 6)); //Font.font("Source Code Pro")
+        durText.setOpacity(0.8);
         root.getChildren().add(durText);
     }
 
@@ -114,15 +123,15 @@ public class Brick {
 
     public void formatText(Text durabilityText) {
         if (this.durability >= 100) {
-            durabilityText.setLayoutX((posX + this.size * 0.5) - 10);
+            durabilityText.setLayoutX((posX + this.size * 0.5) - 8);
             durabilityText.setScaleX(2 * (this.size / 50));
             durabilityText.setScaleY(2 * (this.size / 50));
         } else if (this.durability >= 10) {
-            durabilityText.setLayoutX((posX + this.size * 0.5) - 6.7);
+            durabilityText.setLayoutX((posX + this.size * 0.5) - 4.7);
             durabilityText.setScaleX(3 * (this.size / 50));
             durabilityText.setScaleY(3 * (this.size / 50));
         } else {
-            durabilityText.setLayoutX((posX + this.size * 0.5) - 3.5);
+            durabilityText.setLayoutX((posX + this.size * 0.5) - 1);
             durabilityText.setScaleX(4 * (this.size / 50));
             durabilityText.setScaleY(4 * (this.size / 50));
         }
@@ -132,7 +141,7 @@ public class Brick {
         if ((int) this.durability == 1) { // stays one step after 1 for some reason
             this.durabilityText.setVisible(false);
             this.playBreakEffect();
-            Utils.world.destroyBody((Body) this.node.getUserData());
+            GameView.world.destroyBody((Body) this.node.getUserData());
             ArrayList<Line> RRT = DisplayElements.MakeLightning(400); //800
             root.getChildren().addAll(RRT);
             AnimationTimer at = DisplayElements.DrawLightning(root, RRT, 30, 0.8); //35, 0.8

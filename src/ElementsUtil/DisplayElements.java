@@ -1,22 +1,20 @@
+package ElementsUtil;
+
+import View.PhysBrick;
+import View.SettingsView;
 import javafx.animation.AnimationTimer;
 import javafx.animation.Interpolator;
 import javafx.animation.PathTransition;
-import javafx.geometry.Insets;
 import javafx.scene.Group;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.media.AudioClip;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import sub_util.Node;
-import sub_util.RRT;
-import sub_util.Vertex;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import SubUtil.Node;
+import SubUtil.RRT;
+import SubUtil.Vertex;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -32,7 +30,7 @@ public class DisplayElements {
         Color color = Utils.LightningColor();
 
         Random rand = new Random();
-        Vertex ver = new Vertex(rand.nextInt(Utils.WIDTH), 0); //y = View.Utils.HEIGHT or 0
+        Vertex ver = new Vertex(rand.nextInt(Utils.WIDTH), 0); //y = View.UtilElements.Utils.HEIGHT or 0
         Node startNode = new Node(ver);
         rrt.executeRRT(iterations, startNode);
 
@@ -172,7 +170,8 @@ public class DisplayElements {
         }
     }
 
-    public static void EightiesAnim(boolean debug_preload, Stage primaryStage, Group root, Color color) {
+    // adds new 80s tron grid to passed in root
+    public static ArrayList<ArrayList<Line>> EightiesAnim(boolean debug_preload, Stage primaryStage, Group root, Color color) {
         ArrayList<Line> xlines = DisplayElements.MakeXLines(root);
         ArrayList<Line> ylines = DisplayElements.MakeYLines(root);
         ChangeLinesColor(color, xlines, ylines);
@@ -202,12 +201,26 @@ public class DisplayElements {
                 //starts the program
                 if (count % startTime == 0 && game_on == false) {
                     primaryStage.show();
+                    if (PhysBrick.DEBUG == false) {
+                        SettingsView.musicPlayer.play();
+                    }
                     game_on = true;
                 }
             }
         };
         at.start();
+
+        ArrayList<ArrayList<Line>> arr = new ArrayList<>();
+        arr.add(xlines);
+        arr.add(ylines);
+
+        return arr;
     }
 
-
+    // this only exists to add already playing animations to new game levels because they get dynamically created by user
+    public static void AddEightiesMatrixRoot(Group root, ArrayList<ArrayList<Line>> arr) {
+        for (ArrayList<Line> lines : arr) {
+            root.getChildren().addAll(lines);
+        }
+    }
 }

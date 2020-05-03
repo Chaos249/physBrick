@@ -1,6 +1,4 @@
-package sub_util;
-
-import com.sun.javafx.geom.Point2D;
+package SubUtil;
 
 public class Node {
 

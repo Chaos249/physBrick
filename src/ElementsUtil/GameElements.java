@@ -1,3 +1,7 @@
+package ElementsUtil;
+
+import Components.Ball;
+import View.GameView;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -6,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
@@ -27,7 +30,7 @@ public class GameElements {
         BodyDef bd = new BodyDef();
         bd.position= new Vec2(0.0f,-10f);
 
-        Utils.world.createBody(bd).createFixture(fd);
+        GameView.world.createBody(bd).createFixture(fd);
     }
 
     public static void addCeiling(float width, float height) {
@@ -40,7 +43,7 @@ public class GameElements {
         BodyDef bd = new BodyDef();
         bd.position= new Vec2(0.0f,110f);
 
-        Utils.world.createBody(bd).createFixture(fd);
+        GameView.world.createBody(bd).createFixture(fd);
     }
 
     //This method creates a walls.
@@ -56,7 +59,7 @@ public class GameElements {
         BodyDef bd = new BodyDef();
         bd.position.set(posX, posY);
 
-        Utils.world.createBody(bd).createFixture(fd);
+        GameView.world.createBody(bd).createFixture(fd);
     }
 
     public static void MakeBoundingBox(){

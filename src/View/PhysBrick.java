@@ -1,15 +1,22 @@
+package View;
+
+import ElementsUtil.DisplayElements;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.media.AudioClip;
+import javafx.scene.Group;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class PhysBrick extends Application {
 
     // start game immediately and disables music if true
     public final static boolean DEBUG = true;
+
+    public static double VOLUME = 0.5;
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -23,22 +30,23 @@ public class PhysBrick extends Application {
         primaryStage.setFullScreen(false);
         primaryStage.setResizable(false);
 
-        // music
-        AudioClip music = new AudioClip(this.getClass().getResource("resources/sound/Untitled.wav").toString());
-        music.setVolume(0.1);
+        Group defaultRoot = new Group();
+        ArrayList arr = DisplayElements.EightiesAnim(DEBUG, primaryStage, defaultRoot, Color.CYAN);
 
         // makes the scene for the credits view
         TitleView tv = new TitleView(primaryStage);
         primaryStage.setScene(tv.titleScene);
 
         CreditsView cv = new CreditsView(primaryStage, tv.titleScene);
+
         SettingsView sv = new SettingsView(primaryStage, tv.titleScene);
-        GameView gv = new GameView(primaryStage, tv.titleScene);
+
+        LevelSelectView lsv = new LevelSelectView(primaryStage, tv.titleScene, arr);
 
         tv.playButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                primaryStage.setScene(gv.gameScene);
+                primaryStage.setScene(lsv.levelSelectScene);
             }
         });
 
@@ -55,7 +63,5 @@ public class PhysBrick extends Application {
                 primaryStage.setScene(cv.creditsScene);
             }
         });
-
-
     }
 }

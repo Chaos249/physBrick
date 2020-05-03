@@ -1,3 +1,9 @@
+package View;
+
+import ElementsUtil.DisplayElements;
+import ElementsUtil.Utils;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -7,22 +13,29 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class SettingsView {
 
-    Scene settingsScene;
+    public Scene settingsScene;
 
-    Group root;
+    public Group root;
 
-    Button backButton;
+    public Button backButton;
 
-    ImageView volumeImage;
-    Slider volumeSlider;
+    public ImageView volumeImage;
+    public Slider volumeSlider;
+
+    public static String musicPath = new File("src/resources/sound/titlemusic.wav").getAbsolutePath();
+    public static Media music = new Media(new File(musicPath).toURI().toString());
+    public static MediaPlayer musicPlayer = new MediaPlayer(music);
 
     public SettingsView(Stage primaryStage, Scene menuScene) throws FileNotFoundException {
         this.root = new Group();
@@ -32,9 +45,9 @@ public class SettingsView {
 
         this.backButton = initBackButton(primaryStage, menuScene);
         this.volumeSlider = initSlider();
+
         this.volumeImage = MakeVolumeImage();
 
-        this.root.getChildren().add(backButton);
         this.root.getChildren().add(volumeSlider);
     }
 
@@ -46,7 +59,7 @@ public class SettingsView {
         double btnScale = 0.3;
 
         btn.setLayoutX((Utils.WIDTH / 14f));
-        btn.setLayoutY((Utils.HEIGHT - 365));
+        btn.setLayoutY((Utils.HEIGHT - 373)); //365
         btn.setGraphic(btngraphic);
         btn.setScaleX(btnScale);
         btn.setScaleY(btnScale);
@@ -69,7 +82,6 @@ public class SettingsView {
         this.backButton.setScaleY(btnScale);
         this.backButton.setOpacity(0.8);
         this.backButton.setPadding(Insets.EMPTY);
-
         this.backButton.setTranslateX(-190);
         this.backButton.setTranslateY(-40);
 
@@ -80,25 +92,33 @@ public class SettingsView {
             }
         });
 
+        this.root.getChildren().add(backButton);
         return backButton;
     }
 
     public Slider initSlider() {
+        musicPlayer.setVolume(0.25);
 
         Slider volumeSlider = new Slider(0, 100, 50);
-        volumeSlider.setMax(1);
+        volumeSlider.setMax(0.5);
         volumeSlider.setMin(0);
 
         volumeSlider.setPrefWidth(862);
-
         volumeSlider.setTranslateX(Utils.WIDTH / 2 - 431);
         volumeSlider.setTranslateY(Utils.HEIGHT / 2- 100);
-
         volumeSlider.setId("custom-slider");
 
         volumeSlider.setOpacity(0.8);
-
+        volumeSlider.setValue(0.25);
         settingsScene.getStylesheets().add("/resources/image/slider.css");
+
+        volumeSlider.valueProperty().addListener(new InvalidationListener() {
+            @Override
+            public void invalidated(Observable observable) {
+                PhysBrick.VOLUME = volumeSlider.getValue();
+                musicPlayer.setVolume(volumeSlider.getValue());
+            }
+        });
 
         return volumeSlider;
     }

@@ -1,19 +1,18 @@
+package ElementsUtil;
+
 import javafx.scene.paint.Color;
-import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.World;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
 public class Utils {
-    //Create a JBox2D world.
-    public static final World world = new World(new Vec2(0.0f, -10.0f));
 
     //Screen width and height
     public static final int WIDTH = 1280; //1280
     public static final int HEIGHT = 1280; //960
 
-    //Ball radius in pixel
+    //Entities.Ball radius in pixel
     public static final int BALL_SIZE = 8;
 
     // brick size

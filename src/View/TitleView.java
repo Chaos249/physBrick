@@ -1,3 +1,8 @@
+package View;
+
+import ElementsUtil.DisplayElements;
+import ElementsUtil.GameElements;
+import ElementsUtil.Utils;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -10,18 +15,17 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-
 public class TitleView {
 
-    Scene titleScene;
+    public Scene titleScene;
 
-    Group root;
+    public Group root;
 
-    ImageView titleImage;
+    public ImageView titleImage;
 
-    Button playButton;
-    Button settingsButton;
-    Button creditButton;
+    public Button playButton;
+    public Button settingsButton;
+    public Button creditButton;
 
     public TitleView(Stage primaryStage) throws FileNotFoundException {
         this.root = new Group();
@@ -29,9 +33,9 @@ public class TitleView {
 
         DisplayElements.EightiesAnim(PhysBrick.DEBUG, primaryStage, this.root, Color.MAGENTA);
 
-        this.titleImage = MakeTitle(this.root);
-        this.playButton = MakePlayButton(this.root);
+        this.titleImage = MakeTitle();
 
+        this.playButton = MakePlayButton(this.root);
         this.settingsButton = SettingsView.MakeSettingsButton(this.root);
         this.creditButton = CreditsView.MakeCreditButton(this.root);
 
@@ -39,14 +43,14 @@ public class TitleView {
     }
 
     //creates title image
-    public static ImageView MakeTitle(Group root) throws FileNotFoundException {
+    public ImageView MakeTitle() throws FileNotFoundException {
         FileInputStream title_input = new FileInputStream("src/resources/image/title.jpg");
         Image image = new Image(title_input);
         ImageView imageView = new ImageView(image);
         imageView.setLayoutX((Utils.WIDTH / 2) - 380);
         imageView.setLayoutY(Utils.HEIGHT - 1200);
         imageView.setOpacity(0.8);
-        root.getChildren().add(imageView);
+        this.root.getChildren().add(imageView);
         return imageView;
     }
 

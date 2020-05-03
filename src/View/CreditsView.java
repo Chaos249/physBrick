@@ -1,3 +1,7 @@
+package View;
+
+import ElementsUtil.DisplayElements;
+import ElementsUtil.Utils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;

@@ -1,3 +1,7 @@
+package Components;
+
+import ElementsUtil.Utils;
+import View.GameView;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
@@ -18,7 +22,7 @@ public class UserInput {
         ground_shape.setAsBox(0, 0);
         BodyDef ground_bodydef = new BodyDef();
         ground_bodydef.type = BodyType.STATIC;
-        Body ground = Utils.world.createBody(ground_bodydef);
+        Body ground = GameView.world.createBody(ground_bodydef);
         FixtureDef groundFd = new FixtureDef();
         groundFd.shape = ground_shape;
         groundFd.isSensor = false;
@@ -41,11 +45,10 @@ public class UserInput {
     // mouse joint control and platform placement
     public static void MakeMouseJointEventHandler(Scene scene, Platform plat) {
         MouseJointDef jointDef = UserInput.makeMouseJoint(plat);
-        MouseJoint m_joint = (MouseJoint) Utils.world.createJoint(jointDef);
+        MouseJoint m_joint = (MouseJoint) GameView.world.createJoint(jointDef);
         EventHandler<MouseEvent> mouseEvent = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                Body body_p = (Body) plat.node.getUserData();
                 float Xmouse = (float) mouseEvent.getX();
                 float Ymouse = (float) mouseEvent.getY();
 

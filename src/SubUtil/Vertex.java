@@ -1,4 +1,4 @@
-package sub_util;
+package SubUtil;
 
 public class Vertex {
 
