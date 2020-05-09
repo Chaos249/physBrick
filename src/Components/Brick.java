@@ -3,10 +3,12 @@ package Components;
 import ElementsUtil.DisplayElements;
 import ElementsUtil.Utils;
 import View.GameView;
+import View.PhysBrick;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -45,6 +47,8 @@ public class Brick {
 
     public Group root;
 
+    public static AudioClip hit = new AudioClip("file:src/resources/sound/hit.wav");
+
     public Brick(float posX, float posY, int size, int durability, Color color, Group root) {
         this.posX = posX;
         this.posY = posY;
@@ -76,13 +80,13 @@ public class Brick {
         bd.position.set(Utils.toPosX(posX) + (((this.size / 2) - 5.4f) * 0.1f), Utils.toPosY(posY) - (((this.size / 2) - 5.2f) * 0.1f));
 
         PolygonShape ss = new PolygonShape();
-        ss.setAsBox((this.size)  * 0.04f, (this.size) * 0.038f); // x : * 0.0393f, y : * 0.13f
+        ss.setAsBox((this.size)  * 0.038f, (this.size) * 0.038f); // x : * 0.04f, y : * 0.038f
 
         // Create a fixture for brick
         FixtureDef fd = new FixtureDef();
         fd.shape = ss;
         fd.density = 10f; //10 yields best results
-        fd.restitution = 0.2f;
+        fd.restitution = 0.5f; // 0.2 is the baseline
 
         Body body = GameView.world.createBody(bd);
         body.createFixture(fd);
@@ -90,18 +94,6 @@ public class Brick {
         brick.setUserData(body);
 
         return brick;
-    }
-
-    public boolean BallContacted() {
-        Body body = (Body) this.node.getUserData();
-        ContactEdge contactEdge = body.getContactList();
-        if (contactEdge != null) {
-            //System.out.println(contactEdge.next.toString());
-            if (contactEdge.contact.getFixtureB().getShape() instanceof CircleShape) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public void initDurabilityText(Group root) throws FileNotFoundException {
@@ -113,12 +105,6 @@ public class Brick {
         durText.setFont(Font.loadFont(new FileInputStream("src/resources/start.ttf"), 6)); //Font.font("Source Code Pro")
         durText.setOpacity(0.8);
         root.getChildren().add(durText);
-    }
-
-    public void damageDurabilityText(float damageAmount) { // usually 1
-        this.durability -= damageAmount;
-        this.durabilityText.setText(Integer.toString((int) this.durability));
-        formatText(durabilityText);
     }
 
     public void formatText(Text durabilityText) {
@@ -137,8 +123,28 @@ public class Brick {
         }
     }
 
-    public void breakCheck(Group root) {
-        if ((int) this.durability == 1) { // stays one step after 1 for some reason
+    public boolean CheckContact() {
+        Body body = (Body) this.node.getUserData();
+        ContactEdge contactEdge = body.getContactList();
+        if (contactEdge != null) {
+            return contactEdge.contact.getFixtureB().getShape() instanceof CircleShape;
+        }
+        return false;
+    }
+
+    public void damageDurability(float damageAmount) { // usually 1
+        if ((int)(this.durability - damageAmount) < (int) this.durability) {
+            hit.setVolume(PhysBrick.VOLUME);
+            hit.play();
+        }
+        this.durability -= damageAmount;
+        this.durabilityText.setText(Integer.toString((int) this.durability));
+        formatText(durabilityText);
+
+    }
+
+    public void BreakCheck(Group root, ArrayList<Ball> balls) {
+        if ((int) this.durability <= 0) { // stays one step after 1 for some reason
             this.durabilityText.setVisible(false);
             this.playBreakEffect();
             GameView.world.destroyBody((Body) this.node.getUserData());
@@ -146,6 +152,10 @@ public class Brick {
             root.getChildren().addAll(RRT);
             AnimationTimer at = DisplayElements.DrawLightning(root, RRT, 30, 0.8); //35, 0.8
             at.start();
+
+            Ball ball = new Ball(root, Utils.WIDTH / 2, Utils.HEIGHT / 2, Utils.RandomColor());
+            ball.node.setVisible(true);
+            balls.add(ball);
         }
     }
 
@@ -156,7 +166,6 @@ public class Brick {
         ft.setFromValue(1);
         ft.setToValue(0);
         ft.setAutoReverse(false);
-
         ft.play();
     }
 }

@@ -22,6 +22,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import static View.PhysBrick.VOLUME;
+import static View.PhysBrick.buttonSound;
+
 public class SettingsView {
 
     public Scene settingsScene;
@@ -89,6 +92,8 @@ public class SettingsView {
             @Override
             public void handle(ActionEvent actionEvent) {
                 primaryStage.setScene(menuScene);
+                buttonSound.setVolume(VOLUME * 1.25);
+                buttonSound.play();
             }
         });
 
@@ -97,7 +102,7 @@ public class SettingsView {
     }
 
     public Slider initSlider() {
-        musicPlayer.setVolume(0.25);
+        musicPlayer.setVolume(0.1);
 
         Slider volumeSlider = new Slider(0, 100, 50);
         volumeSlider.setMax(0.5);
@@ -110,13 +115,14 @@ public class SettingsView {
 
         volumeSlider.setOpacity(0.8);
         volumeSlider.setValue(0.25);
+
         settingsScene.getStylesheets().add("/resources/image/slider.css");
 
         volumeSlider.valueProperty().addListener(new InvalidationListener() {
             @Override
             public void invalidated(Observable observable) {
-                PhysBrick.VOLUME = volumeSlider.getValue();
-                musicPlayer.setVolume(volumeSlider.getValue());
+                VOLUME = volumeSlider.getValue();
+                musicPlayer.setVolume(volumeSlider.getValue() * 0.25);
             }
         });
 

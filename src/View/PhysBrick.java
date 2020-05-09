@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -16,10 +17,11 @@ public class PhysBrick extends Application {
     // start game immediately and disables music if true
     public final static boolean DEBUG = true;
 
-    public static double VOLUME = 0.5;
+    public static double VOLUME = 0.25;
+    public static AudioClip buttonSound = new AudioClip("file:src/resources/sound/button.wav");
 
     public static void main(String[] args) {
-        Application.launch(args);
+        Application.launch(args); 
     }
 
     // javafx main start
@@ -33,20 +35,24 @@ public class PhysBrick extends Application {
         Group defaultRoot = new Group();
         ArrayList arr = DisplayElements.EightiesAnim(DEBUG, primaryStage, defaultRoot, Color.CYAN);
 
+
         // makes the scene for the credits view
         TitleView tv = new TitleView(primaryStage);
         primaryStage.setScene(tv.titleScene);
+        if (DEBUG) {VOLUME = 0.05;}
 
         CreditsView cv = new CreditsView(primaryStage, tv.titleScene);
 
         SettingsView sv = new SettingsView(primaryStage, tv.titleScene);
 
-        LevelSelectView lsv = new LevelSelectView(primaryStage, tv.titleScene, arr);
+        LevelView lsv = new LevelView(primaryStage, tv.titleScene, arr);
 
         tv.playButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 primaryStage.setScene(lsv.levelSelectScene);
+                buttonSound.setVolume(VOLUME * 1.25);
+                buttonSound.play();
             }
         });
 
@@ -54,6 +60,8 @@ public class PhysBrick extends Application {
             @Override
             public void handle(ActionEvent actionEvent) {
                 primaryStage.setScene(sv.settingsScene);
+                buttonSound.setVolume(VOLUME * 1.25);
+                buttonSound.play();
             }
         });
 
@@ -61,6 +69,8 @@ public class PhysBrick extends Application {
             @Override
             public void handle(ActionEvent actionEvent) {
                 primaryStage.setScene(cv.creditsScene);
+                buttonSound.setVolume(VOLUME * 1.25);
+                buttonSound.play();
             }
         });
     }

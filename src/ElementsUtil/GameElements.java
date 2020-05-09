@@ -39,6 +39,7 @@ public class GameElements {
 
         FixtureDef fd = new FixtureDef();
         fd.shape = ps;
+        fd.restitution = 0.7f; // BOUNCY CEILING !!?!?!?!?!?!?!?!??!?!?!
 
         BodyDef bd = new BodyDef();
         bd.position= new Vec2(0.0f,110f);
@@ -55,6 +56,7 @@ public class GameElements {
         fd.shape = ps;
         fd.density = 1.0f;
         fd.friction = 0.3f;
+        fd.restitution = 0.5f; // SLIGHTLY BOUNCY WALLS
 
         BodyDef bd = new BodyDef();
         bd.position.set(posX, posY);
@@ -78,7 +80,7 @@ public class GameElements {
                 float dragY = (float) me.getSceneY();
 
                 //Draw ball on this location. Set balls body type to static.
-                Ball ball = new Ball(root, Utils.toPosX(dragX), Utils.toPosY(dragY), 12, Utils.RandomColor());
+                Ball ball = new Ball(root, Utils.toPosX(dragX), Utils.toPosY(dragY), Utils.RandomColor());
                 balls.add(ball);
                 homeButton.toFront();
             }

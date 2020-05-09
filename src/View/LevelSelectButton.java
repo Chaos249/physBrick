@@ -1,5 +1,6 @@
 package View;
 
+import Components.Brick;
 import ElementsUtil.DisplayElements;
 import ElementsUtil.Utils;
 import javafx.event.ActionEvent;
@@ -18,13 +19,19 @@ import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+
+import static View.PhysBrick.VOLUME;
+import static View.PhysBrick.buttonSound;
 
 public class LevelSelectButton {
 
     public Text levelNumberText;
 
     public Button levelButton;
+
+    public ArrayList<Brick> gameLayout;
 
     public LevelSelectButton(Stage primaryStage, Scene menuScene, Group root, int levelNumber, ArrayList arr, int posX, int posY) throws FileNotFoundException {
         this.levelButton = new Button();
@@ -60,10 +67,13 @@ public class LevelSelectButton {
             @Override
             public void handle(ActionEvent actionEvent) {
                 try {
-                    GameView gv = new GameView(primaryStage, menuScene);
+                    GameView gv = new GameView(primaryStage, menuScene, levelNumber);
+
                     DisplayElements.AddEightiesMatrixRoot(gv.root, arr);
                     DisplayElements.ChangeLinesColor(Utils.RandomColor(), (ArrayList<Line>) arr.get(0), (ArrayList<Line>) arr.get(1));
                     primaryStage.setScene(gv.gameScene);
+                    buttonSound.setVolume(VOLUME * 1.25);
+                    buttonSound.play();
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -71,7 +81,7 @@ public class LevelSelectButton {
         });
     }
 
-    public static ArrayList<Button> MakeButtons(Stage primaryStage, Scene menuScene, Group root, ArrayList arr) throws FileNotFoundException {
+    public static ArrayList<Button> MakeButtons(Stage primaryStage, Scene menuScene, Group root, ArrayList graphic) throws FileNotFoundException {
         ArrayList<Button> buttons = new ArrayList<>();
         int levelAmount = 5; // only doing 5 levels for now
 
@@ -83,7 +93,7 @@ public class LevelSelectButton {
 
         int levelNumber = 1;
         for (int i = 1; i <= levelAmount; i++) { // only doing 5 levels for now
-            LevelSelectButton butt = new LevelSelectButton(primaryStage, menuScene, root, levelNumber, arr, posX, posY);
+            LevelSelectButton butt = new LevelSelectButton(primaryStage, menuScene, root, levelNumber, graphic, posX, posY);
             posX += xOffset;
             if (i % 5 == 0) {
                 posY += yOffset;

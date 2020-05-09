@@ -7,7 +7,6 @@ import javafx.animation.Interpolator;
 import javafx.animation.PathTransition;
 import javafx.scene.Group;
 import javafx.scene.media.AudioClip;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
@@ -54,7 +53,7 @@ public class DisplayElements {
             @Override
             public void handle(long l) {
                 if (playAudio == false) {
-                    thunder.setVolume(0.1);
+                    thunder.setVolume(PhysBrick.VOLUME / 2);
                     thunder.setBalance(0.1);
                     thunder.setRate(soundRate); //0.3 transition
                     thunder.play();

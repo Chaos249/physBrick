@@ -17,6 +17,9 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import static View.PhysBrick.VOLUME;
+import static View.PhysBrick.buttonSound;
+
 public class CreditsView {
 
     Scene creditsScene;
@@ -90,6 +93,8 @@ public class CreditsView {
             @Override
             public void handle(ActionEvent actionEvent) {
                 primaryStage.setScene(menuScene);
+                buttonSound.setVolume(VOLUME * 1.25);
+                buttonSound.play();
             }
         });
 

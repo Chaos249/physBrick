@@ -27,6 +27,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+import static View.PhysBrick.VOLUME;
+import static View.PhysBrick.buttonSound;
+
 public class GameView {
 
     public static World world;
@@ -43,7 +46,7 @@ public class GameView {
 
     public Timeline timeline = new Timeline();
 
-    public GameView(Stage primaryStage, Scene menuScene) throws FileNotFoundException {
+    public GameView(Stage primaryStage, Scene menuScene, int levelNumber) throws FileNotFoundException {
         this.root = new Group();
         this.gameScene = new Scene(root, Utils.WIDTH, Utils.HEIGHT, Color.BLACK);
 
@@ -62,7 +65,24 @@ public class GameView {
         GameElements.MakeBoundingBox(); // bounding box
         GameElements.MakeAddBallMouseEvent(gameScene, root, balls, homeButton);
 
-        this.gameLayout = LevelSelectView.MakeBrickLayout1(this.root); // loads level
+        if (levelNumber == 1) {
+            this.gameLayout = LevelView.MakeBrickLayout1(root);
+        }
+        else if (levelNumber == 2) {
+            this.gameLayout = LevelView.MakeBrickLayout2(root);
+        }
+        else if (levelNumber == 3) {
+            this.gameLayout = LevelView.MakeBrickLayout3(root);
+        }
+        else if (levelNumber == 4) {
+            this.gameLayout = LevelView.MakeBrickLayout2(root);
+        }
+        else if (levelNumber == 5) {
+            this.gameLayout = LevelView.MakeBrickLayout2(root);
+        } else {
+            this.gameLayout = LevelView.MakeBrickLayout2(root);
+        }
+
 
         timeline.playFromStart();
     }
@@ -84,14 +104,7 @@ public class GameView {
                 // updates the platform on screen
                 plat.node.setLayoutX(xpos_p - Platform.width / 2);
                 plat.node.setLayoutY(ypos_p - Platform.height / 2);
-
-
-                for (Brick brick : gameLayout) { // contact currently way too fast, possibly make StillContacted method
-                    if (brick.BallContacted()) {
-                        brick.breakCheck(root);
-                        brick.damageDurabilityText(0.1f); // usually 1
-                    }
-                }
+                plat.node.toFront();
 
                 // updates the balls on screen
                 for (Ball ball : balls) {
@@ -101,9 +114,17 @@ public class GameView {
 
                     ball.node.setLayoutX(xpos);
                     ball.node.setLayoutY(ypos);
-
-                    ball.setVelocityInfo();
                 }
+
+                // damage check loop
+                for (Brick brick : gameLayout) {
+                    if (brick.CheckContact()) {
+                        double damageAmount = 0.195;
+                        brick.BreakCheck(root, balls);
+                        brick.damageDurability((float) damageAmount); // usually 1
+                    }
+                }
+                homeButton.toFront();
             }
         };
         KeyFrame frame = new KeyFrame(duration, loopEvent, null, null);
@@ -111,27 +132,27 @@ public class GameView {
     }
 
     public Button initHomeButton(Stage primaryStage, Scene menuScene) throws FileNotFoundException {
+        double btnScale = 0.2;
         this.homeButton = new Button();
         FileInputStream play_input = new FileInputStream("src/resources/image/home.jpg");
         Image play_img = new Image(play_input);
         ImageView btngraphic = new ImageView(play_img);
 
-        double btnScale = 0.2;
         this.homeButton.setGraphic(btngraphic);
         this.homeButton.setScaleX(btnScale);
         this.homeButton.setScaleY(btnScale);
         this.homeButton.setOpacity(0.92);
         this.homeButton.setPadding(Insets.EMPTY);
-
         this.homeButton.setTranslateX(-150);
         this.homeButton.setTranslateY(-150);
 
         this.homeButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                StripAndClip();
+                StripAndClip(); // tries to deletes game object to save memory and not have other dumb shit happen
                 primaryStage.setScene(menuScene);
-                // make call to delete game view object
+                buttonSound.setVolume(VOLUME * 1.25);
+                buttonSound.play();
             }
         });
 
