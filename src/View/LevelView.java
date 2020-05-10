@@ -347,11 +347,46 @@ public class LevelView {
         try { // for the custom font loading a try catch block is needed
 
             // bottom row
+            Brick brick1 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 100, 52, 10, Color.WHITE, root);
+            brick1.initDurabilityText(root);
+            Brick brick2 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 100, 52, 10, Color.WHITE, root);
+            brick2.initDurabilityText(root);
+            Brick brick3 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 100, 52, 10, Color.WHITE, root);
+            brick3.initDurabilityText(root);
+            Brick brick4 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 100, 52, 10, Color.WHITE, root);
+            brick4.initDurabilityText(root);
+            Brick brick13 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 100, 52, 10, Color.WHITE, root);
+            brick13.initDurabilityText(root);
+            Brick brick18 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 100, 52, 10, Color.WHITE, root);
+            brick18.initDurabilityText(root);
 
+            Brick brick29 = new Brick(Utils.WIDTH / 2 - 330, Utils.HEIGHT / 2 - 100, 52, 10, Color.WHITE, root);
+            brick29.initDurabilityText(root);
+            Brick brick30 = new Brick(Utils.WIDTH / 2 + 275, Utils.HEIGHT / 2 - 100, 52, 10, Color.WHITE, root);
+            brick30.initDurabilityText(root);
+
+
+            // less bottom row
+            Brick brick9 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 155, 52, 10, Color.WHITE, root);
+            brick9.initDurabilityText(root);
+            Brick brick10 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 155, 52, 10, Color.WHITE, root);
+            brick10.initDurabilityText(root);
+            Brick brick11 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 155, 52, 10, Color.WHITE, root);
+            brick11.initDurabilityText(root);
+            Brick brick12 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 155, 52, 10, Color.WHITE, root);
+            brick12.initDurabilityText(root);
+            Brick brick21 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 155, 52, 10, Color.WHITE, root);
+            brick21.initDurabilityText(root);
+            Brick brick22 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 155, 52, 10, Color.WHITE, root);
+            brick22.initDurabilityText(root);
+
+            // middle row
+            Brick brick25 = new Brick(Utils.WIDTH / 2 - 330, Utils.HEIGHT / 2 - 265, 52, 10, Color.WHITE, root);
+            brick25.initDurabilityText(root);
+            Brick brick26 = new Brick(Utils.WIDTH / 2 + 275, Utils.HEIGHT / 2 - 265, 52, 10, Color.WHITE, root);
+            brick26.initDurabilityText(root);
 
             // top row
-            Brick brick4 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
-            brick4.initDurabilityText(root);
             Brick brick5 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
             brick5.initDurabilityText(root);
             Brick brick6 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
@@ -360,16 +395,12 @@ public class LevelView {
             brick7.initDurabilityText(root);
             Brick brick8 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
             brick8.initDurabilityText(root);
-            Brick brick11 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
-            brick11.initDurabilityText(root);
             Brick brick19 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
             brick19.initDurabilityText(root);
             Brick brick23 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
             brick23.initDurabilityText(root);
 
             // top top row
-            Brick brick13 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
-            brick13.initDurabilityText(root);
             Brick brick14 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
             brick14.initDurabilityText(root);
             Brick brick15 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
@@ -378,25 +409,28 @@ public class LevelView {
             brick16.initDurabilityText(root);
             Brick brick17 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
             brick17.initDurabilityText(root);
-            Brick brick18 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
-            brick18.initDurabilityText(root);
             Brick brick20 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
             brick20.initDurabilityText(root);
             Brick brick24 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
             brick24.initDurabilityText(root);
 
-            //brickList.add(brick1);
-            //brickList.add(brick2);
-            //brickList.add(brick3);
+            Brick brick27 = new Brick(Utils.WIDTH / 2 - 330, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
+            brick27.initDurabilityText(root);
+            Brick brick28 = new Brick(Utils.WIDTH / 2 + 275, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
+            brick28.initDurabilityText(root);
+
+            brickList.add(brick1);
+            brickList.add(brick2);
+            brickList.add(brick3);
             brickList.add(brick4);
             brickList.add(brick5);
             brickList.add(brick6);
             brickList.add(brick7);
             brickList.add(brick8);
-            //brickList.add(brick9);
-            //brickList.add(brick10);
+            brickList.add(brick9);
+            brickList.add(brick10);
             brickList.add(brick11);
-            //brickList.add(brick12);
+            brickList.add(brick12);
             brickList.add(brick13);
             brickList.add(brick14);
             brickList.add(brick15);
@@ -405,12 +439,33 @@ public class LevelView {
             brickList.add(brick18);
             brickList.add(brick19);
             brickList.add(brick20);
-            //brickList.add(brick21);
-            //brickList.add(brick22);
+            brickList.add(brick21);
+            brickList.add(brick22);
             brickList.add(brick23);
             brickList.add(brick24);
+            brickList.add(brick25);
+            brickList.add(brick26);
+            brickList.add(brick27);
+            brickList.add(brick28);
+            brickList.add(brick29);
+            brickList.add(brick30);
 
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        }
+
+        return brickList;
+    }
+
+    public static ArrayList<Brick> MakeBrickLayout4(Group root) {
+        ArrayList<Brick> brickList = new ArrayList<>();
+        try {
+        Brick brick1 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 400, 52, 5, Color.WHITE, root);
+        brick1.initDurabilityText(root);
+
+        brickList.add(brick1);
+
+        } catch (FileNotFoundException e) {
             System.out.println(e);
         }
 

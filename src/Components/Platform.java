@@ -22,8 +22,8 @@ public class Platform{
     private float posY;
 
     // platform dimensions in pixels
-    public static float width = 100;
-    public static float height = 25;
+    public static float width = 100; // 100
+    public static float height = 25; // 25
 
     private Color color;
 
@@ -64,7 +64,6 @@ public class Platform{
         // shape
         PolygonShape platform_rectangle = new PolygonShape();
         platform_rectangle.setAsBox(Utils.toPosY(this.height) * 0.0393f, Utils.toPosX(this.width) * 0.13f); // x and y are backwards
-        //View.UtilElements.Utils.toPosY(this.height) * 0.1f)/2.54f, View.UtilElements.Utils.toPosX(this.width) * 0.1f) * 1.3)
 
         // fixture
         FixtureDef fd = new FixtureDef();

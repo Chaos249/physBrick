@@ -38,7 +38,6 @@ public class Ball {
 		this.color = color;
 		node = create();
 		root.getChildren().add(node);
-
 	}
 
 	private Node create() {

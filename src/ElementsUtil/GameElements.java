@@ -3,6 +3,7 @@ package ElementsUtil;
 import Components.Ball;
 import View.GameView;
 import javafx.animation.AnimationTimer;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 
 public class GameElements {
 
-    public static void addGround(float width, float height) {
+    public static void addGround(float width, float height) { // disabled for real game, only exists for testing
         PolygonShape ps = new PolygonShape();
         ps.setAsBox(width,height);
 
@@ -66,7 +67,7 @@ public class GameElements {
 
     public static void MakeBoundingBox(){
         // bounding box
-        addGround(100, 11);
+        //addGround(100, 11); // disabled for real game, only exists for testing
         addWall(0,100,1,105); //Left wall
         addWall(100,100,1,105); //Right wall
         addCeiling(100, 11);
@@ -79,7 +80,7 @@ public class GameElements {
                 float dragX = (float) me.getSceneX();
                 float dragY = (float) me.getSceneY();
 
-                //Draw ball on this location. Set balls body type to static.
+                // Draw ball on this location
                 Ball ball = new Ball(root, Utils.toPosX(dragX), Utils.toPosY(dragY), Utils.RandomColor());
                 balls.add(ball);
                 homeButton.toFront();

@@ -39,7 +39,7 @@ public class PhysBrick extends Application {
         // makes the scene for the credits view
         TitleView tv = new TitleView(primaryStage);
         primaryStage.setScene(tv.titleScene);
-        if (DEBUG) {VOLUME = 0.05;}
+        if (DEBUG) { VOLUME = 0.05; }
 
         CreditsView cv = new CreditsView(primaryStage, tv.titleScene);
 

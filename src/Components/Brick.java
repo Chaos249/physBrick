@@ -143,8 +143,8 @@ public class Brick {
 
     }
 
-    public void BreakCheck(Group root, ArrayList<Ball> balls) {
-        if ((int) this.durability <= 0) { // stays one step after 1 for some reason
+    public boolean BreakCheck(Group root) {
+        if ((int) this.durability <= 1) { // stays one step after 1 for some reason
             this.durabilityText.setVisible(false);
             this.playBreakEffect();
             GameView.world.destroyBody((Body) this.node.getUserData());
@@ -152,11 +152,9 @@ public class Brick {
             root.getChildren().addAll(RRT);
             AnimationTimer at = DisplayElements.DrawLightning(root, RRT, 30, 0.8); //35, 0.8
             at.start();
-
-            Ball ball = new Ball(root, Utils.WIDTH / 2, Utils.HEIGHT / 2, Utils.RandomColor());
-            ball.node.setVisible(true);
-            balls.add(ball);
+            return true;
         }
+        return false;
     }
 
     public void playBreakEffect() {
