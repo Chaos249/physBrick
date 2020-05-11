@@ -1,11 +1,13 @@
 package ElementsUtil;
 
+import Components.LightingThread;
 import View.PhysBrick;
 import View.SettingsView;
 import javafx.animation.AnimationTimer;
 import javafx.animation.Interpolator;
 import javafx.animation.PathTransition;
 import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -16,6 +18,8 @@ import SubUtil.RRT;
 import SubUtil.Vertex;
 import java.util.ArrayList;
 import java.util.Random;
+
+import static View.GameView.gameScene;
 
 public class DisplayElements {
 
@@ -43,7 +47,7 @@ public class DisplayElements {
     }
 
     // generates rrt and draws the configuration and then undraws it
-    public static AnimationTimer DrawLightning(Group root, ArrayList<Line> lines, int lightningSpeed, double soundRate) {
+    public static AnimationTimer DrawLightning(Scene scene, Group root, ArrayList<Line> lines, int lightningSpeed, double soundRate) {
         AnimationTimer at = new AnimationTimer() {
             boolean playAudio = false;
             boolean flip = false;
@@ -85,6 +89,8 @@ public class DisplayElements {
                 count++;
             }
         };
+        Thread thread = new Thread(new LightingThread(scene));
+        thread.start();
         return at;
     }
 

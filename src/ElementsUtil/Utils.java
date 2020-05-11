@@ -12,14 +12,6 @@ public class Utils {
     public static final int WIDTH = 1280; //1280
     public static final int HEIGHT = 1280; //960
 
-    //Entities.Ball radius in pixel
-    public static final int BALL_SIZE = 8;
-
-    // brick size
-    public static final int SML_BRICK_SIZE = 5;
-    public static final int MED_BRICK_SIZE = 10;
-    public static final int LRG_BRICK_SIZE = 15;
-
     //Total number of balls
     //public final static int NO_OF_BALLS = 1;
 

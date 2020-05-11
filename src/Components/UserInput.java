@@ -52,7 +52,7 @@ public class UserInput {
                 float Xmouse = (float) mouseEvent.getX();
                 float Ymouse = (float) mouseEvent.getY();
 
-                Vec2 vec = new Vec2(Utils.toPosX(Xmouse) - (Utils.WIDTH / 25.6f), Utils.toPosY(Ymouse) - (Utils.HEIGHT / 25.9f)); //50, 37
+                Vec2 vec = new Vec2(Utils.toPosX(Xmouse) - (Utils.WIDTH / 25.6f) + 3.8f, Utils.toPosY(Ymouse) - (Utils.HEIGHT / 25.9f) + 10); //50, 37
                 m_joint.setTarget(vec);
             }
         };

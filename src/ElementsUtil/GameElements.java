@@ -1,7 +1,9 @@
 package ElementsUtil;
 
 import Components.Ball;
+import Components.Platform;
 import View.GameView;
+import View.PhysBrick;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -76,7 +78,6 @@ public class GameElements {
     public static void MakeAddBallMouseEvent(Scene scene, Group root, ArrayList<Ball> balls, Button homeButton) {
         EventHandler<MouseEvent> addBall = new EventHandler<MouseEvent>() {
             public void handle(MouseEvent me) {
-
                 float dragX = (float) me.getSceneX();
                 float dragY = (float) me.getSceneY();
 
@@ -90,17 +91,43 @@ public class GameElements {
     }
 
     public static void MakeAddLightningButtonMouseEvent(Scene scene, Group root) {
-        EventHandler<KeyEvent> keyEvent = new EventHandler<KeyEvent>() {
+        EventHandler<KeyEvent> lightningKey = new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode() == KeyCode.L) {
                     ArrayList<Line> RRT = DisplayElements.MakeLightning(800); //800
                     root.getChildren().addAll(RRT);
-                    AnimationTimer at = DisplayElements.DrawLightning(root, RRT, 35, 0.8); //35, 0.8
+                    AnimationTimer at = DisplayElements.DrawLightning(scene, root, RRT, 35, 0.8); //35, 0.8
                     at.start();
                 }
             }
         };
-        scene.setOnKeyPressed(keyEvent);
+        scene.setOnKeyPressed(lightningKey);
     }
+
+    public static void DebugHotkeys(Scene gameScene, Platform plat, ArrayList<Ball> balls) {
+        gameScene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.J) {
+                    plat.enlargePlatform();
+                }
+                if (keyEvent.getCode() == KeyCode.I) {
+                    Ball.embiggenBalls(balls);
+                }
+            }
+        });
+        gameScene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.K) {
+                    plat.ensmallPlatform();
+                }
+                if (keyEvent.getCode() == KeyCode.O) {
+                    Ball.microBalls(balls);
+                }
+            }
+        });
+    }
+
 }

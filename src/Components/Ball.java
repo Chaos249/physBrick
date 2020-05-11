@@ -8,10 +8,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.Body;
-import org.jbox2d.dynamics.BodyDef;
-import org.jbox2d.dynamics.BodyType;
-import org.jbox2d.dynamics.FixtureDef;
+import org.jbox2d.dynamics.*;
+
+import java.util.ArrayList;
 
 public class Ball {
 
@@ -87,4 +86,27 @@ public class Ball {
 		double delta = Math.pow(velocityVector.x, 2) + Math.pow(velocityVector.y, 2);
 		return Math.sqrt(delta);
 	}
+
+	public static void embiggenBalls(ArrayList<Ball> balls) {
+		for (Ball ball : balls) {
+			Fixture fixture = ball.ballBody.getFixtureList();
+			CircleShape cs = (CircleShape) fixture.getShape();
+			cs.setRadius((currentRadius * 2) * 0.1f);
+
+			Circle circle = (Circle) ball.node;
+			circle.setRadius(currentRadius * 2);
+		}
+	}
+
+	public static void microBalls(ArrayList<Ball> balls) {
+		for (Ball ball : balls) {
+			Fixture fixture = ball.ballBody.getFixtureList();
+			CircleShape cs = (CircleShape) fixture.getShape();
+			cs.setRadius((currentRadius) * 0.1f);
+
+			Circle circle = (Circle) ball.node;
+			circle.setRadius(currentRadius);
+		}
+	}
+
 }

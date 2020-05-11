@@ -11,44 +11,62 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import static View.PhysBrick.VOLUME;
 import static View.PhysBrick.buttonSound;
 
 public class CreditsView {
 
-    Scene creditsScene;
+    public Scene creditsScene;
 
-    Group root;
+    public Group root;
 
-    Text authorText;
-    Text musicText;
-    Text miscText;
+    public Text authorText;
+    public Text userText;
+    public Text miscText;
 
-    Button backButton;
+    public Button backButton;
 
-    public CreditsView(Stage primaryStage, Scene menuScene) throws FileNotFoundException {
+    public CreditsView(Stage primaryStage, Scene menuScene, ArrayList arr, boolean titleView) throws FileNotFoundException {
 
         this.root = new Group();
         this.creditsScene = new Scene(root, Utils.WIDTH, Utils.HEIGHT, Color.BLACK);
 
-        DisplayElements.EightiesAnim(PhysBrick.DEBUG, primaryStage, this.root, Color.RED);
+        if (titleView) { // shitty way to do this but it fixes the 80s graphic not appearing after game completion bug
+            DisplayElements.EightiesAnim(PhysBrick.DEBUG, primaryStage, this.root, Color.RED);
+        } else {
+            DisplayElements.AddEightiesMatrixRoot(this.root, arr);
+            DisplayElements.ChangeLinesColor(Color.RED, (ArrayList<Line>) arr.get(0), (ArrayList<Line>) arr.get(1));
+        }
 
-        this.authorText = new Text("Kyle Yagloski");
+        this.authorText = new Text("AUTHOR: KYLE YAGLOSKI");
+        this.authorText.setOpacity(0.8);
+        this.authorText.setFont(Font.loadFont(new FileInputStream("src/resources/start.ttf"), 25));
+        this.authorText.setFill(Color.WHITE);
+        this.authorText.setTranslateX((Utils.WIDTH / 2) - 275);
+        this.authorText.setTranslateY((Utils.HEIGHT / 2) - 400);
 
-        this.musicText = new Text("Placeholder");
+        this.userText = new Text("AKA \"CHAOS249\"");
+        this.userText.setOpacity(0.8);
+        this.userText.setFont(Font.loadFont(new FileInputStream("src/resources/start.ttf"), 25));
+        this.userText.setFill(Color.WHITE);
+        this.userText.setTranslateX((Utils.WIDTH / 2) - 185);
+        this.userText.setTranslateY((Utils.HEIGHT / 2) - 350);
 
-        this.miscText = new Text("Placeholder");
+        this.miscText = new Text("PATREON:");
 
         this.backButton = initBackButton(primaryStage, menuScene);
 
         root.getChildren().add(authorText);
-        root.getChildren().add(musicText);
+        root.getChildren().add(userText);
         root.getChildren().add(miscText);
         root.getChildren().add(backButton);
     }
@@ -59,10 +77,10 @@ public class CreditsView {
         FileInputStream play_input = new FileInputStream("src/resources/image/credit.jpg");
         Image play_img = new Image(play_input);
         ImageView btngraphic = new ImageView(play_img);
-        double btnScale = 0.3;
+        double btnScale = 0.6;
 
-        btn.setLayoutX((Utils.WIDTH / 6.9));
-        btn.setLayoutY((Utils.HEIGHT - 250));
+        btn.setLayoutX((Utils.WIDTH / 2) - 282); // /6.9
+        btn.setLayoutY((Utils.HEIGHT) - 185); // -250
         btn.setGraphic(btngraphic);
         btn.setScaleX(btnScale);
         btn.setScaleY(btnScale);

@@ -59,14 +59,14 @@ public class SettingsView {
         FileInputStream play_input = new FileInputStream("src/resources/image/settings.jpg");
         Image play_img = new Image(play_input);
         ImageView btngraphic = new ImageView(play_img);
-        double btnScale = 0.3;
+        double btnScale = 0.6;
 
-        btn.setLayoutX((Utils.WIDTH / 14f));
-        btn.setLayoutY((Utils.HEIGHT - 373)); //365
+        btn.setLayoutX((Utils.WIDTH / 2) - 348); // /14f
+        btn.setLayoutY((Utils.HEIGHT - 325)); //-373
         btn.setGraphic(btngraphic);
         btn.setScaleX(btnScale);
         btn.setScaleY(btnScale);
-        btn.setOpacity(0.85);
+        btn.setOpacity(0.8);
         btn.setPadding(Insets.EMPTY);
 
         root.getChildren().add(btn);
@@ -103,6 +103,7 @@ public class SettingsView {
 
     public Slider initSlider() {
         musicPlayer.setVolume(0.1);
+        musicPlayer.setCycleCount(999999999);
 
         Slider volumeSlider = new Slider(0, 100, 50);
         volumeSlider.setMax(0.5);
@@ -122,7 +123,7 @@ public class SettingsView {
             @Override
             public void invalidated(Observable observable) {
                 VOLUME = volumeSlider.getValue();
-                musicPlayer.setVolume(volumeSlider.getValue() * 0.25);
+                musicPlayer.setVolume(volumeSlider.getValue() * 0.75);
             }
         });
 

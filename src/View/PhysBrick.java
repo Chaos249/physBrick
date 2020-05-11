@@ -35,13 +35,12 @@ public class PhysBrick extends Application {
         Group defaultRoot = new Group();
         ArrayList arr = DisplayElements.EightiesAnim(DEBUG, primaryStage, defaultRoot, Color.CYAN);
 
-
         // makes the scene for the credits view
         TitleView tv = new TitleView(primaryStage);
         primaryStage.setScene(tv.titleScene);
         if (DEBUG) { VOLUME = 0.05; }
 
-        CreditsView cv = new CreditsView(primaryStage, tv.titleScene);
+        CreditsView cv = new CreditsView(primaryStage, tv.titleScene, arr, true);
 
         SettingsView sv = new SettingsView(primaryStage, tv.titleScene);
 

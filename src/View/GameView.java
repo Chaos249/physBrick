@@ -1,15 +1,10 @@
 package View;
 
-import Components.Ball;
-import Components.Brick;
-import Components.Platform;
-import Components.UserInput;
+import Components.*;
 import ElementsUtil.DisplayElements;
 import ElementsUtil.GameElements;
 import ElementsUtil.Utils;
-import javafx.animation.FadeTransition;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -18,6 +13,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
@@ -27,7 +28,9 @@ import javafx.util.Duration;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.World;
+import org.w3c.dom.ls.LSOutput;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -39,7 +42,7 @@ public class GameView {
 
     public static World world;
 
-    public Scene gameScene;
+    public static Scene gameScene;
     public Group root;
 
     public Button homeButton;
@@ -57,23 +60,35 @@ public class GameView {
     public int timer;
     public Text timerText;
 
+    public Text startText;
+
     public ImageView gameOverImage;
     public Button retryButton;
     public ImageView levelCompleteImage;
     public Button nextLevelButton;
+    public Button creditsButton;
 
     public Timeline timeline = new Timeline();
 
     public boolean gameover = false;
     public boolean levelComplete = false;
+    public boolean paused = false;
+    public boolean gameStarted = false;
+    public AudioClip pauseSound = new AudioClip("file:src/resources/sound/pause.wav");
+    public Text pauseText;
+
+    public static String gameMusicPath = new File("src/resources/sound/gamemusic.wav").getAbsolutePath();
+    public static Media gameMusic = new Media(new File(gameMusicPath).toURI().toString());
+    public static MediaPlayer gameMusicPlayer = new MediaPlayer(gameMusic);
 
     public GameView(Stage primaryStage, Scene menuScene, int levelNumber, ArrayList arr) throws FileNotFoundException {
         this.root = new Group();
         this.gameScene = new Scene(root, Utils.WIDTH, Utils.HEIGHT, Color.BLACK);
 
         this.world = new World(new Vec2(0.0f, -10.0f));
-        this.plat = new Platform(this.root, Utils.toPosX(Utils.WIDTH / 2), Utils.toPosX((Utils.HEIGHT / 2)), Color.WHITE);
-        this.startBall = new Ball(this.root, Utils.toPosX(Utils.WIDTH / 2), Utils.toPosX((Utils.HEIGHT / 2) + 40), Utils.RandomColor());
+        this.plat = new Platform(this.root, Utils.toPosX(Utils.WIDTH / 2) - 3.8f, Utils.toPosX((Utils.HEIGHT / 2)) - 10, Color.WHITE);
+
+        this.startBall = new Ball(this.root, Utils.toPosX(Utils.WIDTH / 2), Utils.toPosX((Utils.HEIGHT / 2) + 0), Utils.RandomColor());
         this.balls = new ArrayList<>();
         this.balls.add(this.startBall);
 
@@ -83,19 +98,54 @@ public class GameView {
 
         this.timerText = initTimer();
 
+        SettingsView.musicPlayer.stop();
+
+        this.gameMusicPlayer.setCycleCount(999999999);
+        this.gameMusicPlayer.setVolume(VOLUME * 0.75);
+        if (!PhysBrick.DEBUG) {
+            this.gameMusicPlayer.play();
+        }
+
         this.gameOverImage = MakeGameOverImage();
         this.retryButton = MakeRetryButton(primaryStage, menuScene, arr, levelNumber);
         this.levelCompleteImage = MakeLevelCompleteImage();
         this.nextLevelButton = MakeNextLevelButton(primaryStage, menuScene, arr, levelNumber);
+        this.startText = MakeStartText();
+        this.pauseText = MakePauseText();
+
+        this.creditsButton = CreditsView.MakeCreditButton(root);
+        this.creditsButton.setOpacity(0);
+        this.creditsButton.setVisible(false);
+        this.creditsButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    StripAndClip();
+                    CreditsView newCv = new CreditsView(primaryStage, menuScene, arr, false);
+                    primaryStage.setScene(newCv.creditsScene);
+                    buttonSound.setVolume(VOLUME * 1.25);
+                    buttonSound.play();
+
+                    gameMusicPlayer.stop();
+                    if (!PhysBrick.DEBUG) {
+                        SettingsView.musicPlayer.play();
+                    }
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         timeline.setCycleCount(Timeline.INDEFINITE);
-        Duration duration = Duration.seconds(1.0 / 60.0); // duration for frame.
+        Duration duration = Duration.seconds(1.0 / 60.0); // duration for frame
 
         UserInput.MakeMouseJointEventHandler(gameScene, plat); // mouse joint control and platform placement // this is not being deleted by stripandclip
         GameLoop(duration, timeline);
 
         GameElements.MakeBoundingBox(); // bounding box
-        GameElements.MakeAddBallMouseEvent(gameScene, root, balls, homeButton);
+        if (PhysBrick.DEBUG) {
+            GameElements.MakeAddBallMouseEvent(gameScene, root, balls, homeButton);
+        }
 
         this.levelNumber = levelNumber;
         switch (levelNumber) {
@@ -112,12 +162,58 @@ public class GameView {
                 this.gameLayout = LevelView.MakeBrickLayout4(root);
                 break;
             case 5:
-                this.gameLayout = LevelView.MakeBrickLayout4(root);
+                this.gameLayout = LevelView.MakeBrickLayout5(root);
                 break;
             default:
-                this.gameLayout = LevelView.MakeBrickLayout2(root);
+                this.gameLayout = LevelView.MakeBrickLayout1(root);
         }
-        timeline.playFromStart();
+
+        gameScene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.ESCAPE && paused == false) {
+                    timeline.pause();
+                    paused = true;
+                    pauseSound.setVolume(VOLUME * 2.5);
+                    if (!PhysBrick.DEBUG) {
+                        gameMusicPlayer.pause();
+                    }
+                    pauseSound.play();
+                    pauseText.toFront();
+                    pauseText.setVisible(true);
+                }
+                else if (keyEvent.getCode() == KeyCode.ESCAPE && paused == true) {
+                    if (gameStarted == true) {
+                        timeline.play();
+                    }
+                    paused = false;
+                    pauseSound.setVolume(VOLUME * 2.5);
+                    pauseSound.play();
+                    if (!PhysBrick.DEBUG) {
+                        gameMusicPlayer.play();
+                    }
+                    pauseText.setVisible(false);
+                }
+            }
+        });
+
+        if (!(timeline.getStatus() == Animation.Status.PAUSED)) {
+            gameScene.setOnMousePressed(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (paused == false) {
+                        timeline.playFromStart();
+                        gameStarted = true;
+                        startText.setVisible(false);
+                    }
+                }
+            });
+        }
+
+        if (PhysBrick.DEBUG) { // this causes pausing to break for some reason
+            GameElements.MakeAddLightningButtonMouseEvent(gameScene, root);
+            GameElements.DebugHotkeys(gameScene, plat, balls);
+        }
     }
 
     public void GameLoop(Duration duration, Timeline timeline) {
@@ -153,7 +249,7 @@ public class GameView {
                 for (Brick brick : gameLayout) {
                     if (brick.CheckContact()) {
                         double damageAmount = 0.195;
-                        boolean broken = brick.BreakCheck(root);
+                        boolean broken = brick.BreakCheck(gameScene, root);
                         brick.damageDurability((float) damageAmount); // usually 1
                         UpdateScore();
                         if (broken) {
@@ -175,6 +271,7 @@ public class GameView {
                         }
                         levelComplete = true;
                     }
+                    creditsButton.toFront();
                     nextLevelButton.toFront();
                     levelCompleteImage.toFront();
                     return;
@@ -220,6 +317,11 @@ public class GameView {
                 primaryStage.setScene(menuScene);
                 buttonSound.setVolume(VOLUME * 1.25);
                 buttonSound.play();
+
+                gameMusicPlayer.stop();
+                if (!PhysBrick.DEBUG) {
+                    SettingsView.musicPlayer.play();
+                }
             }
         });
 
@@ -292,7 +394,6 @@ public class GameView {
         imageView.setLayoutX((Utils.WIDTH / 2) - 851);
         imageView.setLayoutY(Utils.HEIGHT - 1100);
         imageView.setOpacity(0);
-
         imageView.setScaleX(0.58);
         imageView.setScaleY(0.58);
 
@@ -318,7 +419,6 @@ public class GameView {
         this.nextLevelButton.setPadding(Insets.EMPTY);
         this.nextLevelButton.setTranslateX((Utils.WIDTH / 2) - 370);
         this.nextLevelButton.setTranslateY((Utils.HEIGHT / 2) - 130);
-
         this.nextLevelButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -347,7 +447,6 @@ public class GameView {
         imageView.setLayoutX((Utils.WIDTH / 2) - 525);
         imageView.setLayoutY(Utils.HEIGHT - 1100);
         imageView.setOpacity(0);
-
         imageView.setScaleX(0.6);
         imageView.setScaleY(0.6);
 
@@ -373,7 +472,6 @@ public class GameView {
         this.retryButton.setPadding(Insets.EMPTY);
         this.retryButton.setTranslateX((Utils.WIDTH / 2) - 370);
         this.retryButton.setTranslateY((Utils.HEIGHT / 2) - 200);
-
         this.retryButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -390,7 +488,6 @@ public class GameView {
                 buttonSound.play();
             }
         });
-
         this.root.getChildren().add(retryButton);
         return retryButton;
     }
@@ -419,6 +516,16 @@ public class GameView {
             endText.setFill(Color.WHITE);
             endText.setTranslateX((Utils.WIDTH / 2) - 450);
             endText.setTranslateY((Utils.HEIGHT / 2) - 140);
+
+            this.creditsButton.setVisible(true);
+            FadeTransition creditft = new FadeTransition();
+            creditft.setNode(this.creditsButton);
+            creditft.setDuration(Duration.seconds(0.15));
+            creditft.setFromValue(0);
+            creditft.setToValue(0.9);
+            creditft.setAutoReverse(false);
+            creditft.play();
+
             this.root.getChildren().add(endText);
             nextLevelButton.setVisible(false);
         }
@@ -444,7 +551,36 @@ public class GameView {
         ft.play();
     }
 
-    public void StripAndClip() {
+    public Text MakeStartText() throws FileNotFoundException {
+        Text startText = new Text();
+        startText.setText("CLICK TO START!");
+        startText.setOpacity(0.8);
+        startText.setFont(Font.loadFont(new FileInputStream("src/resources/start.ttf"), 30));
+        startText.setFill(Color.WHITE);
+        startText.setTranslateX((Utils.WIDTH / 2) - 220);
+        startText.setTranslateY((Utils.HEIGHT / 2) + 80);
+
+        this.root.getChildren().add(startText);
+
+        return startText;
+    }
+
+    public Text MakePauseText() throws FileNotFoundException {
+        Text pauseText = new Text();
+        pauseText.setText("PAUSED");
+        pauseText.setOpacity(0.8);
+        pauseText.setFont(Font.loadFont(new FileInputStream("src/resources/start.ttf"), 30));
+        pauseText.setFill(Color.WHITE);
+        pauseText.setTranslateX((Utils.WIDTH / 2) - 90);
+        pauseText.setTranslateY((Utils.HEIGHT / 2) + 35);
+        pauseText.setVisible(false);
+
+        this.root.getChildren().add(pauseText);
+
+        return pauseText;
+    }
+
+    public void StripAndClip() { // deletes all objects in parent object to save memory and not fuck other shit up
         world = null;
         this.timeline.stop();
         this.timeline = null;

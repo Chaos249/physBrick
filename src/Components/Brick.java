@@ -8,6 +8,7 @@ import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -49,7 +50,7 @@ public class Brick {
 
     public static AudioClip hit = new AudioClip("file:src/resources/sound/hit.wav");
 
-    public Brick(float posX, float posY, int size, int durability, Color color, Group root) {
+    public Brick(float posX, float posY, int size, int durability, Color color, Group root ) {
         this.posX = posX;
         this.posY = posY;
         this.size = size;
@@ -143,14 +144,14 @@ public class Brick {
 
     }
 
-    public boolean BreakCheck(Group root) {
+    public boolean BreakCheck(Scene scene, Group root) {
         if ((int) this.durability <= 1) { // stays one step after 1 for some reason
             this.durabilityText.setVisible(false);
             this.playBreakEffect();
             GameView.world.destroyBody((Body) this.node.getUserData());
             ArrayList<Line> RRT = DisplayElements.MakeLightning(400); //800
             root.getChildren().addAll(RRT);
-            AnimationTimer at = DisplayElements.DrawLightning(root, RRT, 30, 0.8); //35, 0.8
+            AnimationTimer at = DisplayElements.DrawLightning(scene, root, RRT, 30, 0.8); //35, 0.8
             at.start();
             return true;
         }
