@@ -19,8 +19,6 @@ import SubUtil.Vertex;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static View.GameView.gameScene;
-
 public class DisplayElements {
 
     public static AudioClip thunder = new AudioClip("file:src/resources/sound/thunder.wav"); //thunder.wav
@@ -227,5 +225,12 @@ public class DisplayElements {
         for (ArrayList<Line> lines : arr) {
             root.getChildren().addAll(lines);
         }
+    }
+
+    public static void CustomLightning(Scene scene, Group root, int iterations, int lightningSpeed, float soundRate) {
+        ArrayList<Line> RRT = DisplayElements.MakeLightning(iterations); //800
+        root.getChildren().addAll(RRT);
+        AnimationTimer at = DisplayElements.DrawLightning(scene, root, RRT, lightningSpeed, soundRate); //35, 0.8
+        at.start();
     }
 }

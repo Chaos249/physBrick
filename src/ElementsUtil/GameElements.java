@@ -1,27 +1,39 @@
 package ElementsUtil;
 
-import Components.Ball;
-import Components.Platform;
+import Components.*;
 import View.GameView;
-import View.PhysBrick;
 import javafx.animation.AnimationTimer;
-import javafx.event.ActionEvent;
+import javafx.animation.Interpolator;
+import javafx.animation.PathTransition;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
+import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.AudioClip;
 import javafx.scene.shape.Line;
+import javafx.util.Duration;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.FixtureDef;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GameElements {
+
+    public static AudioClip powerupSound = new AudioClip("file:src/resources/sound/powerup.wav");
+    public static AudioClip enlargeSound = new AudioClip("file:src/resources/sound/enlarge.wav");
 
     public static void addGround(float width, float height) { // disabled for real game, only exists for testing
         PolygonShape ps = new PolygonShape();
@@ -75,6 +87,32 @@ public class GameElements {
         addCeiling(100, 11);
     }
 
+    public static void rollPowerUp(Group root, GamePlatform plat, Brick brick, ArrayList<Ball> balls) {
+        if (Utils.randomChance(10)){
+            Random r = new Random();
+            int powerUp = r.nextInt(3);
+            switch (powerUp){
+                case 0:
+                    PowerUp pStrawberry = new PowerUp(root, new String("strawberry_platform"), plat, (float) brick.node.getLayoutX(), (float) brick.node.getLayoutY(), balls);
+                    pStrawberry.sendPowerUp();
+                    break;
+                case 1:
+                    PowerUp pCherry = new PowerUp(root, new String("cherry_balls"), plat,(float) brick.node.getLayoutX(), (float) brick.node.getLayoutY(), balls);
+                    pCherry.sendPowerUp();
+                    break;
+                case 2:
+                    PowerUp pBanana = new PowerUp(root, new String("banana_laser"), plat,(float) brick.node.getLayoutX(), (float) brick.node.getLayoutY(), balls);
+                    pBanana.sendPowerUp();
+                    break;
+                default:
+                    System.out.println("error cannot find correct powerup");
+            }
+        }
+    }
+
+    /**
+     * DEBUG FUNCTIONALITY BELOW - COMPLETELY NONESSENTIAL
+     */
     public static void MakeAddBallMouseEvent(Scene scene, Group root, ArrayList<Ball> balls, Button homeButton) {
         EventHandler<MouseEvent> addBall = new EventHandler<MouseEvent>() {
             public void handle(MouseEvent me) {
@@ -105,7 +143,7 @@ public class GameElements {
         scene.setOnKeyPressed(lightningKey);
     }
 
-    public static void DebugHotkeys(Scene gameScene, Platform plat, ArrayList<Ball> balls) {
+    public static void DebugHotkeys(Scene gameScene, GamePlatform plat, ArrayList<Ball> balls, Group root, ArrayList<Brick> gameLayout) {
         gameScene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
@@ -115,19 +153,49 @@ public class GameElements {
                 if (keyEvent.getCode() == KeyCode.I) {
                     Ball.embiggenBalls(balls);
                 }
-            }
-        });
-        gameScene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode() == KeyCode.K) {
                     plat.ensmallPlatform();
                 }
                 if (keyEvent.getCode() == KeyCode.O) {
                     Ball.microBalls(balls);
                 }
+
             }
         });
+        gameScene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.P) {
+                    plat.shootLasers(gameScene, gameLayout);
+                }
+                if (keyEvent.getCode() == KeyCode.M) {
+                    testPowerUp(root, plat, balls);
+                }
+            }
+        });
+    }
+
+    public static void testPowerUp(Group root, GamePlatform plat, ArrayList<Ball> balls) {
+        if (Utils.randomChance(2)){
+            Random r = new Random();
+            int powerUp = r.nextInt(3);
+            switch (powerUp){
+                case 0:
+                    PowerUp pStrawberry = new PowerUp(root, new String("strawberry_platform"), plat, Utils.WIDTH / 2, Utils.WIDTH / 2, balls);
+                    pStrawberry.sendPowerUp();
+                    break;
+                case 1:
+                    PowerUp pCherry = new PowerUp(root, new String("cherry_balls"), plat,Utils.WIDTH / 2, Utils.WIDTH / 2, balls);
+                    pCherry.sendPowerUp();
+                    break;
+                case 2:
+                    PowerUp pBanana = new PowerUp(root, new String("banana_laser"), plat,Utils.WIDTH / 2, Utils.WIDTH / 2, balls);
+                    pBanana.sendPowerUp();
+                    break;
+                default:
+                    System.out.println("error cannot find correct powerup");
+            }
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 package Components;
 
 import ElementsUtil.DisplayElements;
+import ElementsUtil.GameElements;
 import ElementsUtil.Utils;
 import View.GameView;
 import View.PhysBrick;
@@ -48,9 +49,11 @@ public class Brick {
 
     public Group root;
 
+    public boolean broken = false;
+
     public static AudioClip hit = new AudioClip("file:src/resources/sound/hit.wav");
 
-    public Brick(float posX, float posY, int size, int durability, Color color, Group root ) {
+    public Brick(float posX, float posY, int size, int durability, Color color, Group root) {
         this.posX = posX;
         this.posY = posY;
         this.size = size;
@@ -147,6 +150,7 @@ public class Brick {
     public boolean BreakCheck(Scene scene, Group root) {
         if ((int) this.durability <= 1) { // stays one step after 1 for some reason
             this.durabilityText.setVisible(false);
+            this.broken = true;
             this.playBreakEffect();
             GameView.world.destroyBody((Body) this.node.getUserData());
             ArrayList<Line> RRT = DisplayElements.MakeLightning(400); //800
@@ -166,5 +170,7 @@ public class Brick {
         ft.setToValue(0);
         ft.setAutoReverse(false);
         ft.play();
+
+        GameElements.rollPowerUp(root, GameView.plat,this, GameView.balls);
     }
 }

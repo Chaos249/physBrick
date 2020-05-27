@@ -16,7 +16,7 @@ import org.jbox2d.dynamics.joints.MouseJointDef;
 
 public class UserInput {
 
-    public static MouseJointDef makeMouseJoint(Platform plat){
+    public static MouseJointDef makeMouseJoint(GamePlatform plat){
         // mouse joint
         PolygonShape ground_shape = new PolygonShape();
         ground_shape.setAsBox(0, 0);
@@ -43,7 +43,7 @@ public class UserInput {
      * PLATFORM PLACEMENT
      */
     // mouse joint control and platform placement
-    public static void MakeMouseJointEventHandler(Scene scene, Platform plat) {
+    public static void MakeMouseJointEventHandler(Scene scene, GamePlatform plat) {
         MouseJointDef jointDef = UserInput.makeMouseJoint(plat);
         MouseJoint m_joint = (MouseJoint) GameView.world.createJoint(jointDef);
         EventHandler<MouseEvent> mouseEvent = new EventHandler<MouseEvent>() {

@@ -28,7 +28,6 @@ import javafx.util.Duration;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.World;
-import org.w3c.dom.ls.LSOutput;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -38,24 +37,28 @@ import java.util.ArrayList;
 import static View.PhysBrick.VOLUME;
 import static View.PhysBrick.buttonSound;
 
+
+/**
+ * THIS CLASS IS VERY EMBARRASSING PLEASE LEAVE AND NEVER COME BACK!!!!!!!!!!!!!!
+ */
 public class GameView {
 
     public static World world;
 
     public static Scene gameScene;
-    public Group root;
+    public static Group root;
 
     public Button homeButton;
 
-    public Platform plat;
+    public static GamePlatform plat;
     public Ball startBall;
-    public ArrayList<Ball> balls;
+    public static ArrayList<Ball> balls;
 
     public int levelNumber;
-    public ArrayList<Brick> gameLayout;
+    public static ArrayList<Brick> gameLayout;
 
-    public int score;
-    public Text scoreText;
+    public static int score;
+    public static Text scoreText;
 
     public int timer;
     public Text timerText;
@@ -86,7 +89,7 @@ public class GameView {
         this.gameScene = new Scene(root, Utils.WIDTH, Utils.HEIGHT, Color.BLACK);
 
         this.world = new World(new Vec2(0.0f, -10.0f));
-        this.plat = new Platform(this.root, Utils.toPosX(Utils.WIDTH / 2) - 3.8f, Utils.toPosX((Utils.HEIGHT / 2)) - 10, Color.WHITE);
+        this.plat = new GamePlatform(this.root, Utils.toPosX(Utils.WIDTH / 2) - 3.8f, Utils.toPosX((Utils.HEIGHT / 2)) - 10, Color.WHITE);
 
         this.startBall = new Ball(this.root, Utils.toPosX(Utils.WIDTH / 2), Utils.toPosX((Utils.HEIGHT / 2) + 0), Utils.RandomColor());
         this.balls = new ArrayList<>();
@@ -125,7 +128,7 @@ public class GameView {
                     primaryStage.setScene(newCv.creditsScene);
                     buttonSound.setVolume(VOLUME * 1.25);
                     buttonSound.play();
-
+                    DisplayElements.CustomLightning(newCv.creditsScene, newCv.root, 8000, 50, 0.5f);
                     gameMusicPlayer.stop();
                     if (!PhysBrick.DEBUG) {
                         SettingsView.musicPlayer.play();
@@ -212,7 +215,7 @@ public class GameView {
 
         if (PhysBrick.DEBUG) { // this causes pausing to break for some reason
             GameElements.MakeAddLightningButtonMouseEvent(gameScene, root);
-            GameElements.DebugHotkeys(gameScene, plat, balls);
+            GameElements.DebugHotkeys(gameScene, plat, balls, root, gameLayout);
         }
     }
 
@@ -232,8 +235,8 @@ public class GameView {
                 float ypos_p = Utils.toPixelPosY(body_p.getPosition().y);
 
                 // updates the platform on screen
-                plat.node.setLayoutX(xpos_p - Platform.width / 2);
-                plat.node.setLayoutY(ypos_p - Platform.height / 2);
+                plat.node.setLayoutX(xpos_p - GamePlatform.width / 2);
+                plat.node.setLayoutY(ypos_p - GamePlatform.height / 2);
                 plat.node.toFront();
 
                 // updates the balls on screen
@@ -343,9 +346,9 @@ public class GameView {
         return scoreText;
     }
 
-    public void UpdateScore() {
-        this.score += 1;
-        this.scoreText.setText("SCORE:" + this.score);
+    public static void UpdateScore() {
+        score += 1;
+        scoreText.setText("SCORE:" + score);
     }
 
     public Text initTimer() throws FileNotFoundException {
@@ -595,7 +598,7 @@ public class GameView {
         this.nextLevelButton = null;
         this.levelCompleteImage = null;
         this.gameOverImage = null;
-        Runtime.getRuntime().gc();
+        Runtime.getRuntime().gc(); // java garbage cleaner
         System.out.println("stripped and clipped");
     }
 }

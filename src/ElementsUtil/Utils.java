@@ -1,7 +1,6 @@
 package ElementsUtil;
 
 import javafx.scene.paint.Color;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -11,9 +10,6 @@ public class Utils {
     //Screen width and height
     public static final int WIDTH = 1280; //1280
     public static final int HEIGHT = 1280; //960
-
-    //Total number of balls
-    //public final static int NO_OF_BALLS = 1;
 
     //Convert a JBox2D x coordinate to a JavaFX pixel x coordinate
     public static float toPixelPosX(float posX) {
@@ -74,5 +70,12 @@ public class Utils {
     public static float toPixelPosYPlat(float posY) {
         float y = (HEIGHT - (1.0f*HEIGHT) * posY / 100.0f);
         return y;
+    }
+
+    public static boolean randomChance(int bound) { // returns true with a 10 percent chance (for power up drops)
+        Random r = new Random();
+        int chance = r.nextInt(bound);
+
+        return chance == 0;
     }
 }

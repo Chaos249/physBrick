@@ -1,7 +1,9 @@
 package Components;
 
+import ElementsUtil.GameElements;
 import ElementsUtil.Utils;
 import View.GameView;
+import View.PhysBrick;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
@@ -96,6 +98,8 @@ public class Ball {
 			Circle circle = (Circle) ball.node;
 			circle.setRadius(currentRadius * 2);
 		}
+		GameElements.enlargeSound.setVolume(PhysBrick.VOLUME * 1.5);
+		GameElements.enlargeSound.play();
 	}
 
 	public static void microBalls(ArrayList<Ball> balls) {

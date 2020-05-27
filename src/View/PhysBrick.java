@@ -1,6 +1,7 @@
 package View;
 
 import ElementsUtil.DisplayElements;
+import ElementsUtil.Utils;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,11 +10,13 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class PhysBrick extends Application {
-
     // start game immediately and disables music if true
     public final static boolean DEBUG = true;
 
@@ -27,6 +30,7 @@ public class PhysBrick extends Application {
     // javafx main start
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
+        System.out.println("starting");
 
         primaryStage.setTitle("");
         primaryStage.setFullScreen(false);
@@ -70,6 +74,7 @@ public class PhysBrick extends Application {
                 primaryStage.setScene(cv.creditsScene);
                 buttonSound.setVolume(VOLUME * 1.25);
                 buttonSound.play();
+                DisplayElements.CustomLightning(cv.creditsScene, cv.root, 8000, 50, 0.5f);
             }
         });
     }

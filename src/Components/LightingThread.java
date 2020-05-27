@@ -1,5 +1,6 @@
 package Components;
 
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 
@@ -10,7 +11,6 @@ public class LightingThread implements Runnable{
     public LightingThread(Scene scene) {
         this.scene = scene;
     }
-
 
     @Override
     public void run() {
