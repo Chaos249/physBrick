@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
@@ -40,6 +41,15 @@ public class TitleView {
         this.creditButton = CreditsView.MakeCreditButton(this.root);
 
         GameElements.MakeAddLightningButtonMouseEvent(this.titleScene, this.root);
+
+        Scale scale = new Scale(PhysBrick.SCALE_FACTOR, PhysBrick.SCALE_FACTOR);
+        scale.setPivotX(0);
+        scale.setPivotY(0);
+        titleScene.getRoot().getTransforms().setAll(scale);
+        primaryStage.setMaxHeight(Utils.WIDTH * PhysBrick.SCALE_FACTOR + 40);
+        primaryStage.setMaxWidth(Utils.HEIGHT * PhysBrick.SCALE_FACTOR);
+        primaryStage.setMinWidth(Utils.WIDTH * PhysBrick.SCALE_FACTOR);
+        primaryStage.setMinHeight(Utils.WIDTH * PhysBrick.SCALE_FACTOR + 40);
     }
 
     //creates title image

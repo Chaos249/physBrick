@@ -12,14 +12,14 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-import static View.PhysBrick.VOLUME;
-import static View.PhysBrick.buttonSound;
+import static View.PhysBrick.*;
 
 public class LevelView {
 
@@ -29,6 +29,8 @@ public class LevelView {
     public ImageView selectLevelImage;
 
     public Button backButton;
+
+    public static int brickSize = 52;
 
     public LevelView(Stage primaryStage, Scene menuScene, ArrayList arr) throws FileNotFoundException {
         this.root = new Group();
@@ -40,6 +42,11 @@ public class LevelView {
         this.backButton = initBackButton(primaryStage, menuScene);
 
         LevelSelectButton.MakeButtons(primaryStage, menuScene, this.root, arr);
+
+        Scale scale = new Scale(PhysBrick.SCALE_FACTOR, PhysBrick.SCALE_FACTOR);
+        scale.setPivotX(0);
+        scale.setPivotY(0);
+        levelSelectScene.getRoot().getTransforms().setAll(scale);
     }
 
     public Button initBackButton(Stage primaryStage, Scene menuScene) throws FileNotFoundException {
@@ -91,57 +98,57 @@ public class LevelView {
         try { // for the custom font loading a try catch block is needed
 
             // bottom row
-            Brick brick1 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 265, 52, 10, Color.WHITE, root);
+            Brick brick1 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 265, brickSize, 10, Color.WHITE, root);
             brick1.initDurabilityText(root);
-            Brick brick2 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 265, 52, 10, Color.WHITE, root);
+            Brick brick2 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 265, brickSize, 10, Color.WHITE, root);
             brick2.initDurabilityText(root);
-            Brick brick3 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 265, 52, 10, Color.WHITE, root);
+            Brick brick3 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 265, brickSize, 10, Color.WHITE, root);
             brick3.initDurabilityText(root);
-            Brick brick9 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 265, 52, 5, Color.WHITE, root);
+            Brick brick9 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 265, brickSize, 5, Color.WHITE, root);
             brick9.initDurabilityText(root);
-            Brick brick10 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 265, 52, 5, Color.WHITE, root);
+            Brick brick10 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 265, brickSize, 5, Color.WHITE, root);
             brick10.initDurabilityText(root);
-            Brick brick12 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 265, 52, 10, Color.WHITE, root);
+            Brick brick12 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 265, brickSize, 10, Color.WHITE, root);
             brick12.initDurabilityText(root);
-            Brick brick21 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 265, 52, 5, Color.WHITE, root);
+            Brick brick21 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 265, brickSize, 5, Color.WHITE, root);
             brick21.initDurabilityText(root);
-            Brick brick22 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 265, 52, 5, Color.WHITE, root);
+            Brick brick22 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 265, brickSize, 5, Color.WHITE, root);
             brick22.initDurabilityText(root);
 
             // top row
-            Brick brick4 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 320, 52, 10, Color.WHITE, root);
+            Brick brick4 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 320, brickSize, 10, Color.WHITE, root);
             brick4.initDurabilityText(root);
-            Brick brick5 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 320, 52, 20, Color.WHITE, root);
+            Brick brick5 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 320, brickSize, 20, Color.WHITE, root);
             brick5.initDurabilityText(root);
-            Brick brick6 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 320, 52, 20, Color.WHITE, root);
+            Brick brick6 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 320, brickSize, 20, Color.WHITE, root);
             brick6.initDurabilityText(root);
-            Brick brick7 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 320, 52, 5, Color.WHITE, root);
+            Brick brick7 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 320, brickSize, 5, Color.WHITE, root);
             brick7.initDurabilityText(root);
-            Brick brick8 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 320, 52, 5, Color.WHITE, root);
+            Brick brick8 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 320, brickSize, 5, Color.WHITE, root);
             brick8.initDurabilityText(root);
-            Brick brick11 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 320, 52, 10, Color.WHITE, root);
+            Brick brick11 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 320, brickSize, 10, Color.WHITE, root);
             brick11.initDurabilityText(root);
-            Brick brick19 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 320, 52, 5, Color.WHITE, root);
+            Brick brick19 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 320, brickSize, 5, Color.WHITE, root);
             brick19.initDurabilityText(root);
-            Brick brick23 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 320, 52, 5, Color.WHITE, root);
+            Brick brick23 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 320, brickSize, 5, Color.WHITE, root);
             brick23.initDurabilityText(root);
 
             // top top row
-            Brick brick13 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
+            Brick brick13 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 375, brickSize, 10, Color.WHITE, root);
             brick13.initDurabilityText(root);
-            Brick brick14 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
+            Brick brick14 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 375, brickSize, 10, Color.WHITE, root);
             brick14.initDurabilityText(root);
-            Brick brick15 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
+            Brick brick15 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 375, brickSize, 10, Color.WHITE, root);
             brick15.initDurabilityText(root);
-            Brick brick16 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 375, 52, 5, Color.WHITE, root);
+            Brick brick16 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 375, brickSize, 5, Color.WHITE, root);
             brick16.initDurabilityText(root);
-            Brick brick17 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 375, 52, 5, Color.WHITE, root);
+            Brick brick17 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 375, brickSize, 5, Color.WHITE, root);
             brick17.initDurabilityText(root);
-            Brick brick18 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
+            Brick brick18 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 375, brickSize, 10, Color.WHITE, root);
             brick18.initDurabilityText(root);
-            Brick brick20 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 375, 52, 5, Color.WHITE, root);
+            Brick brick20 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 375, brickSize, 5, Color.WHITE, root);
             brick20.initDurabilityText(root);
-            Brick brick24 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 375, 52, 5, Color.WHITE, root);
+            Brick brick24 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 375, brickSize, 5, Color.WHITE, root);
             brick24.initDurabilityText(root);
 
             brickList.add(brick1);
@@ -182,153 +189,153 @@ public class LevelView {
         try { // for the custom font loading a try catch block is needed
 
             // bottom row
-            Brick brick1 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 265, 52, 20, Color.WHITE, root);
+            Brick brick1 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 265, brickSize, 20, Color.WHITE, root);
             brick1.initDurabilityText(root);
-            Brick brick2 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 265, 52, 20, Color.WHITE, root);
+            Brick brick2 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 265, brickSize, 20, Color.WHITE, root);
             brick2.initDurabilityText(root);
-            Brick brick3 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 265, 52, 10, Color.WHITE, root);
+            Brick brick3 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 265, brickSize, 10, Color.WHITE, root);
             brick3.initDurabilityText(root);
-            Brick brick7 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 265, 52, 10, Color.WHITE, root);
+            Brick brick7 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 265, brickSize, 10, Color.WHITE, root);
             brick7.initDurabilityText(root);
-            Brick brick27 = new Brick(Utils.WIDTH / 2 + 110, Utils.HEIGHT / 2 - 265, 52, 10, Color.WHITE, root);
+            Brick brick27 = new Brick(Utils.WIDTH / 2 + 110, Utils.HEIGHT / 2 - 265, brickSize, 10, Color.WHITE, root);
             brick27.initDurabilityText(root);
-            Brick brick28 = new Brick(Utils.WIDTH / 2 - 165, Utils.HEIGHT / 2 - 265, 52, 10, Color.WHITE, root);
+            Brick brick28 = new Brick(Utils.WIDTH / 2 - 165, Utils.HEIGHT / 2 - 265, brickSize, 10, Color.WHITE, root);
             brick28.initDurabilityText(root);
-            Brick brick29 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 265, 52, 10, Color.WHITE, root);
+            Brick brick29 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 265, brickSize, 10, Color.WHITE, root);
             brick29.initDurabilityText(root);
-            Brick brick30 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 265, 52, 10, Color.WHITE, root);
+            Brick brick30 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 265, brickSize, 10, Color.WHITE, root);
             brick30.initDurabilityText(root);
-            Brick brick31 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 265, 52, 10, Color.WHITE, root);
+            Brick brick31 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 265, brickSize, 10, Color.WHITE, root);
             brick31.initDurabilityText(root);
-            Brick brick32 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 265, 52, 10, Color.WHITE, root);
+            Brick brick32 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 265, brickSize, 10, Color.WHITE, root);
             brick32.initDurabilityText(root);
-            Brick brick33 = new Brick(Utils.WIDTH / 2 + 440, Utils.HEIGHT / 2 - 265, 52, 10, Color.WHITE, root);
+            Brick brick33 = new Brick(Utils.WIDTH / 2 + 440, Utils.HEIGHT / 2 - 265, brickSize, 10, Color.WHITE, root);
             brick33.initDurabilityText(root);
-            Brick brick34 = new Brick(Utils.WIDTH / 2 - 495, Utils.HEIGHT / 2 - 265, 52, 10, Color.WHITE, root);
+            Brick brick34 = new Brick(Utils.WIDTH / 2 - 495, Utils.HEIGHT / 2 - 265, brickSize, 10, Color.WHITE, root);
             brick34.initDurabilityText(root);
-            Brick brick56 = new Brick(Utils.WIDTH / 2 + 385, Utils.HEIGHT / 2 - 265, 52, 5, Color.WHITE, root);
+            Brick brick56 = new Brick(Utils.WIDTH / 2 + 385, Utils.HEIGHT / 2 - 265, brickSize, 5, Color.WHITE, root);
             brick56.initDurabilityText(root);
-            Brick brick57 = new Brick(Utils.WIDTH / 2 - 440, Utils.HEIGHT / 2 - 265, 52, 5, Color.WHITE, root);
+            Brick brick57 = new Brick(Utils.WIDTH / 2 - 440, Utils.HEIGHT / 2 - 265, brickSize, 5, Color.WHITE, root);
             brick57.initDurabilityText(root);
 
             // top row
-            Brick brick4 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 320, 52, 10, Color.WHITE, root);
+            Brick brick4 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 320, brickSize, 10, Color.WHITE, root);
             brick4.initDurabilityText(root);
-            Brick brick5 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 320, 52, 20, Color.WHITE, root);
+            Brick brick5 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 320, brickSize, 20, Color.WHITE, root);
             brick5.initDurabilityText(root);
-            Brick brick6 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 320, 52, 20, Color.WHITE, root);
+            Brick brick6 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 320, brickSize, 20, Color.WHITE, root);
             brick6.initDurabilityText(root);
-            Brick brick8 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 320, 52, 10, Color.WHITE, root);
+            Brick brick8 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 320, brickSize, 10, Color.WHITE, root);
             brick8.initDurabilityText(root);
-            Brick brick23 = new Brick(Utils.WIDTH / 2 - 165, Utils.HEIGHT / 2 - 320, 52, 10, Color.WHITE, root);
+            Brick brick23 = new Brick(Utils.WIDTH / 2 - 165, Utils.HEIGHT / 2 - 320, brickSize, 10, Color.WHITE, root);
             brick23.initDurabilityText(root);
-            Brick brick24 = new Brick(Utils.WIDTH / 2 - 220, Utils.HEIGHT / 2 - 320, 52, 10, Color.WHITE, root);
+            Brick brick24 = new Brick(Utils.WIDTH / 2 - 220, Utils.HEIGHT / 2 - 320, brickSize, 10, Color.WHITE, root);
             brick24.initDurabilityText(root);
-            Brick brick51 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 320, 52, 5, Color.WHITE, root);
+            Brick brick51 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 320, brickSize, 5, Color.WHITE, root);
             brick51.initDurabilityText(root);
-            Brick brick25 = new Brick(Utils.WIDTH / 2 + 110, Utils.HEIGHT / 2 - 320, 52, 10, Color.WHITE, root);
+            Brick brick25 = new Brick(Utils.WIDTH / 2 + 110, Utils.HEIGHT / 2 - 320, brickSize, 10, Color.WHITE, root);
             brick25.initDurabilityText(root);
-            Brick brick26 = new Brick(Utils.WIDTH / 2 + 165, Utils.HEIGHT / 2 - 320, 52, 10, Color.WHITE, root);
+            Brick brick26 = new Brick(Utils.WIDTH / 2 + 165, Utils.HEIGHT / 2 - 320, brickSize, 10, Color.WHITE, root);
             brick26.initDurabilityText(root);
-            Brick brick50 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 320, 52, 5, Color.WHITE, root);
+            Brick brick50 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 320, brickSize, 5, Color.WHITE, root);
             brick50.initDurabilityText(root);
-            Brick brick35 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 320, 52, 10, Color.WHITE, root);
+            Brick brick35 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 320, brickSize, 10, Color.WHITE, root);
             brick35.initDurabilityText(root);
-            Brick brick36 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 320, 52, 10, Color.WHITE, root);
+            Brick brick36 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 320, brickSize, 10, Color.WHITE, root);
             brick36.initDurabilityText(root);
-            Brick brick37 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 320, 52, 10, Color.WHITE, root);
+            Brick brick37 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 320, brickSize, 10, Color.WHITE, root);
             brick37.initDurabilityText(root);
-            Brick brick38 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 320, 52, 10, Color.WHITE, root);
+            Brick brick38 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 320, brickSize, 10, Color.WHITE, root);
             brick38.initDurabilityText(root);
 
             // top top row
-            Brick brick9 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
+            Brick brick9 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 375, brickSize, 10, Color.WHITE, root);
             brick9.initDurabilityText(root);
-            Brick brick10 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 375, 52, 20, Color.WHITE, root);
+            Brick brick10 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 375, brickSize, 20, Color.WHITE, root);
             brick10.initDurabilityText(root);
-            Brick brick11 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 375, 52, 20, Color.WHITE, root);
+            Brick brick11 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 375, brickSize, 20, Color.WHITE, root);
             brick11.initDurabilityText(root);
-            Brick brick12 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
+            Brick brick12 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 375, brickSize, 10, Color.WHITE, root);
             brick12.initDurabilityText(root);
-            Brick brick21 = new Brick(Utils.WIDTH / 2 + 110, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
+            Brick brick21 = new Brick(Utils.WIDTH / 2 + 110, Utils.HEIGHT / 2 - 375, brickSize, 10, Color.WHITE, root);
             brick21.initDurabilityText(root);
-            Brick brick22 = new Brick(Utils.WIDTH / 2 - 165, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
+            Brick brick22 = new Brick(Utils.WIDTH / 2 - 165, Utils.HEIGHT / 2 - 375, brickSize, 10, Color.WHITE, root);
             brick22.initDurabilityText(root);
-            Brick brick39 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
+            Brick brick39 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 375, brickSize, 10, Color.WHITE, root);
             brick39.initDurabilityText(root);
-            Brick brick40 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
+            Brick brick40 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 375, brickSize, 10, Color.WHITE, root);
             brick40.initDurabilityText(root);
-            Brick brick41 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
+            Brick brick41 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 375, brickSize, 10, Color.WHITE, root);
             brick41.initDurabilityText(root);
-            Brick brick42 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
+            Brick brick42 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 375, brickSize, 10, Color.WHITE, root);
             brick42.initDurabilityText(root);
-            Brick brick43 = new Brick(Utils.WIDTH / 2 + 440, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
+            Brick brick43 = new Brick(Utils.WIDTH / 2 + 440, Utils.HEIGHT / 2 - 375, brickSize, 10, Color.WHITE, root);
             brick43.initDurabilityText(root);
-            Brick brick44 = new Brick(Utils.WIDTH / 2 - 495, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
+            Brick brick44 = new Brick(Utils.WIDTH / 2 - 495, Utils.HEIGHT / 2 - 375, brickSize, 10, Color.WHITE, root);
             brick44.initDurabilityText(root);
-            Brick brick54 = new Brick(Utils.WIDTH / 2 + 385, Utils.HEIGHT / 2 - 375, 52, 5, Color.WHITE, root);
+            Brick brick54 = new Brick(Utils.WIDTH / 2 + 385, Utils.HEIGHT / 2 - 375, brickSize, 5, Color.WHITE, root);
             brick54.initDurabilityText(root);
-            Brick brick55 = new Brick(Utils.WIDTH / 2 - 440, Utils.HEIGHT / 2 - 375, 52, 5, Color.WHITE, root);
+            Brick brick55 = new Brick(Utils.WIDTH / 2 - 440, Utils.HEIGHT / 2 - 375, brickSize, 5, Color.WHITE, root);
             brick55.initDurabilityText(root);
 
             // top top top row
-            Brick brick13 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
+            Brick brick13 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 430, brickSize, 10, Color.WHITE, root);
             brick13.initDurabilityText(root);
-            Brick brick14 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 430, 52, 20, Color.WHITE, root);
+            Brick brick14 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 430, brickSize, 20, Color.WHITE, root);
             brick14.initDurabilityText(root);
-            Brick brick15 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 430, 52, 20, Color.WHITE, root);
+            Brick brick15 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 430, brickSize, 20, Color.WHITE, root);
             brick15.initDurabilityText(root);
-            Brick brick16 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
+            Brick brick16 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 430, brickSize, 10, Color.WHITE, root);
             brick16.initDurabilityText(root);
-            Brick brick17 = new Brick(Utils.WIDTH / 2 - 165, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
+            Brick brick17 = new Brick(Utils.WIDTH / 2 - 165, Utils.HEIGHT / 2 - 430, brickSize, 10, Color.WHITE, root);
             brick17.initDurabilityText(root);
-            Brick brick18 = new Brick(Utils.WIDTH / 2 - 220, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
+            Brick brick18 = new Brick(Utils.WIDTH / 2 - 220, Utils.HEIGHT / 2 - 430, brickSize, 10, Color.WHITE, root);
             brick18.initDurabilityText(root);
-            Brick brick52 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 430, 52, 5, Color.WHITE, root);
-            brick52.initDurabilityText(root);
-            Brick brick19 = new Brick(Utils.WIDTH / 2 + 110, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
+            Brick brickbrickSize = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 430, brickSize, 5, Color.WHITE, root);
+            brickbrickSize.initDurabilityText(root);
+            Brick brick19 = new Brick(Utils.WIDTH / 2 + 110, Utils.HEIGHT / 2 - 430, brickSize, 10, Color.WHITE, root);
             brick19.initDurabilityText(root);
-            Brick brick20 = new Brick(Utils.WIDTH / 2 + 165, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
+            Brick brick20 = new Brick(Utils.WIDTH / 2 + 165, Utils.HEIGHT / 2 - 430, brickSize, 10, Color.WHITE, root);
             brick20.initDurabilityText(root);
-            Brick brick53 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 430, 52, 5, Color.WHITE, root);
+            Brick brick53 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 430, brickSize, 5, Color.WHITE, root);
             brick53.initDurabilityText(root);
-            Brick brick45 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
+            Brick brick45 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 430, brickSize, 10, Color.WHITE, root);
             brick45.initDurabilityText(root);
-            Brick brick46 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
+            Brick brick46 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 430, brickSize, 10, Color.WHITE, root);
             brick46.initDurabilityText(root);
-            Brick brick47 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
+            Brick brick47 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 430, brickSize, 10, Color.WHITE, root);
             brick47.initDurabilityText(root);
-            Brick brick48 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
+            Brick brick48 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 430, brickSize, 10, Color.WHITE, root);
             brick48.initDurabilityText(root);
 
             // bottom bottom row
-            Brick brick58 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 210, 52, 10, Color.WHITE, root);
+            Brick brick58 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 210, brickSize, 10, Color.WHITE, root);
             brick58.initDurabilityText(root);
-            Brick brick59 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 210, 52, 20, Color.WHITE, root);
+            Brick brick59 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 210, brickSize, 20, Color.WHITE, root);
             brick59.initDurabilityText(root);
-            Brick brick60 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 210, 52, 20, Color.WHITE, root);
+            Brick brick60 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 210, brickSize, 20, Color.WHITE, root);
             brick60.initDurabilityText(root);
-            Brick brick61 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 210, 52, 10, Color.WHITE, root);
+            Brick brick61 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 210, brickSize, 10, Color.WHITE, root);
             brick61.initDurabilityText(root);
-            Brick brick62 = new Brick(Utils.WIDTH / 2 - 165, Utils.HEIGHT / 2 - 210, 52, 10, Color.WHITE, root);
+            Brick brick62 = new Brick(Utils.WIDTH / 2 - 165, Utils.HEIGHT / 2 - 210, brickSize, 10, Color.WHITE, root);
             brick62.initDurabilityText(root);
-            Brick brick63 = new Brick(Utils.WIDTH / 2 - 220, Utils.HEIGHT / 2 - 210, 52, 10, Color.WHITE, root);
+            Brick brick63 = new Brick(Utils.WIDTH / 2 - 220, Utils.HEIGHT / 2 - 210, brickSize, 10, Color.WHITE, root);
             brick63.initDurabilityText(root);
-            Brick brick64 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 210, 52, 5, Color.WHITE, root);
+            Brick brick64 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 210, brickSize, 5, Color.WHITE, root);
             brick64.initDurabilityText(root);
-            Brick brick65 = new Brick(Utils.WIDTH / 2 + 110, Utils.HEIGHT / 2 - 210, 52, 10, Color.WHITE, root);
+            Brick brick65 = new Brick(Utils.WIDTH / 2 + 110, Utils.HEIGHT / 2 - 210, brickSize, 10, Color.WHITE, root);
             brick65.initDurabilityText(root);
-            Brick brick66 = new Brick(Utils.WIDTH / 2 + 165, Utils.HEIGHT / 2 - 210, 52, 10, Color.WHITE, root);
+            Brick brick66 = new Brick(Utils.WIDTH / 2 + 165, Utils.HEIGHT / 2 - 210, brickSize, 10, Color.WHITE, root);
             brick66.initDurabilityText(root);
-            Brick brick67 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 210, 52, 5, Color.WHITE, root);
+            Brick brick67 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 210, brickSize, 5, Color.WHITE, root);
             brick67.initDurabilityText(root);
-            Brick brick68 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 210, 52, 10, Color.WHITE, root);
+            Brick brick68 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 210, brickSize, 10, Color.WHITE, root);
             brick68.initDurabilityText(root);
-            Brick brick69 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 210, 52, 10, Color.WHITE, root);
+            Brick brick69 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 210, brickSize, 10, Color.WHITE, root);
             brick69.initDurabilityText(root);
-            Brick brick70 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 210, 52, 10, Color.WHITE, root);
+            Brick brick70 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 210, brickSize, 10, Color.WHITE, root);
             brick70.initDurabilityText(root);
-            Brick brick71 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 210, 52, 10, Color.WHITE, root);
+            Brick brick71 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 210, brickSize, 10, Color.WHITE, root);
             brick71.initDurabilityText(root);
 
             brickList.add(brick1);
@@ -381,7 +388,7 @@ public class LevelView {
             brickList.add(brick48);
             brickList.add(brick50);
             brickList.add(brick51);
-            brickList.add(brick52);
+            brickList.add(brickbrickSize);
             brickList.add(brick53);
             brickList.add(brick54);
             brickList.add(brick55);
@@ -415,76 +422,76 @@ public class LevelView {
         try { // for the custom font loading a try catch block is needed
 
             // bottom row
-            Brick brick1 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 100, 52, 10, Color.WHITE, root);
+            Brick brick1 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 100, brickSize, 10, Color.WHITE, root);
             brick1.initDurabilityText(root);
-            Brick brick2 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 100, 52, 10, Color.WHITE, root);
+            Brick brick2 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 100, brickSize, 10, Color.WHITE, root);
             brick2.initDurabilityText(root);
-            Brick brick3 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 100, 52, 10, Color.WHITE, root);
+            Brick brick3 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 100, brickSize, 10, Color.WHITE, root);
             brick3.initDurabilityText(root);
-            Brick brick4 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 100, 52, 10, Color.WHITE, root);
+            Brick brick4 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 100, brickSize, 10, Color.WHITE, root);
             brick4.initDurabilityText(root);
-            Brick brick13 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 100, 52, 10, Color.WHITE, root);
+            Brick brick13 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 100, brickSize, 10, Color.WHITE, root);
             brick13.initDurabilityText(root);
-            Brick brick18 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 100, 52, 10, Color.WHITE, root);
+            Brick brick18 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 100, brickSize, 10, Color.WHITE, root);
             brick18.initDurabilityText(root);
 
-            Brick brick29 = new Brick(Utils.WIDTH / 2 - 330, Utils.HEIGHT / 2 - 100, 52, 20, Color.WHITE, root);
+            Brick brick29 = new Brick(Utils.WIDTH / 2 - 330, Utils.HEIGHT / 2 - 100, brickSize, 20, Color.WHITE, root);
             brick29.initDurabilityText(root);
-            Brick brick30 = new Brick(Utils.WIDTH / 2 + 275, Utils.HEIGHT / 2 - 100, 52, 20, Color.WHITE, root);
+            Brick brick30 = new Brick(Utils.WIDTH / 2 + 275, Utils.HEIGHT / 2 - 100, brickSize, 20, Color.WHITE, root);
             brick30.initDurabilityText(root);
 
 
             // less bottom row
-            Brick brick9 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 155, 52, 10, Color.WHITE, root);
+            Brick brick9 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 155, brickSize, 10, Color.WHITE, root);
             brick9.initDurabilityText(root);
-            Brick brick10 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 155, 52, 10, Color.WHITE, root);
+            Brick brick10 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 155, brickSize, 10, Color.WHITE, root);
             brick10.initDurabilityText(root);
-            Brick brick11 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 155, 52, 10, Color.WHITE, root);
+            Brick brick11 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 155, brickSize, 10, Color.WHITE, root);
             brick11.initDurabilityText(root);
-            Brick brick12 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 155, 52, 10, Color.WHITE, root);
+            Brick brick12 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 155, brickSize, 10, Color.WHITE, root);
             brick12.initDurabilityText(root);
-            Brick brick21 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 155, 52, 10, Color.WHITE, root);
+            Brick brick21 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 155, brickSize, 10, Color.WHITE, root);
             brick21.initDurabilityText(root);
-            Brick brick22 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 155, 52, 10, Color.WHITE, root);
+            Brick brick22 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 155, brickSize, 10, Color.WHITE, root);
             brick22.initDurabilityText(root);
 
             // middle row
-            Brick brick25 = new Brick(Utils.WIDTH / 2 - 330, Utils.HEIGHT / 2 - 265, 52, 20, Color.WHITE, root);
+            Brick brick25 = new Brick(Utils.WIDTH / 2 - 330, Utils.HEIGHT / 2 - 265, brickSize, 20, Color.WHITE, root);
             brick25.initDurabilityText(root);
-            Brick brick26 = new Brick(Utils.WIDTH / 2 + 275, Utils.HEIGHT / 2 - 265, 52, 20, Color.WHITE, root);
+            Brick brick26 = new Brick(Utils.WIDTH / 2 + 275, Utils.HEIGHT / 2 - 265, brickSize, 20, Color.WHITE, root);
             brick26.initDurabilityText(root);
 
             // top row
-            Brick brick5 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
+            Brick brick5 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 375, brickSize, 10, Color.WHITE, root);
             brick5.initDurabilityText(root);
-            Brick brick6 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
+            Brick brick6 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 375, brickSize, 10, Color.WHITE, root);
             brick6.initDurabilityText(root);
-            Brick brick7 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
+            Brick brick7 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 375, brickSize, 10, Color.WHITE, root);
             brick7.initDurabilityText(root);
-            Brick brick8 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
+            Brick brick8 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 375, brickSize, 10, Color.WHITE, root);
             brick8.initDurabilityText(root);
-            Brick brick19 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
+            Brick brick19 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 375, brickSize, 10, Color.WHITE, root);
             brick19.initDurabilityText(root);
-            Brick brick23 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 375, 52, 10, Color.WHITE, root);
+            Brick brick23 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 375, brickSize, 10, Color.WHITE, root);
             brick23.initDurabilityText(root);
 
             // top top row
-            Brick brick14 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
+            Brick brick14 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 430, brickSize, 10, Color.WHITE, root);
             brick14.initDurabilityText(root);
-            Brick brick15 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
+            Brick brick15 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 430, brickSize, 10, Color.WHITE, root);
             brick15.initDurabilityText(root);
-            Brick brick16 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
+            Brick brick16 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 430, brickSize, 10, Color.WHITE, root);
             brick16.initDurabilityText(root);
-            Brick brick17 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
+            Brick brick17 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 430, brickSize, 10, Color.WHITE, root);
             brick17.initDurabilityText(root);
-            Brick brick20 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
+            Brick brick20 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 430, brickSize, 10, Color.WHITE, root);
             brick20.initDurabilityText(root);
-            Brick brick24 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 430, 52, 10, Color.WHITE, root);
+            Brick brick24 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 430, brickSize, 10, Color.WHITE, root);
             brick24.initDurabilityText(root);
 
-            Brick brick27 = new Brick(Utils.WIDTH / 2 - 330, Utils.HEIGHT / 2 - 430, 52, 20, Color.WHITE, root);
+            Brick brick27 = new Brick(Utils.WIDTH / 2 - 330, Utils.HEIGHT / 2 - 430, brickSize, 20, Color.WHITE, root);
             brick27.initDurabilityText(root);
-            Brick brick28 = new Brick(Utils.WIDTH / 2 + 275, Utils.HEIGHT / 2 - 430, 52, 20, Color.WHITE, root);
+            Brick brick28 = new Brick(Utils.WIDTH / 2 + 275, Utils.HEIGHT / 2 - 430, brickSize, 20, Color.WHITE, root);
             brick28.initDurabilityText(root);
 
             brickList.add(brick1);
@@ -530,158 +537,158 @@ public class LevelView {
         try {
 
             // bottom row
-            Brick brick1 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 100, 52, 10, Color.WHITE, root);
+            Brick brick1 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 100, brickSize, 10, Color.WHITE, root);
             brick1.initDurabilityText(root);
-            Brick brick2 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 100, 52, 10, Color.WHITE, root);
+            Brick brick2 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 100, brickSize, 10, Color.WHITE, root);
             brick2.initDurabilityText(root);
-            Brick brick3 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 100, 52, 20, Color.WHITE, root);
+            Brick brick3 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 100, brickSize, 20, Color.WHITE, root);
             brick3.initDurabilityText(root);
-            Brick brick4 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 100, 52, 20, Color.WHITE, root);
+            Brick brick4 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 100, brickSize, 20, Color.WHITE, root);
             brick4.initDurabilityText(root);
-            Brick brick5 = new Brick(Utils.WIDTH / 2 + 110, Utils.HEIGHT / 2 - 100, 52, 20, Color.WHITE, root);
+            Brick brick5 = new Brick(Utils.WIDTH / 2 + 110, Utils.HEIGHT / 2 - 100, brickSize, 20, Color.WHITE, root);
             brick5.initDurabilityText(root);
-            Brick brick6 = new Brick(Utils.WIDTH / 2 - 165, Utils.HEIGHT / 2 - 100, 52, 20, Color.WHITE, root);
+            Brick brick6 = new Brick(Utils.WIDTH / 2 - 165, Utils.HEIGHT / 2 - 100, brickSize, 20, Color.WHITE, root);
             brick6.initDurabilityText(root);
-            Brick brick7 = new Brick(Utils.WIDTH / 2 + 165, Utils.HEIGHT / 2 - 100, 52, 20, Color.WHITE, root);
+            Brick brick7 = new Brick(Utils.WIDTH / 2 + 165, Utils.HEIGHT / 2 - 100, brickSize, 20, Color.WHITE, root);
             brick7.initDurabilityText(root);
-            Brick brick8 = new Brick(Utils.WIDTH / 2 - 220, Utils.HEIGHT / 2 - 100, 52, 20, Color.WHITE, root);
+            Brick brick8 = new Brick(Utils.WIDTH / 2 - 220, Utils.HEIGHT / 2 - 100, brickSize, 20, Color.WHITE, root);
             brick8.initDurabilityText(root);
-            Brick brick9 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 100, 52, 20, Color.WHITE, root);
+            Brick brick9 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 100, brickSize, 20, Color.WHITE, root);
             brick9.initDurabilityText(root);
-            Brick brick10 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 100, 52, 20, Color.WHITE, root);
+            Brick brick10 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 100, brickSize, 20, Color.WHITE, root);
             brick10.initDurabilityText(root);
-            Brick brick11 = new Brick(Utils.WIDTH / 2 + 275, Utils.HEIGHT / 2 - 100, 52, 20, Color.WHITE, root);
+            Brick brick11 = new Brick(Utils.WIDTH / 2 + 275, Utils.HEIGHT / 2 - 100, brickSize, 20, Color.WHITE, root);
             brick11.initDurabilityText(root);
-            Brick brick12 = new Brick(Utils.WIDTH / 2 - 330, Utils.HEIGHT / 2 - 100, 52, 20, Color.WHITE, root);
+            Brick brick12 = new Brick(Utils.WIDTH / 2 - 330, Utils.HEIGHT / 2 - 100, brickSize, 20, Color.WHITE, root);
             brick12.initDurabilityText(root);
-            Brick brick13 = new Brick(Utils.WIDTH / 2 + 330, Utils.HEIGHT / 2 - 100, 52, 20, Color.WHITE, root);
+            Brick brick13 = new Brick(Utils.WIDTH / 2 + 330, Utils.HEIGHT / 2 - 100, brickSize, 20, Color.WHITE, root);
             brick13.initDurabilityText(root);
-            Brick brick14 = new Brick(Utils.WIDTH / 2 - 385, Utils.HEIGHT / 2 - 100, 52, 20, Color.WHITE, root);
+            Brick brick14 = new Brick(Utils.WIDTH / 2 - 385, Utils.HEIGHT / 2 - 100, brickSize, 20, Color.WHITE, root);
             brick14.initDurabilityText(root);
-            Brick brick15 = new Brick(Utils.WIDTH / 2 + 385, Utils.HEIGHT / 2 - 100, 52, 20, Color.WHITE, root);
+            Brick brick15 = new Brick(Utils.WIDTH / 2 + 385, Utils.HEIGHT / 2 - 100, brickSize, 20, Color.WHITE, root);
             brick15.initDurabilityText(root);
-            Brick brick16 = new Brick(Utils.WIDTH / 2 - 440, Utils.HEIGHT / 2 - 100, 52, 20, Color.WHITE, root);
+            Brick brick16 = new Brick(Utils.WIDTH / 2 - 440, Utils.HEIGHT / 2 - 100, brickSize, 20, Color.WHITE, root);
             brick16.initDurabilityText(root);
-            Brick brick17 = new Brick(Utils.WIDTH / 2 + 440, Utils.HEIGHT / 2 - 100, 52, 20, Color.WHITE, root);
+            Brick brick17 = new Brick(Utils.WIDTH / 2 + 440, Utils.HEIGHT / 2 - 100, brickSize, 20, Color.WHITE, root);
             brick17.initDurabilityText(root);
-            Brick brick18 = new Brick(Utils.WIDTH / 2 - 495, Utils.HEIGHT / 2 - 100, 52, 20, Color.WHITE, root);
+            Brick brick18 = new Brick(Utils.WIDTH / 2 - 495, Utils.HEIGHT / 2 - 100, brickSize, 20, Color.WHITE, root);
             brick18.initDurabilityText(root);
-            Brick brick19 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 100, 52, 20, Color.WHITE, root);
+            Brick brick19 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 100, brickSize, 20, Color.WHITE, root);
             brick19.initDurabilityText(root);
-            Brick brick20 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 100, 52, 20, Color.WHITE, root);
+            Brick brick20 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 100, brickSize, 20, Color.WHITE, root);
             brick20.initDurabilityText(root);
-            Brick brick21 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 100, 52, 20, Color.WHITE, root);
+            Brick brick21 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 100, brickSize, 20, Color.WHITE, root);
             brick21.initDurabilityText(root);
-            Brick brick22 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 100, 52, 20, Color.WHITE, root);
+            Brick brick22 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 100, brickSize, 20, Color.WHITE, root);
             brick22.initDurabilityText(root);
 
 
             // small side pillars
-            Brick brick45 = new Brick(Utils.WIDTH / 2 - 440, Utils.HEIGHT / 2 - 155, 52, 10, Color.WHITE, root);
+            Brick brick45 = new Brick(Utils.WIDTH / 2 - 440, Utils.HEIGHT / 2 - 155, brickSize, 10, Color.WHITE, root);
             brick45.initDurabilityText(root);
-            Brick brick46 = new Brick(Utils.WIDTH / 2 + 385, Utils.HEIGHT / 2 - 155, 52, 10, Color.WHITE, root);
+            Brick brick46 = new Brick(Utils.WIDTH / 2 + 385, Utils.HEIGHT / 2 - 155, brickSize, 10, Color.WHITE, root);
             brick46.initDurabilityText(root);
 
-            Brick brick47 = new Brick(Utils.WIDTH / 2 - 440, Utils.HEIGHT / 2 - 210, 52, 5, Color.WHITE, root);
+            Brick brick47 = new Brick(Utils.WIDTH / 2 - 440, Utils.HEIGHT / 2 - 210, brickSize, 5, Color.WHITE, root);
             brick47.initDurabilityText(root);
-            Brick brick48 = new Brick(Utils.WIDTH / 2 + 385, Utils.HEIGHT / 2 - 210, 52, 5, Color.WHITE, root);
+            Brick brick48 = new Brick(Utils.WIDTH / 2 + 385, Utils.HEIGHT / 2 - 210, brickSize, 5, Color.WHITE, root);
             brick48.initDurabilityText(root);
 
-            Brick brick49= new Brick(Utils.WIDTH / 2 - 440, Utils.HEIGHT / 2 - 330, 52, 5, Color.WHITE, root);
+            Brick brick49= new Brick(Utils.WIDTH / 2 - 440, Utils.HEIGHT / 2 - 330, brickSize, 5, Color.WHITE, root);
             brick49.initDurabilityText(root);
-            Brick brick50 = new Brick(Utils.WIDTH / 2 + 385, Utils.HEIGHT / 2 - 330, 52, 5, Color.WHITE, root);
+            Brick brick50 = new Brick(Utils.WIDTH / 2 + 385, Utils.HEIGHT / 2 - 330, brickSize, 5, Color.WHITE, root);
             brick50.initDurabilityText(root);
 
-            Brick brick51 = new Brick(Utils.WIDTH / 2 - 440, Utils.HEIGHT / 2 - 385, 52, 10, Color.WHITE, root);
+            Brick brick51 = new Brick(Utils.WIDTH / 2 - 440, Utils.HEIGHT / 2 - 385, brickSize, 10, Color.WHITE, root);
             brick51.initDurabilityText(root);
-            Brick brick52 = new Brick(Utils.WIDTH / 2 + 385, Utils.HEIGHT / 2 - 385, 52, 10, Color.WHITE, root);
-            brick52.initDurabilityText(root);
+            Brick brickbrickSize = new Brick(Utils.WIDTH / 2 + 385, Utils.HEIGHT / 2 - 385, brickSize, 10, Color.WHITE, root);
+            brickbrickSize.initDurabilityText(root);
 
             // long middle-ish pillars
-            Brick brick53 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 385, 52, 10, Color.WHITE, root);
+            Brick brick53 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 385, brickSize, 10, Color.WHITE, root);
             brick53.initDurabilityText(root);
-            Brick brick54 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 385, 52, 10, Color.WHITE, root);
+            Brick brick54 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 385, brickSize, 10, Color.WHITE, root);
             brick54.initDurabilityText(root);
-            Brick brick55 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 330, 52, 10, Color.WHITE, root);
+            Brick brick55 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 330, brickSize, 10, Color.WHITE, root);
             brick55.initDurabilityText(root);
-            Brick brick56 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 330, 52, 10, Color.WHITE, root);
+            Brick brick56 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 330, brickSize, 10, Color.WHITE, root);
             brick56.initDurabilityText(root);
-            Brick brick57 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 275, 52, 10, Color.WHITE, root);
+            Brick brick57 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 275, brickSize, 10, Color.WHITE, root);
             brick57.initDurabilityText(root);
-            Brick brick58 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 275, 52, 10, Color.WHITE, root);
+            Brick brick58 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 275, brickSize, 10, Color.WHITE, root);
             brick58.initDurabilityText(root);
-            Brick brick59 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 220, 52, 5, Color.WHITE, root);
+            Brick brick59 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 220, brickSize, 5, Color.WHITE, root);
             brick59.initDurabilityText(root);
-            Brick brick60 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 220, 52, 5, Color.WHITE, root);
+            Brick brick60 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 220, brickSize, 5, Color.WHITE, root);
             brick60.initDurabilityText(root);
 
 
             // middle small pillars
-            Brick brick61 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 155, 52, 10, Color.WHITE, root);
+            Brick brick61 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 155, brickSize, 10, Color.WHITE, root);
             brick61.initDurabilityText(root);
-            Brick brick62 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 155, 52, 10, Color.WHITE, root);
+            Brick brick62 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 155, brickSize, 10, Color.WHITE, root);
             brick62.initDurabilityText(root);
 
-            Brick brick63 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 210, 52, 5, Color.WHITE, root);
+            Brick brick63 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 210, brickSize, 5, Color.WHITE, root);
             brick63.initDurabilityText(root);
-            Brick brick64 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 210, 52, 5, Color.WHITE, root);
+            Brick brick64 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 210, brickSize, 5, Color.WHITE, root);
             brick64.initDurabilityText(root);
 
-            Brick brick65 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 330, 52, 5, Color.WHITE, root);
+            Brick brick65 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 330, brickSize, 5, Color.WHITE, root);
             brick65.initDurabilityText(root);
-            Brick brick66 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 330, 52, 5, Color.WHITE, root);
+            Brick brick66 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 330, brickSize, 5, Color.WHITE, root);
             brick66.initDurabilityText(root);
 
-            Brick brick67 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 385, 52, 10, Color.WHITE, root);
+            Brick brick67 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 385, brickSize, 10, Color.WHITE, root);
             brick67.initDurabilityText(root);
-            Brick brick68 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 385, 52, 10, Color.WHITE, root);
+            Brick brick68 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 385, brickSize, 10, Color.WHITE, root);
             brick68.initDurabilityText(root);
 
 
             // top row
-            Brick brick23 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 440, 52, 10, Color.WHITE, root);
+            Brick brick23 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 440, brickSize, 10, Color.WHITE, root);
             brick23.initDurabilityText(root);
-            Brick brick24 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 440, 52, 10, Color.WHITE, root);
+            Brick brick24 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 440, brickSize, 10, Color.WHITE, root);
             brick24.initDurabilityText(root);
-            Brick brick25 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick25 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick25.initDurabilityText(root);
-            Brick brick26 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick26 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick26.initDurabilityText(root);
-            Brick brick27 = new Brick(Utils.WIDTH / 2 + 110, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick27 = new Brick(Utils.WIDTH / 2 + 110, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick27.initDurabilityText(root);
-            Brick brick28 = new Brick(Utils.WIDTH / 2 - 165, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick28 = new Brick(Utils.WIDTH / 2 - 165, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick28.initDurabilityText(root);
-            Brick brick29 = new Brick(Utils.WIDTH / 2 + 165, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick29 = new Brick(Utils.WIDTH / 2 + 165, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick29.initDurabilityText(root);
-            Brick brick30 = new Brick(Utils.WIDTH / 2 - 220, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick30 = new Brick(Utils.WIDTH / 2 - 220, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick30.initDurabilityText(root);
-            Brick brick31 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick31 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick31.initDurabilityText(root);
-            Brick brick32 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick32 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick32.initDurabilityText(root);
-            Brick brick33 = new Brick(Utils.WIDTH / 2 + 275, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick33 = new Brick(Utils.WIDTH / 2 + 275, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick33.initDurabilityText(root);
-            Brick brick34 = new Brick(Utils.WIDTH / 2 - 330, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick34 = new Brick(Utils.WIDTH / 2 - 330, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick34.initDurabilityText(root);
-            Brick brick35 = new Brick(Utils.WIDTH / 2 + 330, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick35 = new Brick(Utils.WIDTH / 2 + 330, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick35.initDurabilityText(root);
-            Brick brick36 = new Brick(Utils.WIDTH / 2 - 385, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick36 = new Brick(Utils.WIDTH / 2 - 385, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick36.initDurabilityText(root);
-            Brick brick37 = new Brick(Utils.WIDTH / 2 + 385, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick37 = new Brick(Utils.WIDTH / 2 + 385, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick37.initDurabilityText(root);
-            Brick brick38 = new Brick(Utils.WIDTH / 2 - 440, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick38 = new Brick(Utils.WIDTH / 2 - 440, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick38.initDurabilityText(root);
-            Brick brick39 = new Brick(Utils.WIDTH / 2 + 440, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick39 = new Brick(Utils.WIDTH / 2 + 440, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick39.initDurabilityText(root);
-            Brick brick40 = new Brick(Utils.WIDTH / 2 - 495, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick40 = new Brick(Utils.WIDTH / 2 - 495, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick40.initDurabilityText(root);
-            Brick brick41 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick41 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick41.initDurabilityText(root);
-            Brick brick42 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick42 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick42.initDurabilityText(root);
-            Brick brick43 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick43 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick43.initDurabilityText(root);
-            Brick brick44 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick44 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick44.initDurabilityText(root);
 
             brickList.add(brick1);
@@ -735,7 +742,7 @@ public class LevelView {
             brickList.add(brick49);
             brickList.add(brick50);
             brickList.add(brick51);
-            brickList.add(brick52);
+            brickList.add(brickbrickSize);
             brickList.add(brick53);
             brickList.add(brick54);
             brickList.add(brick55);
@@ -763,172 +770,172 @@ public class LevelView {
         ArrayList<Brick> brickList = new ArrayList<>();
         try {
             // top row
-            Brick brick23 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick23 = new Brick(Utils.WIDTH / 2, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick23.initDurabilityText(root);
-            Brick brick24 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick24 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick24.initDurabilityText(root);
-            Brick brick25 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick25 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick25.initDurabilityText(root);
-            Brick brick26 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick26 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick26.initDurabilityText(root);
-            Brick brick27 = new Brick(Utils.WIDTH / 2 + 110, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick27 = new Brick(Utils.WIDTH / 2 + 110, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick27.initDurabilityText(root);
-            Brick brick28 = new Brick(Utils.WIDTH / 2 - 165, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick28 = new Brick(Utils.WIDTH / 2 - 165, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick28.initDurabilityText(root);
 
-            Brick brick31 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick31 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick31.initDurabilityText(root);
-            Brick brick32 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick32 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick32.initDurabilityText(root);
-            Brick brick33 = new Brick(Utils.WIDTH / 2 + 275, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick33 = new Brick(Utils.WIDTH / 2 + 275, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick33.initDurabilityText(root);
-            Brick brick34 = new Brick(Utils.WIDTH / 2 - 330, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick34 = new Brick(Utils.WIDTH / 2 - 330, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick34.initDurabilityText(root);
 
-            Brick brick37 = new Brick(Utils.WIDTH / 2 + 385, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick37 = new Brick(Utils.WIDTH / 2 + 385, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick37.initDurabilityText(root);
-            Brick brick38 = new Brick(Utils.WIDTH / 2 - 440, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick38 = new Brick(Utils.WIDTH / 2 - 440, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick38.initDurabilityText(root);
-            Brick brick39 = new Brick(Utils.WIDTH / 2 + 440, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick39 = new Brick(Utils.WIDTH / 2 + 440, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick39.initDurabilityText(root);
-            Brick brick40 = new Brick(Utils.WIDTH / 2 - 495, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick40 = new Brick(Utils.WIDTH / 2 - 495, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick40.initDurabilityText(root);
-            Brick brick41 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick41 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick41.initDurabilityText(root);
-            Brick brick42 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 440, 52, 20, Color.WHITE, root);
+            Brick brick42 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 440, brickSize, 20, Color.WHITE, root);
             brick42.initDurabilityText(root);
-            Brick brick43 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 440, 52, 5, Color.WHITE, root);
+            Brick brick43 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 440, brickSize, 5, Color.WHITE, root);
             brick43.initDurabilityText(root);
-            Brick brick44 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 440, 52, 5, Color.WHITE, root);
+            Brick brick44 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 440, brickSize, 5, Color.WHITE, root);
             brick44.initDurabilityText(root);
 
             // - 1 from top row
-            Brick brick1 = new Brick(Utils.WIDTH / 2 + 165, Utils.HEIGHT / 2 - 385, 52, 10, Color.WHITE, root);
+            Brick brick1 = new Brick(Utils.WIDTH / 2 + 165, Utils.HEIGHT / 2 - 385, brickSize, 10, Color.WHITE, root);
             brick1.initDurabilityText(root);
-            Brick brick2 = new Brick(Utils.WIDTH / 2 - 220, Utils.HEIGHT / 2 - 385, 52, 10, Color.WHITE, root);
+            Brick brick2 = new Brick(Utils.WIDTH / 2 - 220, Utils.HEIGHT / 2 - 385, brickSize, 10, Color.WHITE, root);
             brick2.initDurabilityText(root);
-            Brick brick3 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 385, 52, 10, Color.WHITE, root);
+            Brick brick3 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 385, brickSize, 10, Color.WHITE, root);
             brick3.initDurabilityText(root);
-            Brick brick4 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 385, 52, 10, Color.WHITE, root);
+            Brick brick4 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 385, brickSize, 10, Color.WHITE, root);
             brick4.initDurabilityText(root);
 
-            Brick brick5 = new Brick(Utils.WIDTH / 2 + 330, Utils.HEIGHT / 2 - 385, 52, 10, Color.WHITE, root);
+            Brick brick5 = new Brick(Utils.WIDTH / 2 + 330, Utils.HEIGHT / 2 - 385, brickSize, 10, Color.WHITE, root);
             brick5.initDurabilityText(root);
-            Brick brick6 = new Brick(Utils.WIDTH / 2 - 385, Utils.HEIGHT / 2 - 385, 52, 10, Color.WHITE, root);
+            Brick brick6 = new Brick(Utils.WIDTH / 2 - 385, Utils.HEIGHT / 2 - 385, brickSize, 10, Color.WHITE, root);
             brick6.initDurabilityText(root);
-            Brick brick7 = new Brick(Utils.WIDTH / 2 + 385, Utils.HEIGHT / 2 - 385, 52, 10, Color.WHITE, root);
+            Brick brick7 = new Brick(Utils.WIDTH / 2 + 385, Utils.HEIGHT / 2 - 385, brickSize, 10, Color.WHITE, root);
             brick7.initDurabilityText(root);
-            Brick brick8 = new Brick(Utils.WIDTH / 2 - 440, Utils.HEIGHT / 2 - 385, 52, 10, Color.WHITE, root);
+            Brick brick8 = new Brick(Utils.WIDTH / 2 - 440, Utils.HEIGHT / 2 - 385, brickSize, 10, Color.WHITE, root);
             brick8.initDurabilityText(root);
 
             // - 2 from top row
-            Brick brick9 = new Brick(Utils.WIDTH / 2 + 110, Utils.HEIGHT / 2 - 330, 52, 10, Color.WHITE, root);
+            Brick brick9 = new Brick(Utils.WIDTH / 2 + 110, Utils.HEIGHT / 2 - 330, brickSize, 10, Color.WHITE, root);
             brick9.initDurabilityText(root);
-            Brick brick10 = new Brick(Utils.WIDTH / 2 - 165, Utils.HEIGHT / 2 - 330, 52, 10, Color.WHITE, root);
+            Brick brick10 = new Brick(Utils.WIDTH / 2 - 165, Utils.HEIGHT / 2 - 330, brickSize, 10, Color.WHITE, root);
             brick10.initDurabilityText(root);
-            Brick brick11 = new Brick(Utils.WIDTH / 2 + 165, Utils.HEIGHT / 2 - 330, 52, 10, Color.WHITE, root);
+            Brick brick11 = new Brick(Utils.WIDTH / 2 + 165, Utils.HEIGHT / 2 - 330, brickSize, 10, Color.WHITE, root);
             brick11.initDurabilityText(root);
-            Brick brick12 = new Brick(Utils.WIDTH / 2 - 220, Utils.HEIGHT / 2 - 330, 52, 10, Color.WHITE, root);
+            Brick brick12 = new Brick(Utils.WIDTH / 2 - 220, Utils.HEIGHT / 2 - 330, brickSize, 10, Color.WHITE, root);
             brick12.initDurabilityText(root);
 
-            Brick brick13 = new Brick(Utils.WIDTH / 2 + 275, Utils.HEIGHT / 2 - 330, 52, 10, Color.WHITE, root);
+            Brick brick13 = new Brick(Utils.WIDTH / 2 + 275, Utils.HEIGHT / 2 - 330, brickSize, 10, Color.WHITE, root);
             brick13.initDurabilityText(root);
-            Brick brick14 = new Brick(Utils.WIDTH / 2 - 330, Utils.HEIGHT / 2 - 330, 52, 10, Color.WHITE, root);
+            Brick brick14 = new Brick(Utils.WIDTH / 2 - 330, Utils.HEIGHT / 2 - 330, brickSize, 10, Color.WHITE, root);
             brick14.initDurabilityText(root);
-            Brick brick15 = new Brick(Utils.WIDTH / 2 + 330, Utils.HEIGHT / 2 - 330, 52, 10, Color.WHITE, root);
+            Brick brick15 = new Brick(Utils.WIDTH / 2 + 330, Utils.HEIGHT / 2 - 330, brickSize, 10, Color.WHITE, root);
             brick15.initDurabilityText(root);
-            Brick brick16 = new Brick(Utils.WIDTH / 2 - 385, Utils.HEIGHT / 2 - 330, 52, 10, Color.WHITE, root);
+            Brick brick16 = new Brick(Utils.WIDTH / 2 - 385, Utils.HEIGHT / 2 - 330, brickSize, 10, Color.WHITE, root);
             brick16.initDurabilityText(root);
 
             // - 3 from top row
-            Brick brick17 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 275, 52, 10, Color.WHITE, root);
+            Brick brick17 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 275, brickSize, 10, Color.WHITE, root);
             brick17.initDurabilityText(root);
-            Brick brick18 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 275, 52, 10, Color.WHITE, root);
+            Brick brick18 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 275, brickSize, 10, Color.WHITE, root);
             brick18.initDurabilityText(root);
-            Brick brick19 = new Brick(Utils.WIDTH / 2 + 110, Utils.HEIGHT / 2 - 275, 52, 10, Color.WHITE, root);
+            Brick brick19 = new Brick(Utils.WIDTH / 2 + 110, Utils.HEIGHT / 2 - 275, brickSize, 10, Color.WHITE, root);
             brick19.initDurabilityText(root);
-            Brick brick20 = new Brick(Utils.WIDTH / 2 - 165, Utils.HEIGHT / 2 - 275, 52, 10, Color.WHITE, root);
+            Brick brick20 = new Brick(Utils.WIDTH / 2 - 165, Utils.HEIGHT / 2 - 275, brickSize, 10, Color.WHITE, root);
             brick20.initDurabilityText(root);
 
-            Brick brick21 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 275, 52, 10, Color.WHITE, root);
+            Brick brick21 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 275, brickSize, 10, Color.WHITE, root);
             brick21.initDurabilityText(root);
-            Brick brick22 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 275, 52, 10, Color.WHITE, root);
+            Brick brick22 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 275, brickSize, 10, Color.WHITE, root);
             brick22.initDurabilityText(root);
-            Brick brick45 = new Brick(Utils.WIDTH / 2 + 275, Utils.HEIGHT / 2 - 275, 52, 10, Color.WHITE, root);
+            Brick brick45 = new Brick(Utils.WIDTH / 2 + 275, Utils.HEIGHT / 2 - 275, brickSize, 10, Color.WHITE, root);
             brick45.initDurabilityText(root);
-            Brick brick46 = new Brick(Utils.WIDTH / 2 - 330, Utils.HEIGHT / 2 - 275, 52, 10, Color.WHITE, root);
+            Brick brick46 = new Brick(Utils.WIDTH / 2 - 330, Utils.HEIGHT / 2 - 275, brickSize, 10, Color.WHITE, root);
             brick46.initDurabilityText(root);
 
             // - 4 from top row
-            Brick brick47 = new Brick(Utils.WIDTH / 2 + 0, Utils.HEIGHT / 2 - 220, 52, 10, Color.WHITE, root);
+            Brick brick47 = new Brick(Utils.WIDTH / 2 + 0, Utils.HEIGHT / 2 - 220, brickSize, 10, Color.WHITE, root);
             brick47.initDurabilityText(root);
-            Brick brick48 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 220, 52, 10, Color.WHITE, root);
+            Brick brick48 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 220, brickSize, 10, Color.WHITE, root);
             brick48.initDurabilityText(root);
-            Brick brick49 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 220, 52, 10, Color.WHITE, root);
+            Brick brick49 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 220, brickSize, 10, Color.WHITE, root);
             brick49.initDurabilityText(root);
-            Brick brick50 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 220, 52, 10, Color.WHITE, root);
+            Brick brick50 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 220, brickSize, 10, Color.WHITE, root);
             brick50.initDurabilityText(root);
 
-            Brick brick51 = new Brick(Utils.WIDTH / 2 + 165, Utils.HEIGHT / 2 - 220, 52, 10, Color.WHITE, root);
+            Brick brick51 = new Brick(Utils.WIDTH / 2 + 165, Utils.HEIGHT / 2 - 220, brickSize, 10, Color.WHITE, root);
             brick51.initDurabilityText(root);
-            Brick brick52 = new Brick(Utils.WIDTH / 2 - 220, Utils.HEIGHT / 2 - 220, 52, 10, Color.WHITE, root);
+            Brick brick52 = new Brick(Utils.WIDTH / 2 - 220, Utils.HEIGHT / 2 - 220, brickSize, 10, Color.WHITE, root);
             brick52.initDurabilityText(root);
-            Brick brick53 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 220, 52, 10, Color.WHITE, root);
+            Brick brick53 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 220, brickSize, 10, Color.WHITE, root);
             brick53.initDurabilityText(root);
-            Brick brick54 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 220, 52, 10, Color.WHITE, root);
+            Brick brick54 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 220, brickSize, 10, Color.WHITE, root);
             brick54.initDurabilityText(root);
 
             // - 5 from top row
-            Brick brick55 = new Brick(Utils.WIDTH / 2 + 0, Utils.HEIGHT / 2 - 165, 52, 20, Color.WHITE, root);
+            Brick brick55 = new Brick(Utils.WIDTH / 2 + 0, Utils.HEIGHT / 2 - 165, brickSize, 20, Color.WHITE, root);
             brick55.initDurabilityText(root);
-            Brick brick56 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 165, 52, 20, Color.WHITE, root);
+            Brick brick56 = new Brick(Utils.WIDTH / 2 - 55, Utils.HEIGHT / 2 - 165, brickSize, 20, Color.WHITE, root);
             brick56.initDurabilityText(root);
-            Brick brick57 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 165, 52, 20, Color.WHITE, root);
+            Brick brick57 = new Brick(Utils.WIDTH / 2 + 55, Utils.HEIGHT / 2 - 165, brickSize, 20, Color.WHITE, root);
             brick57.initDurabilityText(root);
-            Brick brick58 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 165, 52, 20, Color.WHITE, root);
+            Brick brick58 = new Brick(Utils.WIDTH / 2 - 110, Utils.HEIGHT / 2 - 165, brickSize, 20, Color.WHITE, root);
             brick58.initDurabilityText(root);
 
-            Brick brick59 = new Brick(Utils.WIDTH / 2 + 110, Utils.HEIGHT / 2 - 165, 52, 20, Color.WHITE, root);
+            Brick brick59 = new Brick(Utils.WIDTH / 2 + 110, Utils.HEIGHT / 2 - 165, brickSize, 20, Color.WHITE, root);
             brick59.initDurabilityText(root);
-            Brick brick60 = new Brick(Utils.WIDTH / 2 - 165, Utils.HEIGHT / 2 - 165, 52, 20, Color.WHITE, root);
+            Brick brick60 = new Brick(Utils.WIDTH / 2 - 165, Utils.HEIGHT / 2 - 165, brickSize, 20, Color.WHITE, root);
             brick60.initDurabilityText(root);
-            Brick brick61 = new Brick(Utils.WIDTH / 2 + 165, Utils.HEIGHT / 2 - 165, 52, 20, Color.WHITE, root);
+            Brick brick61 = new Brick(Utils.WIDTH / 2 + 165, Utils.HEIGHT / 2 - 165, brickSize, 20, Color.WHITE, root);
             brick61.initDurabilityText(root);
-            Brick brick62 = new Brick(Utils.WIDTH / 2 - 220, Utils.HEIGHT / 2 - 165, 52, 20, Color.WHITE, root);
+            Brick brick62 = new Brick(Utils.WIDTH / 2 - 220, Utils.HEIGHT / 2 - 165, brickSize, 20, Color.WHITE, root);
             brick62.initDurabilityText(root);
 
             // bottom row
-            Brick brick71 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 110, 52, 20, Color.WHITE, root);
+            Brick brick71 = new Brick(Utils.WIDTH / 2 + 220, Utils.HEIGHT / 2 - 110, brickSize, 20, Color.WHITE, root);
             brick71.initDurabilityText(root);
-            Brick brick72 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 110, 52, 20, Color.WHITE, root);
+            Brick brick72 = new Brick(Utils.WIDTH / 2 - 275, Utils.HEIGHT / 2 - 110, brickSize, 20, Color.WHITE, root);
             brick72.initDurabilityText(root);
-            Brick brick73 = new Brick(Utils.WIDTH / 2 + 275, Utils.HEIGHT / 2 - 110, 52, 20, Color.WHITE, root);
+            Brick brick73 = new Brick(Utils.WIDTH / 2 + 275, Utils.HEIGHT / 2 - 110, brickSize, 20, Color.WHITE, root);
             brick73.initDurabilityText(root);
-            Brick brick74 = new Brick(Utils.WIDTH / 2 - 330, Utils.HEIGHT / 2 - 110, 52, 20, Color.WHITE, root);
+            Brick brick74 = new Brick(Utils.WIDTH / 2 - 330, Utils.HEIGHT / 2 - 110, brickSize, 20, Color.WHITE, root);
             brick74.initDurabilityText(root);
-            Brick brick75 = new Brick(Utils.WIDTH / 2 + 330, Utils.HEIGHT / 2 - 110, 52, 20, Color.WHITE, root);
+            Brick brick75 = new Brick(Utils.WIDTH / 2 + 330, Utils.HEIGHT / 2 - 110, brickSize, 20, Color.WHITE, root);
             brick75.initDurabilityText(root);
-            Brick brick76 = new Brick(Utils.WIDTH / 2 - 385, Utils.HEIGHT / 2 - 110, 52, 20, Color.WHITE, root);
+            Brick brick76 = new Brick(Utils.WIDTH / 2 - 385, Utils.HEIGHT / 2 - 110, brickSize, 20, Color.WHITE, root);
             brick76.initDurabilityText(root);
-            Brick brick77 = new Brick(Utils.WIDTH / 2 + 385, Utils.HEIGHT / 2 - 110, 52, 20, Color.WHITE, root);
+            Brick brick77 = new Brick(Utils.WIDTH / 2 + 385, Utils.HEIGHT / 2 - 110, brickSize, 20, Color.WHITE, root);
             brick77.initDurabilityText(root);
-            Brick brick78 = new Brick(Utils.WIDTH / 2 - 440, Utils.HEIGHT / 2 - 110, 52, 20, Color.WHITE, root);
+            Brick brick78 = new Brick(Utils.WIDTH / 2 - 440, Utils.HEIGHT / 2 - 110, brickSize, 20, Color.WHITE, root);
             brick78.initDurabilityText(root);
-            Brick brick79 = new Brick(Utils.WIDTH / 2 + 440, Utils.HEIGHT / 2 - 110, 52, 20, Color.WHITE, root);
+            Brick brick79 = new Brick(Utils.WIDTH / 2 + 440, Utils.HEIGHT / 2 - 110, brickSize, 20, Color.WHITE, root);
             brick79.initDurabilityText(root);
-            Brick brick80 = new Brick(Utils.WIDTH / 2 - 495, Utils.HEIGHT / 2 - 110, 52, 20, Color.WHITE, root);
+            Brick brick80 = new Brick(Utils.WIDTH / 2 - 495, Utils.HEIGHT / 2 - 110, brickSize, 20, Color.WHITE, root);
             brick80.initDurabilityText(root);
-            Brick brick81 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 110, 52, 20, Color.WHITE, root);
+            Brick brick81 = new Brick(Utils.WIDTH / 2 + 495, Utils.HEIGHT / 2 - 110, brickSize, 20, Color.WHITE, root);
             brick81.initDurabilityText(root);
-            Brick brick82 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 110, 52, 20, Color.WHITE, root);
+            Brick brick82 = new Brick(Utils.WIDTH / 2 - 550, Utils.HEIGHT / 2 - 110, brickSize, 20, Color.WHITE, root);
             brick82.initDurabilityText(root);
-            Brick brick83 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 110, 52, 5, Color.WHITE, root);
+            Brick brick83 = new Brick(Utils.WIDTH / 2 + 550, Utils.HEIGHT / 2 - 110, brickSize, 5, Color.WHITE, root);
             brick83.initDurabilityText(root);
-            Brick brick84 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 110, 52, 5, Color.WHITE, root);
+            Brick brick84 = new Brick(Utils.WIDTH / 2 - 605, Utils.HEIGHT / 2 - 110, brickSize, 5, Color.WHITE, root);
             brick84.initDurabilityText(root);
 
             // big fucker
-            Brick brick85 = new Brick(Utils.WIDTH / 2 - (55 / 2), Utils.HEIGHT / 2 - 358, 52, 100, Color.WHITE, root);
+            Brick brick85 = new Brick(Utils.WIDTH / 2 - (55 / 2), Utils.HEIGHT / 2 - 358, brickSize, 100, Color.WHITE, root);
             brick85.initDurabilityText(root);
 
             brickList.add(brick1);

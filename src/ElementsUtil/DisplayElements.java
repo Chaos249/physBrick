@@ -110,7 +110,7 @@ public class DisplayElements {
         path.setStartX(Utils.WIDTH / 2);
         path.setEndX(Utils.WIDTH / 2);
         path.setStartY(Utils.HEIGHT / 2 + 100);
-        path.setEndY(Utils.HEIGHT + 2);
+        path.setEndY(Utils.HEIGHT + 20);
 
         PathTransition pt = new PathTransition();
         pt.setNode(line);

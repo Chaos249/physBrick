@@ -112,5 +112,4 @@ public class Ball {
 			circle.setRadius(currentRadius);
 		}
 	}
-
 }

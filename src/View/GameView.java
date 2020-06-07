@@ -23,6 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.jbox2d.common.Vec2;
@@ -36,7 +37,6 @@ import java.util.ArrayList;
 
 import static View.PhysBrick.VOLUME;
 import static View.PhysBrick.buttonSound;
-
 
 /**
  * THIS CLASS IS VERY EMBARRASSING PLEASE LEAVE AND NEVER COME BACK!!!!!!!!!!!!!!
@@ -217,6 +217,11 @@ public class GameView {
             GameElements.MakeAddLightningButtonMouseEvent(gameScene, root);
             GameElements.DebugHotkeys(gameScene, plat, balls, root, gameLayout);
         }
+
+        Scale scale = new Scale(PhysBrick.SCALE_FACTOR, PhysBrick.SCALE_FACTOR);
+        scale.setPivotX(0);
+        scale.setPivotY(0);
+        gameScene.getRoot().getTransforms().setAll(scale);
     }
 
     public void GameLoop(Duration duration, Timeline timeline) {
@@ -598,7 +603,7 @@ public class GameView {
         this.nextLevelButton = null;
         this.levelCompleteImage = null;
         this.gameOverImage = null;
-        Runtime.getRuntime().gc(); // java garbage cleaner
+        Runtime.getRuntime().gc(); // java garbage cleaner is run after this shit becomes null
         System.out.println("stripped and clipped");
     }
 }

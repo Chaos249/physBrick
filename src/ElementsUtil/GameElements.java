@@ -120,7 +120,7 @@ public class GameElements {
                 float dragY = (float) me.getSceneY();
 
                 // Draw ball on this location
-                Ball ball = new Ball(root, Utils.toPosX(dragX), Utils.toPosY(dragY), Utils.RandomColor());
+                Ball ball = new Ball(root, Utils.toPosXScaled(dragX), Utils.toPosYScaled(dragY), Utils.RandomColor());
                 balls.add(ball);
                 homeButton.toFront();
             }

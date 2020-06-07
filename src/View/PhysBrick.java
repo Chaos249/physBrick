@@ -1,7 +1,6 @@
 package View;
 
 import ElementsUtil.DisplayElements;
-import ElementsUtil.Utils;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,21 +9,19 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class PhysBrick extends Application {
     // start game immediately and disables music if true
     public final static boolean DEBUG = true;
+    public final static float SCALE_FACTOR = 0.65f;
 
     public static double VOLUME = 0.25;
     public static AudioClip buttonSound = new AudioClip("file:src/resources/sound/button.wav");
 
     public static void main(String[] args) {
-        Application.launch(args); 
+        Application.launch(args);
     }
 
     // javafx main start
@@ -34,7 +31,7 @@ public class PhysBrick extends Application {
 
         primaryStage.setTitle("");
         primaryStage.setFullScreen(false);
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
 
         Group defaultRoot = new Group();
         ArrayList arr = DisplayElements.EightiesAnim(DEBUG, primaryStage, defaultRoot, Color.CYAN);

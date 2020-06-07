@@ -1,5 +1,6 @@
 package ElementsUtil;
 
+import View.PhysBrick;
 import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,8 +9,13 @@ import java.util.Random;
 public class Utils {
 
     //Screen width and height
-    public static final int WIDTH = 1280; //1280
-    public static final int HEIGHT = 1280; //960
+    /**
+     * Scaled for 1440p
+     */
+    public static final int WIDTH = 1280; //1280 or 640
+    public static final int HEIGHT = 1280; //1280 or 640
+
+    public static final float SCALED_SIZE = WIDTH * PhysBrick.SCALE_FACTOR;
 
     //Convert a JBox2D x coordinate to a JavaFX pixel x coordinate
     public static float toPixelPosX(float posX) {
@@ -21,6 +27,17 @@ public class Utils {
     public static float toPosX(float posX) {
         float x = (posX*100.0f*1.0f)/WIDTH;
         return x;
+    }
+    //Convert a JavaFX pixel x coordinate to a JBox2D x coordinate
+    public static float toPosXScaled(float posX) {
+        float x = (posX*100.0f*1.0f)/SCALED_SIZE;
+        return x;
+    }
+
+    //Convert a JavaFX pixel y coordinate to a JBox2D y coordinate
+    public static float toPosYScaled(float posY) {
+        float y = 100.0f - ((posY * 100 * 1.0f) /SCALED_SIZE) ;
+        return y;
     }
 
     //Convert a JBox2D y coordinate to a JavaFX pixel y coordinate

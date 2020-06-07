@@ -14,6 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
@@ -69,6 +70,11 @@ public class CreditsView {
         root.getChildren().add(userText);
         root.getChildren().add(miscText);
         root.getChildren().add(backButton);
+
+        Scale scale = new Scale(PhysBrick.SCALE_FACTOR, PhysBrick.SCALE_FACTOR);
+        scale.setPivotX(0);
+        scale.setPivotY(0);
+        creditsScene.getRoot().getTransforms().setAll(scale);
     }
 
     // creates credit button
@@ -115,7 +121,6 @@ public class CreditsView {
                 buttonSound.play();
             }
         });
-
         return backButton;
     }
 }

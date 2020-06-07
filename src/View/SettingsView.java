@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -52,6 +53,11 @@ public class SettingsView {
         this.volumeImage = MakeVolumeImage();
 
         this.root.getChildren().add(volumeSlider);
+
+        Scale scale = new Scale(PhysBrick.SCALE_FACTOR, PhysBrick.SCALE_FACTOR);
+        scale.setPivotX(0);
+        scale.setPivotY(0);
+        settingsScene.getRoot().getTransforms().setAll(scale);
     }
 
     public static Button MakeSettingsButton(Group root) throws FileNotFoundException {
@@ -142,7 +148,6 @@ public class SettingsView {
         imageView.setScaleY(0.6);
 
         this.root.getChildren().add(imageView);
-
         return imageView;
     }
 
