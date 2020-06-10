@@ -51,7 +51,8 @@ public class GamePlatform {
     public int extensionTimer = 0;
     public int maxExtensionTime = 50;
 
-    public static AudioClip laserSound = new AudioClip("file:src/resources/sound/laser.wav");
+    //public static AudioClip laserSound = new AudioClip("file:resources/sound/laser.wav");
+    public static AudioClip laserSound = new AudioClip(GamePlatform.class.getResource("/sound/laser.wav").toString());
 
     public GamePlatform(Group root, float posX, float posY, Color color) {
         this.root = root;
@@ -118,7 +119,7 @@ public class GamePlatform {
         rect.setTranslateX(width*2 - width*2.5);
         rect.setWidth(width * 2);
 
-        GameElements.enlargeSound.setVolume(PhysBrick.VOLUME * 1.5);
+        GameElements.enlargeSound.setVolume(PhysBrick.VOLUME);
         GameElements.enlargeSound.play();
     }
 
@@ -189,7 +190,7 @@ public class GamePlatform {
             pt1.play();
             pt2.play();
 
-            laserSound.setVolume(PhysBrick.VOLUME * 2.5);
+            laserSound.setVolume(PhysBrick.VOLUME);
             laserSound.play();
 
             Thread thread1 = new Thread(new LaserThread(scene, root, laser1, gameLayout));

@@ -51,7 +51,8 @@ public class Brick {
 
     public boolean broken = false;
 
-    public static AudioClip hit = new AudioClip("file:src/resources/sound/hit.wav");
+    //public static AudioClip hit = new AudioClip("file:resources/sound/hit.wav");
+    public static AudioClip hit = new AudioClip(Brick.class.getResource("/sound/hit.wav").toString());
 
     public Brick(float posX, float posY, int size, int durability, Color color, Group root) {
         this.posX = posX;
@@ -106,7 +107,8 @@ public class Brick {
         formatText(durText);
         durText.setLayoutY((posY + this.size * 0.5) + 4.2);
         durText.setFill(Color.WHITE);
-        durText.setFont(Font.loadFont(new FileInputStream("src/resources/start.ttf"), 6)); //Font.font("Source Code Pro")
+        //durText.setFont(Font.loadFont(new FileInputStream("resources/start.ttf"), 6)); //Font.font("Source Code Pro")
+        durText.setFont(Font.loadFont(Brick.class.getResource("/font/start.ttf").toString(), 6)); //Font.font("Source Code Pro")
         durText.setOpacity(0.8);
         root.getChildren().add(durText);
     }
@@ -138,7 +140,7 @@ public class Brick {
 
     public void damageDurability(float damageAmount) { // usually 1
         if ((int)(this.durability - damageAmount) < (int) this.durability) {
-            hit.setVolume(PhysBrick.VOLUME);
+            hit.setVolume(PhysBrick.VOLUME * 0.8);
             hit.play();
         }
         this.durability -= damageAmount;

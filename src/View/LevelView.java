@@ -51,8 +51,9 @@ public class LevelView {
 
     public Button initBackButton(Stage primaryStage, Scene menuScene) throws FileNotFoundException {
         this.backButton = new Button();
-        FileInputStream play_input = new FileInputStream("src/resources/image/back.jpg");
-        Image play_img = new Image(play_input);
+//        FileInputStream play_input = new FileInputStream("resources/image/back.jpg");
+//        Image play_img = new Image(play_input);
+        Image play_img = new Image(LevelView.class.getResource("/image/back.jpg").toString());
         ImageView btngraphic = new ImageView(play_img);
 
         double btnScale = 0.4;
@@ -79,8 +80,9 @@ public class LevelView {
     }
 
     public ImageView MakeSelectLevelImage() throws FileNotFoundException {
-        FileInputStream select_input = new FileInputStream("src/resources/image/select_level.jpg");
-        Image image = new Image(select_input);
+//        FileInputStream select_input = new FileInputStream("resources/image/select_level.jpg");
+//        Image image = new Image(select_input);
+        Image image = new Image(LevelView.class.getResource("/image/select_level.jpg").toString());
         ImageView imageView = new ImageView(image);
 
         imageView.setLayoutX((Utils.WIDTH / 2) - 790); // -1576 * 0.45

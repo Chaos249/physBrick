@@ -77,11 +77,10 @@ public class GameView {
     public boolean levelComplete = false;
     public boolean paused = false;
     public boolean gameStarted = false;
-    public AudioClip pauseSound = new AudioClip("file:src/resources/sound/pause.wav");
+    public AudioClip pauseSound = new AudioClip(GameView.class.getResource("/sound/pause.wav").toString());
     public Text pauseText;
 
-    public static String gameMusicPath = new File("src/resources/sound/gamemusic.wav").getAbsolutePath();
-    public static Media gameMusic = new Media(new File(gameMusicPath).toURI().toString());
+    public static Media gameMusic = new Media(GameView.class.getResource("/sound/gamemusic.wav").toString());
     public static MediaPlayer gameMusicPlayer = new MediaPlayer(gameMusic);
 
     public GameView(Stage primaryStage, Scene menuScene, int levelNumber, ArrayList arr) throws FileNotFoundException {
@@ -306,8 +305,8 @@ public class GameView {
     public Button initHomeButton(Stage primaryStage, Scene menuScene) throws FileNotFoundException {
         double btnScale = 0.2;
         this.homeButton = new Button();
-        FileInputStream play_input = new FileInputStream("src/resources/image/home.jpg");
-        Image play_img = new Image(play_input);
+        //FileInputStream play_input = new FileInputStream("resources/image/home.jpg");
+        Image play_img = new Image(GameView.class.getResource("/image/home.jpg").toString());
         ImageView btngraphic = new ImageView(play_img);
 
         this.homeButton.setGraphic(btngraphic);
@@ -342,7 +341,7 @@ public class GameView {
         Text scoreText = new Text();
         scoreText.setText("SCORE:" + this.score);
         scoreText.setOpacity(0.8);
-        scoreText.setFont(Font.loadFont(new FileInputStream("src/resources/start.ttf"), 25));
+        scoreText.setFont(Font.loadFont(GameView.class.getResource("/font/start.ttf").toString(), 25));
         scoreText.setFill(Color.WHITE);
         scoreText.setTranslateX((Utils.WIDTH / 2) - 400);
         scoreText.setTranslateY((Utils.HEIGHT / 2) - 565);
@@ -361,7 +360,7 @@ public class GameView {
         Text timerText = new Text();
         timerText.setText("TIME:" + "0");
         timerText.setOpacity(0.8);
-        timerText.setFont(Font.loadFont(new FileInputStream("src/resources/start.ttf"), 25));
+        timerText.setFont(Font.loadFont(GameView.class.getResource("/font/start.ttf").toString(), 25));
         timerText.setFill(Color.WHITE);
         timerText.setTranslateX((Utils.WIDTH / 2) + 250);
         timerText.setTranslateY((Utils.HEIGHT / 2) - 565);
@@ -396,8 +395,8 @@ public class GameView {
     }
 
     public ImageView MakeLevelCompleteImage() throws FileNotFoundException {
-        FileInputStream fis = new FileInputStream("src/resources/image/level_complete.jpg");
-        Image image = new Image(fis);
+        //FileInputStream fis = new FileInputStream("resources/image/level_complete.jpg");
+        Image image = new Image(GameView.class.getResource("/image/level_complete.jpg").toString());
         ImageView imageView = new ImageView(image);
         imageView.setLayoutX((Utils.WIDTH / 2) - 851);
         imageView.setLayoutY(Utils.HEIGHT - 1100);
@@ -416,8 +415,8 @@ public class GameView {
         this.nextLevelButton = new Button();
         this.nextLevelButton.setOpacity(0);
         this.nextLevelButton.setVisible(false);
-        FileInputStream fis = new FileInputStream("src/resources/image/next_level.jpg");
-        Image play_img = new Image(fis);
+        //FileInputStream fis = new FileInputStream("resources/image/next_level.jpg");
+        Image play_img = new Image(GameView.class.getResource("/image/next_level.jpg").toString());
         ImageView btngraphic = new ImageView(play_img);
 
         double btnScale = 0.85;
@@ -449,8 +448,8 @@ public class GameView {
     }
 
     public ImageView MakeGameOverImage() throws FileNotFoundException {
-        FileInputStream fis = new FileInputStream("src/resources/image/gameover.jpg");
-        Image image = new Image(fis);
+        //FileInputStream fis = new FileInputStream("resources/image/gameover.jpg");
+        Image image = new Image(GameView.class.getResource("/image/gameover.jpg").toString());
         ImageView imageView = new ImageView(image);
         imageView.setLayoutX((Utils.WIDTH / 2) - 525);
         imageView.setLayoutY(Utils.HEIGHT - 1100);
@@ -469,8 +468,8 @@ public class GameView {
         this.retryButton = new Button();
         this.retryButton.setOpacity(0);
         this.retryButton.setVisible(false);
-        FileInputStream fis = new FileInputStream("src/resources/image/retry.jpg");
-        Image play_img = new Image(fis);
+        //FileInputStream fis = new FileInputStream("resources/image/retry.jpg");
+        Image play_img = new Image(GameView.class.getResource("/image/retry.jpg").toString());
         ImageView btngraphic = new ImageView(play_img);
 
         double btnScale = 0.4;
@@ -520,7 +519,7 @@ public class GameView {
             Text endText = new Text();
             endText.setText("YOU HAVE COMPLETED ALL LEVELS!");
             endText.setOpacity(0.8);
-            endText.setFont(Font.loadFont(new FileInputStream("src/resources/start.ttf"), 30));
+            endText.setFont(Font.loadFont(GameView.class.getResource("/font/start.ttf").toString(), 30));
             endText.setFill(Color.WHITE);
             endText.setTranslateX((Utils.WIDTH / 2) - 450);
             endText.setTranslateY((Utils.HEIGHT / 2) - 140);
@@ -563,7 +562,7 @@ public class GameView {
         Text startText = new Text();
         startText.setText("CLICK TO START!");
         startText.setOpacity(0.8);
-        startText.setFont(Font.loadFont(new FileInputStream("src/resources/start.ttf"), 30));
+        startText.setFont(Font.loadFont(GameView.class.getResource("/font/start.ttf").toString(), 30));
         startText.setFill(Color.WHITE);
         startText.setTranslateX((Utils.WIDTH / 2) - 220);
         startText.setTranslateY((Utils.HEIGHT / 2) + 80);
@@ -577,7 +576,7 @@ public class GameView {
         Text pauseText = new Text();
         pauseText.setText("PAUSED");
         pauseText.setOpacity(0.8);
-        pauseText.setFont(Font.loadFont(new FileInputStream("src/resources/start.ttf"), 30));
+        pauseText.setFont(Font.loadFont(GameView.class.getResource("/font/start.ttf").toString(), 30));
         pauseText.setFill(Color.WHITE);
         pauseText.setTranslateX((Utils.WIDTH / 2) - 90);
         pauseText.setTranslateY((Utils.HEIGHT / 2) + 35);

@@ -42,20 +42,23 @@ public class TitleView {
 
         GameElements.MakeAddLightningButtonMouseEvent(this.titleScene, this.root);
 
-        Scale scale = new Scale(PhysBrick.SCALE_FACTOR, PhysBrick.SCALE_FACTOR);
-        scale.setPivotX(0);
-        scale.setPivotY(0);
-        titleScene.getRoot().getTransforms().setAll(scale);
-        primaryStage.setMaxHeight(Utils.WIDTH * PhysBrick.SCALE_FACTOR + 40);
-        primaryStage.setMaxWidth(Utils.HEIGHT * PhysBrick.SCALE_FACTOR);
-        primaryStage.setMinWidth(Utils.WIDTH * PhysBrick.SCALE_FACTOR);
-        primaryStage.setMinHeight(Utils.WIDTH * PhysBrick.SCALE_FACTOR + 40);
+        if (PhysBrick.DEBUG) {
+            Scale scale = new Scale(PhysBrick.SCALE_FACTOR, PhysBrick.SCALE_FACTOR);
+            scale.setPivotX(0);
+            scale.setPivotY(0);
+            titleScene.getRoot().getTransforms().setAll(scale);
+            primaryStage.setMaxHeight(Utils.WIDTH * PhysBrick.SCALE_FACTOR + 40);
+            primaryStage.setMaxWidth(Utils.HEIGHT * PhysBrick.SCALE_FACTOR + 15);
+            primaryStage.setMinHeight(Utils.WIDTH * PhysBrick.SCALE_FACTOR + 40);
+            primaryStage.setMinWidth(Utils.WIDTH * PhysBrick.SCALE_FACTOR + 15);
+        }
     }
 
     //creates title image
     public ImageView MakeTitle() throws FileNotFoundException {
-        FileInputStream title_input = new FileInputStream("src/resources/image/title.jpg");
-        Image image = new Image(title_input);
+        //FileInputStream title_input = new FileInputStream("resources/image/title.jpg");
+        //Image image = new Image(title_input);
+        Image image = new Image(TitleView.class.getResource("/image/title.jpg").toString());
         ImageView imageView = new ImageView(image);
         imageView.setLayoutX((Utils.WIDTH / 2) - 380);
         imageView.setLayoutY(Utils.HEIGHT - 1200);
@@ -67,8 +70,9 @@ public class TitleView {
     // creates plat button
     public static Button MakePlayButton(Group root) throws FileNotFoundException {
         final Button btn = new Button();
-        FileInputStream play_input = new FileInputStream("src/resources/image/play.jpg");
-        Image play_img = new Image(play_input);
+        //FileInputStream play_input = new FileInputStream("resources/image/play.jpg");
+        //Image play_img = new Image(play_input);
+        Image play_img = new Image(TitleView.class.getResource("/image/play.jpg").toString());
         ImageView btngraphic = new ImageView(play_img);
         double btnScale = 0.5;
 

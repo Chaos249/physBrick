@@ -24,6 +24,7 @@ import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.FixtureDef;
+import sun.plugin2.message.GetAppletMessage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -32,8 +33,10 @@ import java.util.Random;
 
 public class GameElements {
 
-    public static AudioClip powerupSound = new AudioClip("file:src/resources/sound/powerup.wav");
-    public static AudioClip enlargeSound = new AudioClip("file:src/resources/sound/enlarge.wav");
+//    public static AudioClip powerupSound = new AudioClip("file:resources/sound/powerup.wav");
+//    public static AudioClip enlargeSound = new AudioClip("file:resources/sound/enlarge.wav");
+    public static AudioClip powerupSound = new AudioClip(GameElements.class.getResource("/sound/powerup.wav").toString());
+    public static AudioClip enlargeSound = new AudioClip(GameElements.class.getResource("/sound/enlarge.wav").toString());
 
     public static void addGround(float width, float height) { // disabled for real game, only exists for testing
         PolygonShape ps = new PolygonShape();

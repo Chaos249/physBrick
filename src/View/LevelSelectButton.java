@@ -17,9 +17,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static View.PhysBrick.VOLUME;
@@ -37,12 +35,14 @@ public class LevelSelectButton {
         this.levelButton = new Button();
         this.levelNumberText = new Text(Integer.toString(levelNumber));
         this.levelNumberText.setFill(Color.WHITE);
-        this.levelNumberText.setFont(Font.loadFont(new FileInputStream("src/resources/start.ttf"), 12)); // source code pro
+        //this.levelNumberText.setFont(Font.loadFont(new FileInputStream("resources/start.ttf"), 12)); // source code pro
+        this.levelNumberText.setFont(Font.loadFont(LevelSelectButton.class.getResource("/font/start.ttf").toString(), 12));
         this.levelNumberText.setMouseTransparent(true);
         this.levelNumberText.setOpacity(0.8);
 
-        FileInputStream box_input = new FileInputStream("src/resources/image/level_box.jpg");
-        Image box_img = new Image(box_input);
+//        FileInputStream box_input = new FileInputStream("resources/image/level_box.jpg");
+//        Image box_img = new Image(box_input);
+        Image box_img = new Image(LevelSelectButton.class.getResource("/image/level_box.jpg").toString());
         ImageView btngraphic = new ImageView(box_img);
 
         this.levelButton.setGraphic(btngraphic);

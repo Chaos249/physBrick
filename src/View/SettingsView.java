@@ -37,9 +37,10 @@ public class SettingsView {
     public ImageView volumeImage;
     public Slider volumeSlider;
 
-    public static String musicPath = new File("src/resources/sound/titlemusic.wav").getAbsolutePath();
-    public static Media music = new Media(new File(musicPath).toURI().toString());
-    public static MediaPlayer musicPlayer = new MediaPlayer(music);
+    //public static String musicPath = new File("resources/sound/titlemusic.wav").getAbsolutePath();
+    //public static Media music = new Media(new File(musicPath).toURI().toString());
+    public static Media media = new Media(SettingsView.class.getResource("/sound/titlemusic.wav").toString());
+    public static MediaPlayer musicPlayer = new MediaPlayer(media);
 
     public SettingsView(Stage primaryStage, Scene menuScene) throws FileNotFoundException {
         this.root = new Group();
@@ -62,8 +63,9 @@ public class SettingsView {
 
     public static Button MakeSettingsButton(Group root) throws FileNotFoundException {
         final Button btn = new Button();
-        FileInputStream play_input = new FileInputStream("src/resources/image/settings.jpg");
-        Image play_img = new Image(play_input);
+        //FileInputStream play_input = new FileInputStream("resources/image/settings.jpg");
+        //Image play_img = new Image(play_input);
+        Image play_img = new Image(SettingsView.class.getResource("/image/settings.jpg").toString());
         ImageView btngraphic = new ImageView(play_img);
         double btnScale = 0.6;
 
@@ -81,8 +83,9 @@ public class SettingsView {
 
     public Button initBackButton(Stage primaryStage, Scene menuScene) throws FileNotFoundException {
         this.backButton = new Button();
-        FileInputStream play_input = new FileInputStream("src/resources/image/back.jpg");
-        Image play_img = new Image(play_input);
+        //FileInputStream play_input = new FileInputStream("resources/image/back.jpg");
+        //Image play_img = new Image(play_input);
+        Image play_img = new Image(SettingsView.class.getResource("/image/back.jpg").toString());
         ImageView btngraphic = new ImageView(play_img);
 
         double btnScale = 0.4;
@@ -113,7 +116,7 @@ public class SettingsView {
 
         Slider volumeSlider = new Slider(0, 100, 50);
         volumeSlider.setMax(0.5);
-        volumeSlider.setMin(0);
+        volumeSlider.setMin(0.0001);
 
         volumeSlider.setPrefWidth(862);
         volumeSlider.setTranslateX(Utils.WIDTH / 2 - 431);
@@ -123,7 +126,7 @@ public class SettingsView {
         volumeSlider.setOpacity(0.8);
         volumeSlider.setValue(0.25);
 
-        settingsScene.getStylesheets().add("/resources/image/slider.css");
+        settingsScene.getStylesheets().add("css_resources/slider.css"); ///resources/image/
 
         volumeSlider.valueProperty().addListener(new InvalidationListener() {
             @Override
@@ -137,8 +140,9 @@ public class SettingsView {
     }
 
     public ImageView MakeVolumeImage() throws FileNotFoundException {
-        FileInputStream volume_input = new FileInputStream("src/resources/image/volume.jpg");
-        Image image = new Image(volume_input);
+        //FileInputStream volume_input = new FileInputStream("resources/image/volume.jpg");
+        //Image image = new Image(volume_input);
+        Image image = new Image(SettingsView.class.getResource("/image/volume.jpg").toString());
         ImageView imageView = new ImageView(image);
         imageView.setLayoutX((Utils.WIDTH / 2) - 460);
         imageView.setLayoutY(Utils.HEIGHT - 1000);

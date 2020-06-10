@@ -4,20 +4,15 @@ import ElementsUtil.GameElements;
 import View.PhysBrick;
 import javafx.animation.Interpolator;
 import javafx.animation.PathTransition;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class PowerUp {
@@ -54,18 +49,13 @@ public class PowerUp {
     }
 
     public ImageView MakePowerUp() { // not visible by default
-        try {
-            Image image = new Image(new FileInputStream("src/resources/image/" + this.type + ".png"));
-            ImageView imageView = new ImageView(image);
-            imageView.setScaleX(1.5);
-            imageView.setScaleY(1.5);
-            imageView.setVisible(false);
-            this.root.getChildren().add(imageView);
-            return imageView;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
+        Image image = new Image(PowerUp.class.getResource("/image/" + this.type + ".png").toString());
+        ImageView imageView = new ImageView(image);
+        imageView.setScaleX(1.5);
+        imageView.setScaleY(1.5);
+        imageView.setVisible(false);
+        this.root.getChildren().add(imageView);
+        return imageView;
     }
 
     public PathTransition MakePathTransition() {
@@ -97,7 +87,7 @@ public class PowerUp {
                 if (checkCollision() && collision == false) { // checkCollision()
                     collision = true;
                     node.setVisible(false);
-                    GameElements.powerupSound.setVolume(PhysBrick.VOLUME * 2);
+                    GameElements.powerupSound.setVolume(PhysBrick.VOLUME);
                     GameElements.powerupSound.play();
                     switch (type) {
                         case "strawberry_platform":

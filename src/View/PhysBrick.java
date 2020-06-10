@@ -10,15 +10,17 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
+
 import java.util.ArrayList;
 
 public class PhysBrick extends Application {
     // start game immediately and disables music if true
-    public final static boolean DEBUG = true;
-    public final static float SCALE_FACTOR = 0.65f;
-
+    public final static boolean DEBUG = false;
+    public final static float SCALE_FACTOR = 0.8f;
     public static double VOLUME = 0.25;
-    public static AudioClip buttonSound = new AudioClip("file:src/resources/sound/button.wav");
+
+    //public static AudioClip buttonSound = new AudioClip("file:resources/sound/button.wav");//
+    public static AudioClip buttonSound = new AudioClip(PhysBrick.class.getResource("/sound/button.wav").toString());
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -40,6 +42,7 @@ public class PhysBrick extends Application {
         TitleView tv = new TitleView(primaryStage);
         primaryStage.setScene(tv.titleScene);
         if (DEBUG) { VOLUME = 0.05; }
+        else { LoadView loadView = new LoadView(primaryStage, tv.titleScene); }
 
         CreditsView cv = new CreditsView(primaryStage, tv.titleScene, arr, true);
 
@@ -71,7 +74,7 @@ public class PhysBrick extends Application {
                 primaryStage.setScene(cv.creditsScene);
                 buttonSound.setVolume(VOLUME * 1.25);
                 buttonSound.play();
-                DisplayElements.CustomLightning(cv.creditsScene, cv.root, 8000, 50, 0.5f);
+                DisplayElements.CustomLightning(cv.creditsScene, cv.root, 4000, 60, 0.4f);
             }
         });
     }

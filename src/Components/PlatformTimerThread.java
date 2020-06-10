@@ -1,9 +1,6 @@
 package Components;
 
-import ElementsUtil.GameElements;
-import View.PhysBrick;
 import javafx.application.Platform;
-
 
 /**
  *  CURRENTLY BROKEN - PLATFORM GETS SMALL AGAIN TOO QUICKLY

@@ -50,14 +50,14 @@ public class CreditsView {
 
         this.authorText = new Text("AUTHOR: KYLE YAGLOSKI");
         this.authorText.setOpacity(0.8);
-        this.authorText.setFont(Font.loadFont(new FileInputStream("src/resources/start.ttf"), 25));
+        this.authorText.setFont(Font.loadFont(CreditsView.class.getResource("/font/start.ttf").toString(), 25));
         this.authorText.setFill(Color.WHITE);
         this.authorText.setTranslateX((Utils.WIDTH / 2) - 275);
         this.authorText.setTranslateY((Utils.HEIGHT / 2) - 400);
 
         this.userText = new Text("AKA \"CHAOS249\"");
         this.userText.setOpacity(0.8);
-        this.userText.setFont(Font.loadFont(new FileInputStream("src/resources/start.ttf"), 25));
+        this.userText.setFont(Font.loadFont(CreditsView.class.getResource("/font/start.ttf").toString(), 25));
         this.userText.setFill(Color.WHITE);
         this.userText.setTranslateX((Utils.WIDTH / 2) - 185);
         this.userText.setTranslateY((Utils.HEIGHT / 2) - 350);
@@ -80,8 +80,8 @@ public class CreditsView {
     // creates credit button
     public static Button MakeCreditButton(Group root) throws FileNotFoundException {
         final Button btn = new Button();
-        FileInputStream play_input = new FileInputStream("src/resources/image/credit.jpg");
-        Image play_img = new Image(play_input);
+//        FileInputStream play_input = new FileInputStream("resources/image/credit.jpg");
+        Image play_img = new Image(CreditsView.class.getResource("/image/credit.jpg").toString());
         ImageView btngraphic = new ImageView(play_img);
         double btnScale = 0.6;
 
@@ -99,8 +99,9 @@ public class CreditsView {
 
     public Button initBackButton(Stage primaryStage, Scene menuScene) throws FileNotFoundException {
         this.backButton = new Button();
-        FileInputStream play_input = new FileInputStream("src/resources/image/back.jpg");
-        Image play_img = new Image(play_input);
+//        FileInputStream play_input = new FileInputStream("resources/image/back.jpg");
+//        Image play_img = new Image(play_input);
+        Image play_img = new Image(CreditsView.class.getResource("/image/back.jpg").toString());
         ImageView btngraphic = new ImageView(play_img);
 
         double btnScale = 0.4;

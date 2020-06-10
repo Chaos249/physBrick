@@ -98,7 +98,7 @@ public class Ball {
 			Circle circle = (Circle) ball.node;
 			circle.setRadius(currentRadius * 2);
 		}
-		GameElements.enlargeSound.setVolume(PhysBrick.VOLUME * 1.5);
+		GameElements.enlargeSound.setVolume(PhysBrick.VOLUME);
 		GameElements.enlargeSound.play();
 	}
 

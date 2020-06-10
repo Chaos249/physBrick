@@ -21,7 +21,8 @@ import java.util.Random;
 
 public class DisplayElements {
 
-    public static AudioClip thunder = new AudioClip("file:src/resources/sound/thunder.wav"); //thunder.wav
+    //public static AudioClip thunder = new AudioClip("file:resources/sound/thunder.wav"); //thunder.wav
+    public static AudioClip thunder = new AudioClip(DisplayElements.class.getResource("/sound/thunder.wav").toString()); //thunder.wav
 
     // generates rrt configuration
     public static ArrayList<Line> MakeLightning(int iterations) {
@@ -55,8 +56,8 @@ public class DisplayElements {
             @Override
             public void handle(long l) {
                 if (playAudio == false) {
-                    thunder.setVolume(PhysBrick.VOLUME / 2);
-                    thunder.setBalance(0.1);
+                    thunder.setVolume(PhysBrick.VOLUME * 0.8);
+                    //thunder.setBalance(0.1);
                     thunder.setRate(soundRate); //0.3 transition
                     thunder.play();
                     playAudio = true;
