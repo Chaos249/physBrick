@@ -10,7 +10,7 @@
 ██╔══██╗██╔══██╗██║██║     ██╔═██╗                                                            
 ██████╔╝██║  ██║██║╚██████╗██║  ██╗                                                 
 ╚═════╝ ╚═╝  ╚═╝╚═╝ ╚═════╝╚═╝  ╚═╝                                               
-                                                                          
+                                                                            
 
 # physBrick
 A game where you bounce balls around to break stuff. 
