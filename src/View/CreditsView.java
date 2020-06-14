@@ -2,6 +2,7 @@ package View;
 
 import ElementsUtil.DisplayElements;
 import ElementsUtil.Utils;
+import com.sun.xml.internal.ws.api.model.MEP;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -26,6 +27,7 @@ import static View.PhysBrick.buttonSound;
 
 public class CreditsView {
 
+    public Stage stage;
     public Scene creditsScene;
 
     public Group root;
@@ -37,7 +39,7 @@ public class CreditsView {
     public Button backButton;
 
     public CreditsView(Stage primaryStage, Scene menuScene, ArrayList arr, boolean titleView) throws FileNotFoundException {
-
+        this.stage = primaryStage;
         this.root = new Group();
         this.creditsScene = new Scene(root, Utils.WIDTH, Utils.HEIGHT, Color.BLACK);
 
@@ -123,5 +125,16 @@ public class CreditsView {
             }
         });
         return backButton;
+    }
+
+    public void setScale() {
+        Scale scale = new Scale(PhysBrick.SCALE_FACTOR, PhysBrick.SCALE_FACTOR);
+        scale.setPivotX(0);
+        scale.setPivotY(0);
+        creditsScene.getRoot().getTransforms().setAll(scale);
+        stage.setMaxHeight(Utils.WIDTH * PhysBrick.SCALE_FACTOR + 40);
+        stage.setMaxWidth(Utils.HEIGHT * PhysBrick.SCALE_FACTOR);
+        stage.setMinHeight(Utils.WIDTH * PhysBrick.SCALE_FACTOR + 40);
+        stage.setMinWidth(Utils.WIDTH * PhysBrick.SCALE_FACTOR);
     }
 }

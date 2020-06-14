@@ -45,6 +45,7 @@ public class GameView {
 
     public static World world;
 
+    public Stage stage;
     public static Scene gameScene;
     public static Group root;
 
@@ -84,6 +85,7 @@ public class GameView {
     public static MediaPlayer gameMusicPlayer = new MediaPlayer(gameMusic);
 
     public GameView(Stage primaryStage, Scene menuScene, int levelNumber, ArrayList arr) throws FileNotFoundException {
+        this.stage = primaryStage;
         this.root = new Group();
         this.gameScene = new Scene(root, Utils.WIDTH, Utils.HEIGHT, Color.BLACK);
 
@@ -585,6 +587,17 @@ public class GameView {
         this.root.getChildren().add(pauseText);
 
         return pauseText;
+    }
+    public void setScale() {
+        Scale scale = new Scale(PhysBrick.SCALE_FACTOR, PhysBrick.SCALE_FACTOR);
+        scale.setPivotX(0);
+        scale.setPivotY(0);
+        gameScene.getRoot().getTransforms().setAll(scale);
+        Utils.SCALED_SIZE = Utils.WIDTH * PhysBrick.SCALE_FACTOR;
+        stage.setMaxHeight(Utils.WIDTH * PhysBrick.SCALE_FACTOR + 40);
+        stage.setMaxWidth(Utils.HEIGHT * PhysBrick.SCALE_FACTOR);
+        stage.setMinHeight(Utils.WIDTH * PhysBrick.SCALE_FACTOR + 40);
+        stage.setMinWidth(Utils.WIDTH * PhysBrick.SCALE_FACTOR);
     }
 
     public void StripAndClip() { // deletes all objects in parent object to save memory and not fuck other shit up

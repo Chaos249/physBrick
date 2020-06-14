@@ -24,9 +24,9 @@ public class LoadView {
         scale.setPivotY(0);
         titleScene.getRoot().getTransforms().setAll(scale);
         stage.setMaxHeight(Utils.WIDTH * PhysBrick.SCALE_FACTOR + 40);
-        stage.setMaxWidth(Utils.HEIGHT * PhysBrick.SCALE_FACTOR + 15);
+        stage.setMaxWidth(Utils.HEIGHT * PhysBrick.SCALE_FACTOR);
         stage.setMinHeight(Utils.WIDTH * PhysBrick.SCALE_FACTOR + 40);
-        stage.setMinWidth(Utils.WIDTH * PhysBrick.SCALE_FACTOR + 15);
+        stage.setMinWidth(Utils.WIDTH * PhysBrick.SCALE_FACTOR);
 
         loadScene = new Scene(root, Utils.WIDTH, Utils.HEIGHT, Color.BLACK);
 

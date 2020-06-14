@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
+import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
@@ -16,10 +17,10 @@ import java.util.ArrayList;
 public class PhysBrick extends Application {
     // start game immediately and disables music if true
     public final static boolean DEBUG = false;
-    public final static float SCALE_FACTOR = 0.8f;
+    public static float SCALE_FACTOR = 0.75f;
     public static double VOLUME = 0.25;
 
-    //public static AudioClip buttonSound = new AudioClip("file:resources/sound/button.wav");//
+    //public static AudioClip buttonSound = new AudioClip("file:resources/sound/button.wav");
     public static AudioClip buttonSound = new AudioClip(PhysBrick.class.getResource("/sound/button.wav").toString());
 
     public static void main(String[] args) {
@@ -40,6 +41,7 @@ public class PhysBrick extends Application {
 
         // makes the scene for the credits view
         TitleView tv = new TitleView(primaryStage);
+        tv.setScale();
         primaryStage.setScene(tv.titleScene);
         if (DEBUG) { VOLUME = 0.05; }
         else { LoadView loadView = new LoadView(primaryStage, tv.titleScene); }
@@ -54,6 +56,7 @@ public class PhysBrick extends Application {
             @Override
             public void handle(ActionEvent actionEvent) {
                 primaryStage.setScene(lsv.levelSelectScene);
+                lsv.setScale();
                 buttonSound.setVolume(VOLUME * 1.25);
                 buttonSound.play();
             }
@@ -63,6 +66,7 @@ public class PhysBrick extends Application {
             @Override
             public void handle(ActionEvent actionEvent) {
                 primaryStage.setScene(sv.settingsScene);
+                sv.setScale();
                 buttonSound.setVolume(VOLUME * 1.25);
                 buttonSound.play();
             }
@@ -72,6 +76,7 @@ public class PhysBrick extends Application {
             @Override
             public void handle(ActionEvent actionEvent) {
                 primaryStage.setScene(cv.creditsScene);
+                cv.setScale();
                 buttonSound.setVolume(VOLUME * 1.25);
                 buttonSound.play();
                 DisplayElements.CustomLightning(cv.creditsScene, cv.root, 4000, 60, 0.4f);

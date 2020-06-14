@@ -15,7 +15,7 @@ public class Utils {
     public static final int WIDTH = 1280; //1280 or 640
     public static final int HEIGHT = 1280; //1280 or 640
 
-    public static final float SCALED_SIZE = WIDTH * PhysBrick.SCALE_FACTOR;
+    public static float SCALED_SIZE = WIDTH * PhysBrick.SCALE_FACTOR;
 
     //Convert a JBox2D x coordinate to a JavaFX pixel x coordinate
     public static float toPixelPosX(float posX) {

@@ -23,6 +23,7 @@ import static View.PhysBrick.*;
 
 public class LevelView {
 
+    public Stage stage;
     public Scene levelSelectScene;
     public Group root;
 
@@ -33,6 +34,7 @@ public class LevelView {
     public static int brickSize = 52;
 
     public LevelView(Stage primaryStage, Scene menuScene, ArrayList arr) throws FileNotFoundException {
+        stage = primaryStage;
         this.root = new Group();
         this.levelSelectScene = new Scene(this.root, Utils.WIDTH, Utils.HEIGHT, Color.BLACK);
 
@@ -42,11 +44,6 @@ public class LevelView {
         this.backButton = initBackButton(primaryStage, menuScene);
 
         LevelSelectButton.MakeButtons(primaryStage, menuScene, this.root, arr);
-
-        Scale scale = new Scale(PhysBrick.SCALE_FACTOR, PhysBrick.SCALE_FACTOR);
-        scale.setPivotX(0);
-        scale.setPivotY(0);
-        levelSelectScene.getRoot().getTransforms().setAll(scale);
     }
 
     public Button initBackButton(Stage primaryStage, Scene menuScene) throws FileNotFoundException {
@@ -92,6 +89,17 @@ public class LevelView {
         imageView.setOpacity(0.8);
         this.root.getChildren().add(imageView);
         return imageView;
+    }
+
+    public void setScale() {
+        Scale scale = new Scale(PhysBrick.SCALE_FACTOR, PhysBrick.SCALE_FACTOR);
+        scale.setPivotX(0);
+        scale.setPivotY(0);
+        levelSelectScene.getRoot().getTransforms().setAll(scale);
+        stage.setMaxHeight(Utils.WIDTH * PhysBrick.SCALE_FACTOR + 40);
+        stage.setMaxWidth(Utils.HEIGHT * PhysBrick.SCALE_FACTOR);
+        stage.setMinHeight(Utils.WIDTH * PhysBrick.SCALE_FACTOR + 40);
+        stage.setMinWidth(Utils.WIDTH * PhysBrick.SCALE_FACTOR);
     }
 
     public static ArrayList<Brick> MakeBrickLayout1(Group root) {

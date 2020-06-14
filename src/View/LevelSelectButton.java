@@ -68,9 +68,9 @@ public class LevelSelectButton {
             public void handle(ActionEvent actionEvent) {
                 try {
                     GameView gv = new GameView(primaryStage, menuScene, levelNumber, arr);
-
                     DisplayElements.AddEightiesMatrixRoot(gv.root, arr);
                     DisplayElements.ChangeLinesColor(Utils.RandomColor(), (ArrayList<Line>) arr.get(0), (ArrayList<Line>) arr.get(1));
+                    gv.setScale();
                     primaryStage.setScene(gv.gameScene);
                     buttonSound.setVolume(VOLUME * 1.25);
                     buttonSound.play();

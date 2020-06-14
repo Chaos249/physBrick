@@ -18,6 +18,7 @@ import java.io.FileNotFoundException;
 
 public class TitleView {
 
+    public Stage stage;
     public Scene titleScene;
 
     public Group root;
@@ -29,6 +30,7 @@ public class TitleView {
     public Button creditButton;
 
     public TitleView(Stage primaryStage) throws FileNotFoundException {
+        this.stage = primaryStage;
         this.root = new Group();
         this.titleScene = new Scene(root, Utils.WIDTH, Utils.HEIGHT, Color.BLACK);
 
@@ -86,5 +88,15 @@ public class TitleView {
 
         root.getChildren().add(btn);
         return btn;
+    }
+    public void setScale() {
+        Scale scale = new Scale(PhysBrick.SCALE_FACTOR, PhysBrick.SCALE_FACTOR);
+        scale.setPivotX(0);
+        scale.setPivotY(0);
+        titleScene.getRoot().getTransforms().setAll(scale);
+        stage.setMaxHeight(Utils.WIDTH * PhysBrick.SCALE_FACTOR + 40);
+        stage.setMaxWidth(Utils.HEIGHT * PhysBrick.SCALE_FACTOR);
+        stage.setMinHeight(Utils.WIDTH * PhysBrick.SCALE_FACTOR + 40);
+        stage.setMinWidth(Utils.WIDTH * PhysBrick.SCALE_FACTOR);
     }
 }
