@@ -133,7 +133,9 @@ public class Brick {
         Body body = (Body) this.node.getUserData();
         ContactEdge contactEdge = body.getContactList();
         if (contactEdge != null) {
-            return contactEdge.contact.getFixtureB().getShape() instanceof CircleShape;
+            if (contactEdge.contact.getFixtureB().getShape() instanceof CircleShape) {
+                return true;
+            }
         }
         return false;
     }
